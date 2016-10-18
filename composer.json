@@ -1,0 +1,12 @@
+{
+    "name": "abellion/mongodb-odm",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Antoine Bellion",
+            "email": "antoine@jubiwee.com"
+        }
+    ],
+    "require": {}
+}
