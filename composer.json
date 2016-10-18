@@ -10,7 +10,8 @@
     ],
     "require": {
         "php": "^7.0",
-        "ext-mongodb": "^1.0"
+        "ext-mongodb": "^1.0",
+        "mongodb/mongodb": "^1.0.0"
     },
     "require-dev": {
         "symfony/var-dumper": "^3.1"
