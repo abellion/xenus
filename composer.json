@@ -1,5 +1,8 @@
 {
     "name": "abellion/mongodb-odm",
+    "description": "MongoDB ODM",
+    "keywords": ["php-7", "mongodb", "odm"],
+    "license": "Apache-2.0",
     "type": "library",
     "license": "MIT",
     "authors": [
