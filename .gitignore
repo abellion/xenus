@@ -1,4 +1,3 @@
 .DS_Store
 Dockerfile
-test.php
 vendor/
