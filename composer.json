@@ -10,13 +10,13 @@
     ],
     "require": {
         "php": "^7.0",
-        "ext-mongodb": "^1.0",
-        "mongodb/mongodb": "^1.0.0"
+        "ext-mongodb": "^1.2.0",
+        "mongodb/mongodb": "^1.1.0"
     },
     "require-dev": {
         "symfony/var-dumper": "^3.1"
     },
     "autoload": {
-        "psr-4": { "Abellion\\ODM\\MongoDB\\": "src/" }
+        "psr-4": { "Abellion\\ODM\\": "src/" }
     }
 }
