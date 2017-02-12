@@ -17,7 +17,7 @@ class Document implements ArrayAccess, ArrayIterator, Serializable, Unserializab
 
 	public function __construct(array $document = [])
 	{
-		$this->fill($document);
+		self::fillFromSetter($document);
 	}
 
 	public function get($offset)
@@ -34,25 +34,25 @@ class Document implements ArrayAccess, ArrayIterator, Serializable, Unserializab
 
 	public function getFromGetter($offset)
 	{
-		return $this->get($offset);
+		return self::get($offset);
 	}
 
 	public function setFromSetter($offset, $value)
 	{
-		return $this->set($offset, $value);
+		return self::set($offset, $value);
 	}
 
 	public function fill(array $document)
 	{
 		foreach ($document as $offset => $value) {
-			$this->set($offset, $value);
+			self::set($offset, $value);
 		}
 	}
 
 	public function fillFromSetter(array $document)
 	{
 		foreach ($document as $offset => $value) {
-			$this->setFromSetter($offset, $value);
+			self::setFromSetter($offset, $value);
 		}
 	}
 }

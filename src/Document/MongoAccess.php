@@ -11,6 +11,6 @@ trait MongoAccess
 
 	public function bsonUnserialize(array $document)
 	{
-		$this->fill($document);
+		$this->fillFromSetter($document);
 	}
 }

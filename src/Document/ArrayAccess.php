@@ -11,7 +11,7 @@ trait ArrayAccess
 
 	public function offsetGet($offset)
 	{
-		return $this->get($offset);
+		return $this->document[$offset];
 	}
 
 	public function __set($offset, $value)
@@ -21,7 +21,7 @@ trait ArrayAccess
 
 	public function offsetSet($offset, $value)
 	{
-		$this->set($offset, $value);
+		$this->document[$offset] = $value;
 	}
 
 	public function offsetUnset($offset)

@@ -28,6 +28,6 @@ trait ArrayIterator
     {
         $key = key($this->document);
 
-        return ($key !== NULL && $key !== FALSE);
+        return ($key !== null && $key !== false);
     }
 }
