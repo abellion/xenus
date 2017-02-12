@@ -1,4 +1,11 @@
-.DS_Store
+# Composer
+composer.phar
+composer.lock
+vendor/
+
+# Docker
 Dockerfile
 docker-compose.yml
-vendor/
+
+# Misc
+.DS_Store
