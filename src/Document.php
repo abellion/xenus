@@ -9,9 +9,10 @@ use MongoDB\BSON\Unserializable;
 
 class Document implements ArrayAccess, ArrayIterator, Serializable, Unserializable
 {
+	use Document\MongoAccess;
 	use Document\ArrayAccess;
 	use Document\ArrayIterator;
-	use Document\MongoAccess;
+	use Document\Mutators\CamelCaseMutator;
 
 	private $document = [];
 
@@ -25,6 +26,17 @@ class Document implements ArrayAccess, ArrayIterator, Serializable, Unserializab
 		return $this->document[$offset];
 	}
 
+	public function getFromGetter($offset)
+	{
+		$getter = $this->getterIze($offset);
+
+		if (method_exists($this, $getter)) {
+			return call_user_func([$this, $getter]);
+		}
+
+		return self::get($offset);
+	}
+
 	public function set($offset, $value)
 	{
 		$this->document[$offset] = $value;
@@ -32,13 +44,14 @@ class Document implements ArrayAccess, ArrayIterator, Serializable, Unserializab
 		return $this;
 	}
 
-	public function getFromGetter($offset)
-	{
-		return self::get($offset);
-	}
-
 	public function setFromSetter($offset, $value)
 	{
+		$setter = $this->setterIze($offset);
+
+		if (method_exists($this, $setter)) {
+			return call_user_func([$this, $setter], $value);
+		}
+
 		return self::set($offset, $value);
 	}
 
