@@ -3,18 +3,22 @@
 namespace Abellion\ODM;
 
 use ArrayAccess;
+use JsonSerializable;
 use Iterator as ArrayIterator;
 use MongoDB\BSON\Serializable;
 use MongoDB\BSON\Unserializable;
 
-class Document implements ArrayAccess, ArrayIterator, Serializable, Unserializable
+class Document implements ArrayAccess, ArrayIterator, JsonSerializable, Serializable, Unserializable
 {
 	use Document\MongoAccess;
 	use Document\ArrayAccess;
 	use Document\ArrayIterator;
 	use Document\Mutators\CamelCaseMutator;
+	use Document\Serializers\JsonSerializer;
+	use Document\Serializers\HttpSerializer;
+	use Document\Serializers\DefaultSerializer;
 
-	private $document = [];
+	protected $document = [];
 
 	public function __construct(array $document = [])
 	{
