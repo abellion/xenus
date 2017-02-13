@@ -20,6 +20,8 @@ Simple Object Document Mapper for the new mongodb driver. It's based on :
 - Test the code
 - Comment the code
 - Add more mutators (currently only CamelCase is supproted for getters / setters names)
-- Declare collection indexes in the *Collection* class
+- Declare collection indexes in the *Collection* class and trigger them through a binary
+- Make a binary that auto-clean the database based on the documents schema
+- Add default fields "created_ad" and "updated_at" to the *Document* class
 - Find a fluent way to assign a default value to *Document* attributes
 - Provide some default methods to the *Collection* class (as ```get()```, ```add()```, ...)
