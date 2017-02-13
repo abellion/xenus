@@ -5,6 +5,7 @@ namespace Abellion\Xenus;
 use ArrayAccess;
 use JsonSerializable;
 use Iterator as ArrayIterator;
+use MongoDB\BSON\ObjectID;
 use MongoDB\BSON\Serializable;
 use MongoDB\BSON\Unserializable;
 
@@ -18,10 +19,15 @@ class Document implements ArrayAccess, ArrayIterator, JsonSerializable, Serializ
 	use Document\Serializers\HttpSerializer;
 	use Document\Serializers\DefaultSerializer;
 
+	protected $hasId = false;
 	protected $document = [];
 
 	public function __construct(array $document = [])
 	{
+		if ($this->hasId && !isset($document['_id'])) {
+			$document['_id'] = new ObjectID();
+		}
+
 		self::fillFromSetter($document);
 	}
 
