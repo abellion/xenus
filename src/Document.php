@@ -22,6 +22,11 @@ class Document implements ArrayAccess, ArrayIterator, JsonSerializable, Serializ
 	protected $hasId = false;
 	protected $document = [];
 
+	public function __debugInfo()
+	{
+		return $this->document;
+	}
+
 	public function __construct(array $document = [])
 	{
 		if ($this->hasId && !isset($document['_id'])) {
