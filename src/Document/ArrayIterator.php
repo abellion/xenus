@@ -1,6 +1,6 @@
 <?php
 
-namespace Abellion\ODM\Document;
+namespace Abellion\Xenus\Document;
 
 trait ArrayIterator
 {

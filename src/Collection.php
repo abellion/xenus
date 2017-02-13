@@ -1,6 +1,6 @@
 <?php
 
-namespace Abellion\ODM;
+namespace Abellion\Xenus;
 
 use MongoDB\Database;
 

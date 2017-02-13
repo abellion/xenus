@@ -1,6 +1,6 @@
 <?php
 
-namespace Abellion\ODM\Document\Serializers;
+namespace Abellion\Xenus\Document\Serializers;
 
 trait JsonSerializer
 {
