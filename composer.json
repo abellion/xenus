@@ -2,7 +2,6 @@
     "name": "abellion/xenus",
     "description": "Xenus : A MongoDB ODM",
     "keywords": ["php-7", "mongodb", "odm", "xenus"],
-    "license": "Apache-2.0",
     "type": "library",
     "license": "MIT",
     "authors": [
