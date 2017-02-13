@@ -1,6 +1,6 @@
 *Documentation is in WIP.*
 
-# Mongodb ODM for PHP 7
+# Xenus : An elegant Mongodb mapper for PHP 7
 
 Simple Object Document Mapper for the new mongodb driver. It's based on :
 - https://github.com/mongodb/mongo-php-driver The new mongodb driver.
