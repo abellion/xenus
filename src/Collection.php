@@ -4,7 +4,7 @@ namespace Abellion\Xenus;
 
 use MongoDB\Database;
 
-class Collection
+abstract class Collection
 {
 	protected $name;
 	protected $document = Document::class;
