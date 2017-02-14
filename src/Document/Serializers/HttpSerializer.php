@@ -12,7 +12,7 @@ trait HttpSerializer
 		return self::httpSerializeIterator($this->document);
 	}
 
-	private static function httpSerializeIterator(array $data)
+	private static function httpSerializeIterator($data)
 	{
 		$document = [];
 
