@@ -7,6 +7,11 @@ use MongoDB\BSON\ObjectID;
 
 trait HttpSerializer
 {
+	public function toHttp()
+	{
+		return $this->httpSerialize();
+	}
+
 	public function httpSerialize()
 	{
 		return self::httpSerializeIterator($this->document);
