@@ -20,7 +20,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
 	use Document\Serializers\HttpSerializer;
 	use Document\Serializers\DefaultSerializer;
 
-	protected $setId = false;
+	protected $withId = false;
 	protected $document = [];
 
 	public function __debugInfo()
@@ -30,8 +30,8 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
 
 	public function __construct(array $document = [])
 	{
-		if ($this->setId && !isset($document['_id'])) {
-			$document['_id'] = new ObjectID();
+		if ($this->withId && !isset($document['_id'])) {
+			self::setFromSetter('_id', new ObjectID());
 		}
 
 		self::fillFromSetter($document);
