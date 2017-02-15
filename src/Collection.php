@@ -14,7 +14,7 @@ abstract class Collection
 	public function __construct(Database $database)
 	{
 		$this->collection = $database->selectCollection($this->name, [
-			'typeMap' => ['root' => $this->document, 'document' => Document::class, 'array' => 'array']
+			'typeMap' => ['root' => $this->document, 'document' => 'array', 'array' => 'array']
 		]);
 	}
 
