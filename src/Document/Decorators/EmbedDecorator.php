@@ -48,7 +48,9 @@ trait EmbedDecorator
 
 			private function makeOn()
 			{
-				return $this->root->set($this->as, new $this->embed($this->on));
+				$on = ($this->on instanceof $this->embed) ? $this->on : new $this->embed($this->on);
+
+				return $this->root->set($this->as, $on);
 			}
 
 			private function makeIn()
@@ -56,7 +58,7 @@ trait EmbedDecorator
 				$in = [];
 
 				foreach ($this->in as $key => $value) {
-					$in[$key] = new $this->embed($value);
+					$in[$key] = ($value instanceof $this->embed) ? $value : new $this->embed($value);
 				}
 
 				return $this->root->set($this->as, $in);
