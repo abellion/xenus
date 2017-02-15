@@ -2,19 +2,20 @@
 
 namespace Abellion\Xenus;
 
+use Iterator;
 use ArrayAccess;
 use JsonSerializable;
-use Iterator as ArrayIterator;
 use MongoDB\BSON\ObjectID;
 use MongoDB\BSON\Serializable;
 use MongoDB\BSON\Unserializable;
 
-class Document implements ArrayAccess, ArrayIterator, JsonSerializable, Serializable, Unserializable
+class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable, Unserializable
 {
 	use Document\MongoAccess;
 	use Document\ArrayAccess;
 	use Document\ArrayIterator;
 	use Document\Mutators\CamelCaseMutator;
+	use Document\Decorators\EmbedDecorator;
 	use Document\Serializers\JsonSerializer;
 	use Document\Serializers\HttpSerializer;
 	use Document\Serializers\DefaultSerializer;
