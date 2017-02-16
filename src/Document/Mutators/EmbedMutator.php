@@ -1,8 +1,8 @@
 <?php
 
-namespace Xenus\Document\Decorators;
+namespace Xenus\Document\Mutators;
 
-trait EmbedDecorator
+trait EmbedMutator
 {
 	public function embed(string $embed)
 	{

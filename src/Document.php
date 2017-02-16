@@ -14,8 +14,8 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
 	use Document\MongoAccess;
 	use Document\ArrayAccess;
 	use Document\ArrayIterator;
-	use Document\Mutators\CamelCaseMutator;
-	use Document\Decorators\EmbedDecorator;
+	use Document\Mutators\EmbedMutator;
+	use Document\Accessors\CamelCaseAccessor;
 	use Document\Serializers\JsonSerializer;
 	use Document\Serializers\HttpSerializer;
 	use Document\Serializers\DefaultSerializer;

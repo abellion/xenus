@@ -1,8 +1,8 @@
 <?php
 
-namespace Xenus\Document\Mutators;
+namespace Xenus\Document\Accessors;
 
-trait CamelCaseMutator
+trait CamelCaseAccessor
 {
 	public function getterIze($offset)
 	{
