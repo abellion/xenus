@@ -1,6 +1,6 @@
 <?php
 
-namespace Abellion\Xenus;
+namespace Xenus;
 
 use MongoDB\Database;
 

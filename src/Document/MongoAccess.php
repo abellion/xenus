@@ -1,6 +1,6 @@
 <?php
 
-namespace Abellion\Xenus\Document;
+namespace Xenus\Document;
 
 trait MongoAccess
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Abellion\Xenus\Document\Serializers;
+namespace Xenus\Document\Serializers;
 
 trait DefaultSerializer
 {

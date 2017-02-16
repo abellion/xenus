@@ -19,6 +19,6 @@
         "symfony/var-dumper": "^3.1"
     },
     "autoload": {
-        "psr-4": { "Abellion\\Xenus\\": "src/" }
+        "psr-4": { "Xenus\\": "src/" }
     }
 }

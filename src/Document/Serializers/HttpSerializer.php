@@ -1,6 +1,6 @@
 <?php
 
-namespace Abellion\Xenus\Document\Serializers;
+namespace Xenus\Document\Serializers;
 
 use Traversable;
 use MongoDB\BSON\ObjectID;

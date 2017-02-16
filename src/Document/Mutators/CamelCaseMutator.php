@@ -1,6 +1,6 @@
 <?php
 
-namespace Abellion\Xenus\Document\Mutators;
+namespace Xenus\Document\Mutators;
 
 trait CamelCaseMutator
 {

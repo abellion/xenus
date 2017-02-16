@@ -1,6 +1,6 @@
 <?php
 
-namespace Abellion\Xenus\Document\Decorators;
+namespace Xenus\Document\Decorators;
 
 trait EmbedDecorator
 {
