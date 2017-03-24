@@ -39,7 +39,7 @@ trait EmbedMutator
 
 			private function make()
 			{
-				if ($this->on) {
+				if (isset($this->on)) {
 					return $this->makeOn();
 				} else {
 					return $this->makeIn();
