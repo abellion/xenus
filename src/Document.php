@@ -42,6 +42,11 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
 		return $this->document[$offset];
 	}
 
+	public function has($offset)
+	{
+		return isset($this->document[$offset]);
+	}
+
 	public function getFromGetter($offset)
 	{
 		$getter = $this->getterIze($offset);
