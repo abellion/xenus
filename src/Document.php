@@ -37,17 +37,17 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
         self::fillFromSetter(($document instanceof self) ? $document->document : $document);
     }
 
-    public function get($offset)
+    public function get(string $offset)
     {
         return $this->document[$offset];
     }
 
-    public function has($offset)
+    public function has(string $offset)
     {
         return isset($this->document[$offset]);
     }
 
-    public function getFromGetter($offset)
+    public function getFromGetter(string $offset)
     {
         $getter = $this->getterIze($offset);
 
@@ -58,14 +58,14 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
         return self::get($offset);
     }
 
-    public function set($offset, $value)
+    public function set(string $offset, $value)
     {
         $this->document[$offset] = $value;
 
         return $this;
     }
 
-    public function setFromSetter($offset, $value)
+    public function setFromSetter(string $offset, $value)
     {
         $setter = $this->setterIze($offset);
 

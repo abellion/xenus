@@ -4,7 +4,7 @@ namespace Xenus\Document;
 
 trait ArrayAccess
 {
-    public function __get($offset)
+    public function __get(string $offset)
     {
         return self::getFromGetter($offset);
     }
@@ -14,7 +14,7 @@ trait ArrayAccess
         return $this->document[$offset];
     }
 
-    public function __set($offset, $value)
+    public function __set(string $offset, $value)
     {
         self::setFromSetter($offset, $value);
     }
