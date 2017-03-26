@@ -10,3 +10,4 @@ docker-compose.yml
 # Misc
 .DS_Store
 tests/test.php
+.php_cs.cache

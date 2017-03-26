@@ -4,13 +4,13 @@ namespace Xenus\Document\Serializers;
 
 trait JsonSerializer
 {
-	public function toJson()
-	{
-		return $this->jsonSerialize();
-	}
+    public function toJson()
+    {
+        return $this->jsonSerialize();
+    }
 
-	public function jsonSerialize()
-	{
-		return $this->defaultSerialize();
-	}
+    public function jsonSerialize()
+    {
+        return $this->defaultSerialize();
+    }
 }

@@ -7,21 +7,21 @@ use MongoDB\BSON\ObjectID;
 
 trait HttpSerializer
 {
-	public function toHttp()
-	{
-		return $this->httpSerialize();
-	}
+    public function toHttp()
+    {
+        return $this->httpSerialize();
+    }
 
-	public function httpSerialize()
-	{
-		return self::httpSerializeIterator($this->document);
-	}
+    public function httpSerialize()
+    {
+        return self::httpSerializeIterator($this->document);
+    }
 
-	private static function httpSerializeIterator($data)
-	{
-		$document = [];
+    private static function httpSerializeIterator($data)
+    {
+        $document = [];
 
-		foreach ($data as $offset => $value) {
+        foreach ($data as $offset => $value) {
             if ($value instanceof ObjectID) {
                 $document[$offset] = (string) $value;
             } elseif (is_array($value) || $value instanceof Traversable) {
@@ -29,8 +29,8 @@ trait HttpSerializer
             } else {
                 $document[$offset] = $value;
             }
-		}
+        }
 
-		return $document;
-	}
+        return $document;
+    }
 }
