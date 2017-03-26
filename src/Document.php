@@ -28,13 +28,13 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
         return $this->document;
     }
 
-    public function __construct(array $document = [])
+    public function __construct($document = [])
     {
         if ($this->withId && !isset($document['_id'])) {
             self::setFromSetter('_id', new ObjectID());
         }
 
-        self::fillFromSetter($document);
+        self::fillFromSetter(($document instanceof self) ? $document->document : $document);
     }
 
     public function get($offset)
