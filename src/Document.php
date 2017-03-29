@@ -17,8 +17,6 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     use Document\Mutators\EmbedMutator;
     use Document\Accessors\CamelCaseAccessor;
     use Document\Serializers\JsonSerializer;
-    use Document\Serializers\HttpSerializer;
-    use Document\Serializers\DefaultSerializer;
 
     protected $withId = false;
     protected $document = [];
@@ -45,6 +43,11 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     public function has(string $offset)
     {
         return isset($this->document[$offset]);
+    }
+
+    public function toArray()
+    {
+        return $this->document;
     }
 
     public function getFromGetter(string $offset)

@@ -11,6 +11,6 @@ trait JsonSerializer
 
     public function jsonSerialize()
     {
-        return $this->defaultSerialize();
+        return $this->document;
     }
 }
