@@ -45,6 +45,11 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
         return isset($this->document[$offset]);
     }
 
+    public function merge(array $document)
+    {
+        return self::fillFromSetter($document);
+    }
+
     public function toArray()
     {
         return $this->document;
@@ -84,6 +89,8 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
         foreach ($document as $offset => $value) {
             self::set($offset, $value);
         }
+
+        return $this;
     }
 
     public function fillFromSetter(array $document)
@@ -91,5 +98,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
         foreach ($document as $offset => $value) {
             self::setFromSetter($offset, $value);
         }
+
+        return $this;
     }
 }
