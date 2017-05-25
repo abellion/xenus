@@ -7,31 +7,23 @@ use MongoDB\BSON\ObjectID;
 
 trait CRUDMethods
 {
-    public function select(ObjectID $id, array $options = [])
+    public function find(ObjectID $id, array $options = [])
     {
-        return $this->collection->findOne([
-            '_id' => $id
-        ], $options);
+        return $this->collection->findOne(['_id' => $id], $options);
     }
 
-    public function delete(ObjectID $id, array $options = [])
+    public function delete(Document $document, array $options = [])
     {
-        return $this->collection->deleteOne([
-            '_id' => $id
-        ], $options);
+        return $this->collection->deleteOne(['_id' => $document->id], $options);
     }
 
-    public function insert($document, array $options = [])
+    public function insert(Document $document, array $options = [])
     {
         return $this->collection->insertOne($document, $options);
     }
 
-    public function update($document, array $options = [])
+    public function update(Document $document, array $options = [])
     {
-        return $this->collection->updateOne([
-            '_id' => $document['_id']
-        ], [
-            '$set' => $document
-        ], $options);
+        return $this->collection->updateOne(['_id' => $document['_id']], ['$set' => $document], $options);
     }
 }
