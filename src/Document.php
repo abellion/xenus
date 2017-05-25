@@ -68,6 +68,47 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     }
 
     /**
+     * Returns a new document with the specified fields
+     *
+     * @param  array  $fields The keys to keep
+     *
+     * @return Xenus\Document A new document conatining only the specified fields
+     */
+    public function with(array $fields)
+    {
+        $document = [];
+
+        foreach ($fields as $field) {
+            if (array_key_exists($field, $this->document)) {
+                $document[$field] = $this->document[$field];
+            }
+        }
+
+        return new self($document);
+    }
+
+    /**
+     * Returns a new document without the specified fields
+     *
+     * @param  array  $fields The keys to drop
+     *
+     * @return Xenus\Document A new document without the specified fields
+     */
+    public function without(array $fields)
+    {
+        $document = [];
+
+        foreach ($this->document as $key => $value) {
+            if (!in_array($key, $fields)) {
+                $document[$key] = $this->document[$key];
+            }
+        }
+
+        return new self($document);
+    }
+
+
+    /**
      * Fills the document whith the given values
      *
      * @param  array  $document The values
