@@ -84,7 +84,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
             }
         }
 
-        return new self($document);
+        return new static($document);
     }
 
     /**
@@ -104,7 +104,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
             }
         }
 
-        return new self($document);
+        return new static($document);
     }
 
 
