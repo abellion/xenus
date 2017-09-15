@@ -76,15 +76,16 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
      */
     public function with(array $fields)
     {
-        $document = [];
+        $document = new static();
+        $document->document = [];
 
         foreach ($fields as $field) {
             if (array_key_exists($field, $this->document)) {
-                $document[$field] = $this->document[$field];
+                $document->document[$field] = $this->document[$field];
             }
         }
 
-        return new static($document);
+        return $document;
     }
 
     /**
@@ -96,15 +97,16 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
      */
     public function without(array $fields)
     {
-        $document = [];
+        $document = new static();
+        $document->document = [];
 
         foreach ($this->document as $key => $value) {
             if (!in_array($key, $fields)) {
-                $document[$key] = $this->document[$key];
+                $document->document[$key] = $this->document[$key];
             }
         }
 
-        return new static($document);
+        return $document;
     }
 
 
