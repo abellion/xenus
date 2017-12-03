@@ -47,12 +47,17 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
      * Gets the value for the given key
      *
      * @param  string $offset The key
+     * @param mixed $default The default value to return
      *
      * @return mixed The value
      */
-    public function get(string $offset)
+    public function get(string $offset, $default = null)
     {
-        return $this->document[$offset];
+        if (isset($this->document[$offset])) {
+            return $this->document[$offset];
+        }
+
+        return $default;
     }
 
     /**

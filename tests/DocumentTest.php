@@ -22,7 +22,15 @@ class DocumentTest extends TestCase
 
         $document->set('name', 'Antoine');
 
+        $this->assertNull($document->get('age'));
         $this->assertEquals('Antoine', $document->get('name'));
+    }
+
+    public function testGetWithDefault()
+    {
+        $document = new Document();
+
+        $this->assertEquals('Antoine', $document->get('name', 'Antoine'));
     }
 
     public function testSet()
