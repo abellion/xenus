@@ -22,7 +22,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     protected $document = [];
 
     /**
-     * Returns the document's values for debugging
+     * Return the document's values for debugging
      *
      * @return array The document's values
      */
@@ -44,7 +44,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     }
 
     /**
-     * Gets the value for the given key
+     * Get the value of the given key
      *
      * @param  string $offset The key
      * @param mixed $default The default value to return
@@ -61,7 +61,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     }
 
     /**
-     * Gets whether the given key exists or not
+     * Get whether the given key exists or not
      *
      * @param  string  $offset The key
      *
@@ -73,7 +73,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     }
 
     /**
-     * Returns a new document with the specified fields
+     * Returnsa new document only with the specified fields
      *
      * @param  array  $fields The keys to keep
      *
@@ -94,7 +94,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     }
 
     /**
-     * Returns a new document without the specified fields
+     * Return a new document without the specified fields
      *
      * @param  array  $fields The keys to drop
      *
@@ -116,7 +116,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
 
 
     /**
-     * Fills the document whith the given values
+     * Fill the document whith the given values
      *
      * @param  array  $document The values
      *
@@ -128,7 +128,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     }
 
     /**
-     * Returns the document as an array
+     * Return the document as an array
      *
      * @return array The document as an array
      */
@@ -138,7 +138,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     }
 
     /**
-     * Gets a value from a getter if it exists, or fallback on the internal array
+     * Get a value from a getter if it exists, or fallback on the internal array
      *
      * @param  string $offset The key
      *
@@ -156,7 +156,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     }
 
     /**
-     * Sets the value on the offset
+     * Set the given value on the offset
      *
      * @param string $offset The key to retrieve the value
      * @param mixed $value  The value
@@ -169,7 +169,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     }
 
     /**
-     * Sets the value through a setter
+     * Set the given value through a setter
      *
      * @param string $offset The key to retrieve the value
      * @param mixed $value  The value
@@ -186,7 +186,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     }
 
     /**
-     * Fills the document with the given array
+     * Fill the document with the given array
      *
      * @param  array  $document The array
      *
@@ -202,7 +202,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     }
 
     /**
-     * Fills the document, though the setters, with the given array
+     * Fill the document, though the setters, with the given array
      *
      * @param  array  $document The array
      *
