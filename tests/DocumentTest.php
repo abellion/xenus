@@ -1,8 +1,8 @@
 <?php
 
-use Xenus\Document;
+namespace Xenus\Tests;
 
-use PHPUnit\Framework\TestCase;
+use Xenus\Document;
 
 class DocumentTest extends TestCase
 {

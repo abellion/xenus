@@ -21,5 +21,8 @@
     },
     "autoload": {
         "psr-4": { "Xenus\\": "src/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Xenus\\Tests\\": "tests/" }
     }
 }

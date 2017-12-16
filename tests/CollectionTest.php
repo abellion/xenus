@@ -1,7 +1,8 @@
 <?php
 
+namespace Xenus\Tests;
+
 use MongoDB\Client;
-use PHPUnit\Framework\TestCase;
 
 use Xenus\Document as XenusDocument;
 use Xenus\Collection as XenusCollection;
