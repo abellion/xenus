@@ -10,3 +10,4 @@ docker-compose.yml
 # Misc
 .DS_Store
 .php_cs.cache
+phpunit.xml
