@@ -1,25 +1,25 @@
 # Getting started
 
-__Xenus__ is a simple yet powerfull ODM for MongoDB. The motivation behind this project is to provide a simple interface between your database documents and your __PHP__ code.
-
-This ODM uses the latest technologies such as PHP 7 and the new MongoDB driver, which are not supported by the others well known ODM.
+__Xenus__ is a simple yet powerfull ODM for MongoDB. It uses the latest technologies such as PHP 7 and the new MongoDB driver.
 
 ## Installation
+
+Xenus requires PHP version 7.0 or higher and the MongoDB driver version 1.2 or higher.
+
+Make sure to install first the MongoDB driver : http://php.net/manual/en/mongodb.installation.php
+
+Once installed, run the following from your project root :
 
 ```bash
 composer require abellion/xenus
 ```
-
-Xenus requires PHP version 7.0 or higher and the MongoDB driver version 1.2 or higher.
-
-Make sure to install first the MongoDB driver, otherwise composer will throw an error. Take a look at the driver documentation : http://php.net/manual/en/set.mongodb.php
 
 ## First steps
 
 > This guide assumes you have an existing knowledge of the MongoDB library and driver.
 
 - Driver documentation : http://php.net/manual/en/set.mongodb.php
-- Library documentation : https://docs.mongodb.com/php-library/master/
+- Library documentation : https://docs.mongodb.com/php-library/v1.2/
 
 We'll walk through the bacics CRUD operations across this guide. The only thing you have to do first is to establish a connection between your database and your PHP code.
 
@@ -32,41 +32,30 @@ $database = $client->myDatabase;
 
 ```
 
-> To know more about the `Client`, `Database` and `Collection` classes, please refer to the MongoDB library : https://docs.mongodb.com/php-library/master/reference/class/MongoDBClient/
+> To know more about the `Client`, `Database` and `Collection` classes, please refer to the MongoDB library : https://docs.mongodb.com/php-library/v1.2/reference/class/MongoDBClient/
 
 # Guide
 
-## Working with collections
+## Collections
 
-One long-standing pattern about databases is to use some methods to grab the data you need instead of directly querying your database from your controllers.
+### Defining collections
 
-Using this pattern has a lot of advantages :
-
-- You don't need to know the internal working of a query
-- You can easilly tweak a query from one single place
-- ... and many more
-
-### Creating a collection
-
-Having a collection of users is very common, so let's take that as an example.
-I usually put all my database business inside a `Model` folder. Let's create a `Users` class which will hold our methods :
+Having a collection of users is very common, so let's take that as an example :
 
 ```php
 use Xenus\Collection;
 
 class Users extends Collection
 {
-    //This is the name of your collection stored in your database
+    //This is the name of your collection stored in the database
     protected $name = 'users';
 }
 ```
 
-A Xenus `Collection` needs two properties to work :
+A Xenus `Collection` needs two properties to be constructed :
 
-- To be constructed, an instance of the `MongoDB\Database` class
-- And then, the name of the collection as a protected property
-
-Instanciating this class can be done as follow :
+- An instance of the `MongoDB\Database` class,
+- The name of the collection as a protected property.
 
 ```php
 use MongoDB;
@@ -80,13 +69,17 @@ $users = new Users($database);
 
 > If you use a framework with a dependency injection container, you can configure it to automatically inject an instance of the `MongoDB\Database` in every collections.
 
-### Querying the database
+### Retrieving documents
 
-Every Xenus collection have an instance of the `MongoDB\Collection` class so you can query the database. The Xenus collection holds it as a protected property allowing you to easily retrieve the data from the database.
+Collections inherit from the `MongoDB\Collection` class so you can use any of the methods provided by the MongoDB library : https://docs.mongodb.com/php-library/v1.2/reference/class/MongoDBCollection/
+
+| Method | Description |
+|--------|-------------|
+| `find()` | https://docs.mongodb.com/php-library/v1.2/reference/method/MongoDBCollection-find/ |
+| `findOne()` | https://docs.mongodb.com/php-library/v1.2/reference/method/MongoDBCollection-findOne/ |
 
 ```php
-//Get all the adult users
-$adultUsers = $users->collection->find([
+$adultUsers = $users->find([
     'age' => ['$gte' => 21]
 ]);
 ```
@@ -102,7 +95,7 @@ class Users extends Collection
 
     public function findAdults(array $options = [])
     {
-        return $this->collection->find([
+        return $this->find([
             'age' => ['$gte' => 21]
         ], $options);
     }
@@ -110,11 +103,10 @@ class Users extends Collection
 ```
 
 ```php
-//The result will be the same but it seems cleaner, isn't it ?
 $adultUsers = $users->findAdults();
 ```
 
-> When creating a method you may find usefull to give an array of options if you want, for example, to sort the results.
+> When creating a method you may find usefull to give an array of options if you want to sort the results for example.
 
 ```php
 $adultUsers = $users->findAdults([
@@ -122,27 +114,28 @@ $adultUsers = $users->findAdults([
 ]);
 ```
 
-### CRUD helpers
+### Inserting & Updating documents
 
-Creating, Reading, Updating and Deleting a document is some operations you'll always do. Xenus provides a trait containing these four methods so you avoid writing them every time you create a collection.
+The MongoDB library offers you some great methods to work with update and delete operations :
+
+| Method | Description |
+|--------|-------------|
+| `insertOne()` | https://docs.mongodb.com/php-library/v1.2/reference/method/MongoDBCollection-insertOne/ |
+| `insertMany()` | https://docs.mongodb.com/php-library/v1.2/reference/method/MongoDBCollection-insertMany/ |
+| `updateOne()` | https://docs.mongodb.com/php-library/v1.2/reference/method/MongoDBCollection-updateOne/ |
+| `updateMany()` | https://docs.mongodb.com/php-library/v1.2/reference/method/MongoDBCollection-updateMany/ |
+| `deleteOne()` | https://docs.mongodb.com/php-library/v1.2/reference/method/MongoDBCollection-deleteOne/ |
+| `deleteMany()` | https://docs.mongodb.com/php-library/v1.2/reference/method/MongoDBCollection-deleteMany/ |
+
+On top of these methods, Xenus provides some more natural `update()`, `delete()` and `insert()` methods taking directly a document as parameter :
 
 ```php
-class Users extends Collection
-{
-    use Xenus\Collection\Collection\CRUDMethods;
-}
-```
-
-```php
-//Create
 $john = new Xenus\Document(['name' => 'John']);
+
+//Create
 $users->insert($john);
 
-//Retrieve
-$john = $users->find(new MongoDB\BSON\ObjectID('...'));
-
 //Update
-$john->name = 'John Doe';
 $users->update($john);
 
 //Delete
@@ -151,18 +144,26 @@ $users->delete($john);
 
 > The `Xenus\Document` class represents a document. We'll see that in a minute !
 
-__CRUD summary :__
+### Querying by ID
 
-- `find(MongoDB\BSON\ObjectID $id, array $options = []): MongoDB\Driver\Cursor`
-    - Retrieve a document
-- `insert(Xenus\Document $document, array $options = []): MongoDB\InsertOneResult`
-    - Insert a document
-- `update(Xenus\Document $document, array $options = []): MongoDB\UpdateResult`
-    - Update a document
-- `delete(Xenus\Document $document, array $options = []): MongoDB\DeleteResult`
-    - Delete a document
+As you may notice, every of the `findOne()`, `updateOne()` and `deleteOne` methods take an array of filter as a first argument.
 
-## Working with documents
+You'll see you very often giving them an array like `['_id' => $id]` to retrieve, update or delete a document by its ID.
+
+To make things easier, Xenus allows you to give directly an `ObjectID` :
+
+```php
+//Retrieve directly by ID
+$users->findOne($userId);
+
+//Update directly by ID
+$users->updateOne($userId, [...]);
+
+//Delete directly by ID
+$users->deleteOne($userId)
+```
+
+## Documents
 
 Instead of receiving your data in the form of an array or a pristine object, Xenus allows you to treat your documents as pre-defined objects, containing a lot of helpful methods.
 
