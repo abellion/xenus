@@ -3,6 +3,7 @@
 namespace Xenus\Tests;
 
 use MongoDB\Client;
+use MongoDB\BSON\ObjectID;
 
 use Xenus\Document as XenusDocument;
 use Xenus\Collection as XenusCollection;
@@ -54,6 +55,39 @@ class CollectionTest extends TestCase
         $this->assertInternalType('array', $city->zips);
         $this->assertInternalType('array', $city->demography);
         $this->assertInternalType('string', $city->name);
+    }
+
+    public function testFindOne()
+    {
+        $cities = new Cities($this->database);
+
+        $this->assertNull($cities->findOne(new ObjectID()));
+        $this->assertNull($cities->findOne(['_id' => new ObjectID()]));
+    }
+
+    public function testDeleteOne()
+    {
+        $cities = new Cities($this->database);
+
+        $this->assertInstanceOf(\MongoDB\DeleteResult::class, $cities->deleteOne(new ObjectID()));
+        $this->assertInstanceOf(\MongoDB\DeleteResult::class, $cities->deleteOne(['_id' => new ObjectID()]));
+    }
+
+    public function testUpdateOne()
+    {
+        $cities = new Cities($this->database);
+        $update = ['$set' => ['field' => 'value']];
+
+        $this->assertInstanceOf(\MongoDB\UpdateResult::class, $cities->updateOne(new ObjectID(), $update));
+        $this->assertInstanceOf(\MongoDB\UpdateResult::class, $cities->updateOne(['_id' => new ObjectID()], $update));
+    }
+
+    public function testReplaceOne()
+    {
+        $cities = new Cities($this->database);
+
+        $this->assertInstanceOf(\MongoDB\UpdateResult::class, $cities->replaceOne(new ObjectID(), []));
+        $this->assertInstanceOf(\MongoDB\UpdateResult::class, $cities->replaceOne(['_id' => new ObjectID()], []));
     }
 }
 
