@@ -5,7 +5,7 @@ namespace Xenus\Document;
 trait ArrayAccess
 {
     /**
-     * Returns from a getter the value at the given offset
+     * Return from a getter the value at the given offset
      *
      * @param  string $offset The key
      *
@@ -17,7 +17,7 @@ trait ArrayAccess
     }
 
     /**
-     * Returns the value at the given offset
+     * Return the value at the given offset
      *
      * @param  string $offset The key
 
@@ -29,7 +29,7 @@ trait ArrayAccess
     }
 
     /**
-     * Sets from a setter the given value at the given offset
+     * Set from a setter the given value at the given offset
      *
      * @param string $offset The key
      * @param mixed $value  The value
@@ -40,7 +40,7 @@ trait ArrayAccess
     }
 
     /**
-     * Sets the given value at the given offset
+     * Set the given value at the given offset
      *
      * @param  string $offset The key
      * @param  mixed $value  The value
@@ -51,7 +51,7 @@ trait ArrayAccess
     }
 
     /**
-     * Unsets the document's value
+     * Unset the document's value at the given offset
      *
      * @param  stirng $offset The key
      */
@@ -61,7 +61,7 @@ trait ArrayAccess
     }
 
     /**
-     * Determines whether the given key exists or not in the document
+     * Determine whether the given key exists or not in the document
      *
      * @param  string $offset The key
      *

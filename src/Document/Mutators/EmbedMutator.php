@@ -5,7 +5,7 @@ namespace Xenus\Document\Mutators;
 trait EmbedMutator
 {
     /**
-     * Returns an utility to embed the given document class to an array
+     * Return an utility to embed the given document class to an array
      *
      * @param  string $embed Adocument class
      *
@@ -28,7 +28,7 @@ trait EmbedMutator
             }
 
             /**
-             * Defines the array to work with
+             * Definesthe array to work with
              *
              * @param  array $in The array to work with
              *
@@ -42,7 +42,7 @@ trait EmbedMutator
             }
 
             /**
-             * Defines the array to work with
+             * Define the array to work with
              *
              * @param  array $in The array to work with
              *
@@ -56,7 +56,7 @@ trait EmbedMutator
             }
 
             /**
-             * Defines the key to use when setting the value
+             * Define the key to use when setting the value
              *
              * @param  string $as The key to use when setting the value
 
@@ -70,7 +70,7 @@ trait EmbedMutator
             }
 
             /**
-             * Calls one of `makeOn` or `makeIn` method
+             * Call one of `makeOn` or `makeIn` method
              *
              * @return Xenus\Document
              */
@@ -84,7 +84,7 @@ trait EmbedMutator
             }
 
             /**
-             * Apply the given document on the array
+             * Apply the given document over the array
              *
              * @return Xenus\Document
              */

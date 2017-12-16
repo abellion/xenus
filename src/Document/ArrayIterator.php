@@ -5,7 +5,7 @@ namespace Xenus\Document;
 trait ArrayIterator
 {
     /**
-     * Rewinds the document
+     * Rewind the document
      */
     public function rewind()
     {
@@ -13,7 +13,7 @@ trait ArrayIterator
     }
 
     /**
-     * Returns the current element
+     * Return the current element
      *
      * @return mixed The current element
      */
@@ -23,7 +23,7 @@ trait ArrayIterator
     }
 
     /**
-     * Returns the current key
+     * Return the current key
      *
      * @return string The current key
      */
@@ -33,7 +33,7 @@ trait ArrayIterator
     }
 
     /**
-     * Moves the array cursor forward and returns the next element
+     * Move the array cursor forward and return the next element
      *
      * @return mixed The next element
      */
@@ -43,7 +43,7 @@ trait ArrayIterator
     }
 
     /**
-     * Determines whether or not the array is ready for an iteration
+     * Determine whether or not the array is ready for an iteration
      *
      * @return bool Whether or not the array is ready for an iteration
      */

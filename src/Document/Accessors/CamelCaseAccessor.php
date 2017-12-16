@@ -5,7 +5,7 @@ namespace Xenus\Document\Accessors;
 trait CamelCaseAccessor
 {
     /**
-     * Transforms the given string into CamelCase
+     * Transform the given string into CamelCase
      *
      * @param  string $offset The string to transform
      *
@@ -17,7 +17,7 @@ trait CamelCaseAccessor
     }
 
     /**
-     * Transforms the given string into CamelCase
+     * Transform the given string into CamelCase
      *
      * @param  string $offset The string to transform
      *

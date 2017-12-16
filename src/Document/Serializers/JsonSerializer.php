@@ -5,7 +5,7 @@ namespace Xenus\Document\Serializers;
 trait JsonSerializer
 {
     /**
-     * Gets a JSON serializable format
+     * Get a JSON serializable format
      *
      * @return array The JSON serializable format
      */
@@ -15,7 +15,7 @@ trait JsonSerializer
     }
 
     /**
-     * Gets a JSON serializable format
+     * Get a JSON serializable format
      *
      * @return array The JSON serializable format
      */

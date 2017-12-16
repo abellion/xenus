@@ -5,7 +5,7 @@ namespace Xenus\Document;
 trait MongoAccess
 {
     /**
-     * Serializes the document to a MongoDB readable value
+     * Serialize the document to a MongoDB readable value
      *
      * @return array The document as array
      */
@@ -15,7 +15,7 @@ trait MongoAccess
     }
 
     /**
-     * Unserializes a document comming from MongoDB
+     * Unserialize a document comming from MongoDB
      *
      * @param  array  $document The document as array
      */
