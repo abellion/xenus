@@ -39,7 +39,7 @@ abstract class Collection extends BaseCollection
      */
     public function delete(Document $document, array $options = [])
     {
-        return parent::deleteOne(['_id' => $document->id], $options);
+        return parent::deleteOne(['_id' => $document['_id']], $options);
     }
 
     /**
