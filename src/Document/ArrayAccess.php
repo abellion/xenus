@@ -65,7 +65,7 @@ trait ArrayAccess
      *
      * @param  string $offset The key
      *
-     * @return book Whether the given key exists or not in the document
+     * @return bool Whether the given key exists or not in the document
      */
     public function offsetExists($offset)
     {
