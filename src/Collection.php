@@ -21,11 +21,11 @@ abstract class Collection extends BaseCollection
     /**
      * Insert the document
      *
-     * @param  Document $document
-     * @param  array    $options
+     * @param  array|object $document
+     * @param  array        $options
      * @return MongoDB\InsertOneResult
      */
-    public function insert(Document $document, array $options = [])
+    public function insert($document, array $options = [])
     {
         return parent::insertOne($document, $options);
     }
@@ -33,11 +33,11 @@ abstract class Collection extends BaseCollection
     /**
      * Delete the document
      *
-     * @param  Document $document
-     * @param  array    $options
+     * @param  array|object $document
+     * @param  array        $options
      * @return MongoDB\DeleteResult
      */
-    public function delete(Document $document, array $options = [])
+    public function delete($document, array $options = [])
     {
         return parent::deleteOne(['_id' => $document['_id']], $options);
     }
@@ -45,11 +45,11 @@ abstract class Collection extends BaseCollection
     /**
      * Update the document
      *
-     * @param  Document $document
-     * @param  array    $options
+     * @param  array|object $document
+     * @param  array        $options
      * @return MongoDB\UpdateResult
      */
-    public function update(Document $document, array $options = [])
+    public function update($document, array $options = [])
     {
         return parent::updateOne(['_id' => $document['_id']], ['$set' => $document], $options);
     }
@@ -57,8 +57,8 @@ abstract class Collection extends BaseCollection
     /**
      * Find one document matching an ID or some filters
      *
-     * @param  array|ObjectID  $filter
-     * @param  array  $options
+     * @param  array|ObjectID   $filter
+     * @param  array            $options
      * @return array|object|null
      */
     public function findOne($filter = [], array $options = [])
@@ -73,8 +73,8 @@ abstract class Collection extends BaseCollection
     /**
      * Delete one document matching an ID or some filters
      *
-     * @param  array|ObjectID $filter
-     * @param  array  $options
+     * @param  array|ObjectID   $filter
+     * @param  array            $options
      * @return MongoDB\DeleteResult
      */
     public function deleteOne($filter, array $options = [])
@@ -89,9 +89,9 @@ abstract class Collection extends BaseCollection
     /**
      * Update one document matching an ID or some filters
      *
-     * @param  array|ObjectID $filter
-     * @param  array|object $update
-     * @param  array  $options
+     * @param  array|ObjectID   $filter
+     * @param  array|object     $update
+     * @param  array            $options
      * @return MongoDB\UpdateResult
      */
     public function updateOne($filter, $update, array $options = [])
@@ -106,9 +106,9 @@ abstract class Collection extends BaseCollection
     /**
      * Replace one document matching an ID or some filters
      *
-     * @param  array|ObjectID $filter
-     * @param  array|object $replace
-     * @param  array  $options
+     * @param  array|ObjectID   $filter
+     * @param  array|object     $replace
+     * @param  array            $options
      * @return MongoDB\UpdateResult
      */
     public function replaceOne($filter, $replace, array $options = [])

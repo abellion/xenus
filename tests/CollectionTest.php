@@ -59,26 +59,29 @@ class CollectionTest extends TestCase
 
     public function testInsert()
     {
-        $city = new XenusDocument(['name' => 'Paris']);
+        $city = ['name' => 'Paris'];
         $cities = new Cities($this->database);
 
         $this->assertInstanceOf(\MongoDB\InsertOneResult::class, $cities->insert($city));
+        $this->assertInstanceOf(\MongoDB\InsertOneResult::class, $cities->insert(new XenusDocument($city)));
     }
 
     public function testUpdate()
     {
-        $city = new XenusDocument(['name' => 'Paris']);
+        $city = ['name' => 'Paris'];
         $cities = new Cities($this->database);
 
         $this->assertInstanceOf(\MongoDB\UpdateResult::class, $cities->update($city));
+        $this->assertInstanceOf(\MongoDB\UpdateResult::class, $cities->update(new XenusDocument($city)));
     }
 
     public function testDelete()
     {
-        $city = new XenusDocument(['name' => 'Paris']);
+        $city = ['name' => 'Paris'];
         $cities = new Cities($this->database);
 
         $this->assertInstanceOf(\MongoDB\DeleteResult::class, $cities->delete($city));
+        $this->assertInstanceOf(\MongoDB\DeleteResult::class, $cities->delete(new XenusDocument($city)));
     }
 
     public function testFindOne()
