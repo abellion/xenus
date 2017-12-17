@@ -21,7 +21,7 @@ composer require abellion/xenus
 - Driver documentation : http://php.net/manual/en/set.mongodb.php
 - Library documentation : https://docs.mongodb.com/php-library/v1.2/
 
-We'll walk through the bacics CRUD operations across this guide. The only thing you have to do first is to establish a connection between your database and your PHP code.
+Before going further, make sure you have a running MongoDB server and a established connection with it :
 
 ```php
 use MongoDB;
@@ -84,7 +84,7 @@ $adultUsers = $users->find([
 ]);
 ```
 
-Instead of making this query everywhere you need these users, you may better make a method inside the users class :
+Instead of making this query everywhere you need these users, you may better make a method inside the users collection :
 
 ```php
 use Xenus\Collection;
@@ -114,6 +114,15 @@ $adultUsers = $users->findAdults([
 ]);
 ```
 
+You'll see you very often retrieving models by ID typing `['_id' => $id]`. To avoid that, Xenus allows you to give directly a `MongoDB\BSON\ObjectID` instance that's automatically translated to the array form :
+
+```php
+// Typing
+$users->findOne($id);
+// Is the same as :
+$users->findOne(['_id' => $id]);
+```
+
 ### Inserting & Updating documents
 
 The MongoDB library offers you some great methods to work with update and delete operations :
@@ -127,10 +136,10 @@ The MongoDB library offers you some great methods to work with update and delete
 | `deleteOne()` | https://docs.mongodb.com/php-library/v1.2/reference/method/MongoDBCollection-deleteOne/ |
 | `deleteMany()` | https://docs.mongodb.com/php-library/v1.2/reference/method/MongoDBCollection-deleteMany/ |
 
-On top of these methods, Xenus provides some more natural `update()`, `delete()` and `insert()` methods taking directly a document as parameter :
+On top of these methods, Xenus provides some more natural `update()`, `delete()` and `insert()` methods to work with single documents. These methods take directly a document as parameter :
 
 ```php
-$john = new Xenus\Document(['name' => 'John']);
+$john = ['_id' => '...', 'name' => 'John'];
 
 //Create
 $users->insert($john);
@@ -142,20 +151,9 @@ $users->update($john);
 $users->delete($john);
 ```
 
-> The `Xenus\Document` class represents a document. We'll see that in a minute !
-
-### Querying by ID
-
-As you may notice, every of the `findOne()`, `updateOne()` and `deleteOne` methods take an array of filter as a first argument.
-
-You'll see you very often giving them an array like `['_id' => $id]` to retrieve, update or delete a document by its ID.
-
-To make things easier, Xenus allows you to give directly an `ObjectID` :
+Sometimes you don't want or need to retrieve a document before updating or deleting it, so you will use one of the `updateOne()` and `deleteOne()` methods. Because it's so common to use them with a single `_id` filter, Xenus offers you the possibility to give directly a `MongoDB\BSON\ObjectID` :
 
 ```php
-//Retrieve directly by ID
-$users->findOne($userId);
-
 //Update directly by ID
 $users->updateOne($userId, [...]);
 
@@ -221,7 +219,7 @@ $user['name'] = 'John';
 
 Both, using the array form or the magic methods, behaves exactly the same currently but there is a difference ! When using the dynamic form Xenus will try to find a getter or a setter method in your document.
 
-If it cannot figure out a getter or a setter method, it will read or write the data directly from the internal array storing the user properties. On the opposite, if it finds one of these methods, it will use them to mutate your document.
+If it cannot figures out a getter or a setter method, it will read or write the data directly from the internal array storing the user properties. On the opposite, if it finds one of these methods, it will use them to mutate your document.
 
 ```php
 use Xenus\Document;
@@ -236,7 +234,7 @@ class User extends Document
 
     public function setName(string $name)
     {
-        //Get `name` to the internal array
+        //Set `name` to the internal array
         return $this->set('name', trim($name));
     }
 }
