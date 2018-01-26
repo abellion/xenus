@@ -108,35 +108,4 @@ class DocumentTest extends TestCase
 
         $this->assertEquals('Charles', $document->setFromSetter('name', 'Charles')->get('name'));
     }
-
-    public function testEmbedOn()
-    {
-        $document = new Document();
-
-        $family = [
-            'mother' => 'Chris',
-            'father' => 'Dominique'
-        ];
-
-        $document->embed(Document::class)->on($family)->as('family');
-
-        $this->assertInstanceOf(Document::class, $document->family);
-        $this->assertEquals($family, $document->family->toArray());
-    }
-
-    public function testEmbedIn()
-    {
-        $document = new Document();
-
-        $browsers = [
-            ['name' => 'Nicolas', 'age' => 25],
-            ['name' => 'Obon', 'age' => 19]
-        ];
-
-        $document->embed(Document::class)->in($browsers)->as('browsers');
-
-        $this->assertTrue(is_array($document->browsers));
-        $this->assertEquals(2, count($document->browsers));
-        $this->assertInstanceOf(Document::class, $document->browsers[0]);
-    }
 }
