@@ -2,8 +2,6 @@
 
 namespace Xenus\Support;
 
-use Xenus\Document;
-
 class Embed
 {
     public static function document(string $document)
