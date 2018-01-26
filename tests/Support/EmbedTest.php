@@ -4,6 +4,8 @@ namespace Xenus\Tests;
 
 use Xenus\Document;
 use Xenus\Support\Embed;
+use Xenus\Tests\TestCase;
+
 use MongoDB\BSON\ObjectID;
 
 class EmbedTest extends TestCase
