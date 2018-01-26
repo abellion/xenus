@@ -1,3 +1,9 @@
+# 0.10
+
+- The `Xenus\Document::embed()` method has been removed. Use the `Xenus\Support\Embed` utility instead.
+- The `Xenus\Support\Embed` utility has been added.
+- The `Xenus\Support\Transform` utility has been added.
+
 # 0.9
 
 - The `Xenus\Collection` class now ineriths from the `MongoDB\Collection` class.
