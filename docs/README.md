@@ -243,7 +243,7 @@ class User extends Document
 Declaring a set of getters and setters in your documents has several advantages :
 
 - At first glance you can see what's inside
-- You can take advantage of PHP type-hint
+- You can take advantage of PHP type-hint to validate input
 - You can tweak your data (we trimmed the name in the example above)
 
 > To deal with your document's data, Xenus store them in an array called `document`. To avoid writing the same code in every getter or setter, you can take advantage of the `get` and `set` methods that provide a fluent way to access this internal array.
@@ -267,14 +267,18 @@ class User extends Document
 
 ### Embedded documents
 
-One super feature of MongoDB is the ability to nest your data within your documents. For example, you could have an array of addresses and another containing the user's contact informations. Embeding these properties as arrays would work, but don't you think it would be better to use a document object ?
+One super feature of MongoDB is the ability to nest data within documents. For example, you could have an array of addresses and another containing some contact informations.
 
-To make your life easier, Xenus has a helper to easily get that done, in an elegant way.
+You'll find the `Embed` utility in the `Xenus\Support` namespace. This class holds a static method called `document`, returning an object with two methods :
 
-__First case : embeding a document :__
+- `Embed::document(Contact::class)->on($contact)` : Return a `Contact` object containing the `$contact` values.
+- `Embed::document(Address::class)->in($addresses)` : Return an array of `Address` object containing the `$addresses` values.
+
+__First case, embeding a document :__
 
 ```php
 use Xenus\Document;
+use Xenus\Support\Embed;
 
 class User extends Document
 {
@@ -286,10 +290,8 @@ class User extends Document
     public function setContact($contact)
     {
         //We tell Xenus to use the Contact class below to store the contact informations.
-
-        //It will create an instance of `Contact` for you and put it in
-        //your document with the "contact" key !
-        return $this->embed(Contact::class)->on($contact)->as('contact');
+        //It will create an instance of `Contact` for you.
+        return $this->set('contact', Embed::document(Contact::class)->on($contact));
     }
 }
 
@@ -309,10 +311,11 @@ class Contact extends Document
 }
 ```
 
-__Second case : embeding an array of documents :__
+__Second case, embeding an array of documents :__
 
 ```php
 use Xenus\Document;
+use Xenus\Support\Embed;
 
 class User extends Document
 {
@@ -326,8 +329,8 @@ class User extends Document
         //Notice the difference : here we use the `in` method (instead of the `on`).
 
         //It behaves exactly the same as above, except that it loops
-        //over the array for creating the addresses
-        return $this->embed(Address::class)->in($addresses)->as('addresses');
+        //over the array to create the addresses.
+        return $this->set('addresses', Embed::document(Address::class)->in($addresses));
     }
 }
 
@@ -345,19 +348,6 @@ class Address extends Document
 
     //...
 }
-```
-
-__Examples :__
-
-```php
-//Retrieve the phone number passing through the contact document
-$phoneNumber = $john->contact->phoneNumber;
-
-//Retrieve john's cities. By the way, this one is a good candidate
-//to take place as a method in the document class !
-$cities = array_map(function ($address) {
-    return $address->city;
-}, $john->addresses);
 ```
 
 > As you may notice in the examples above, the embedded documents are in the same file as the main one. This does not complain with PSR-4 but it's worth having it at the same level for clarity.
