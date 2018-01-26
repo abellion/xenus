@@ -113,7 +113,6 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
         return $document;
     }
 
-
     /**
      * Fill the document whith the given values
      *
