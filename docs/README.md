@@ -178,7 +178,7 @@ class User extends Document
 }
 ```
 
-To create a new user you simply need to instantiate your `User` object, optionnaly with a set of properties :
+To create a new user, simply instantiate the `User` object, optionnaly with a set of properties :
 
 ```php
 //Create an empty user, and then gives him a name
@@ -189,7 +189,7 @@ $john->name = 'John';
 $john = new User(['name' => 'John']);
 ```
 
-Xenus cannot guesses what document to use when fetching your data from the database. By default it uses the `Xenus\Collection` class. So you need to teach him how to _unserialize_ them, by setting a protected property called `doument` in your `Collection` class :
+When retrieving models, you'll receive an instance of a `Xenus\Document` class by default. To tell Xenus to use a custom document, you need to set a protected property called `doument` in the `Collection` class :
 
 ```php
 use Xenus\Collection;
