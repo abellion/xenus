@@ -217,9 +217,26 @@ $user->name = 'John';
 $user['name'] = 'John';
 ```
 
-Both, using the array form or the magic methods, behaves exactly the same currently but there is a difference ! When using the dynamic form Xenus will try to find a getter or a setter method in your document.
+On top of that, a document offers you three methods `get()`, `set()` and `has()` to work in a more OOP way :
 
-If it cannot figures out a getter or a setter method, it will read or write the data directly from the internal array storing the user properties. On the opposite, if it finds one of these methods, it will use them to mutate your document.
+```php
+//Return a boolean
+$user->has('name');
+
+//Return the document's name value
+$user->get('name');
+
+//Set the document's name value and return the instance
+$user->set('name', $name);
+```
+
+If you want to validate the data before setting it, or tweak the data before getting it, you can declare a set of accessors (a getter and a setter) in your models.
+
+Doing this way has several advantages :
+
+- At first glance you can see what's inside a model
+- You can take advantage of PHP type-hint to validate the input
+- You can tweak the data (like applying a `trim()`)
 
 ```php
 use Xenus\Document;
@@ -228,39 +245,33 @@ class User extends Document
 {
     public function getName()
     {
-        //Get `name` from the internal array
         return $this->get('name');
     }
 
     public function setName(string $name)
     {
-        //Set `name` to the internal array
         return $this->set('name', trim($name));
     }
 }
 ```
 
-Declaring a set of getters and setters in your documents has several advantages :
+When mutating a document, Xenus will try to find the corresponding getter and setter for you so you don't have to use the quite verbose `setXXX()` and `getXXX` methods.
 
-- At first glance you can see what's inside
-- You can take advantage of PHP type-hint to validate input
-- You can tweak your data (we trimmed the name in the example above)
+- A getter is a method whose name starts with `get` and its followed by the property name.
+- A setter is a method whose name starts with `set` and its followed by the property name.
 
-> To deal with your document's data, Xenus store them in an array called `document`. To avoid writing the same code in every getter or setter, you can take advantage of the `get` and `set` methods that provide a fluent way to access this internal array.
+!> This "auto discovery" mechanism is not used if you use the array form (ie. `$model['property']`) to keep a way of muttating the documents without using the accessors.
 
-Of course, as well as your getters and setters, you can add some other methods serving your business logic.
+Of course, as well as these accessors, you can add some other methods serving your business logic.
 
 ```php
 use Xenus\Document;
 
 class User extends Document
 {
-    //...
-
     public function isAdult()
     {
-        //You could also use the get method as well : $this->get('age') ...
-        return $this->document['age'] >= 21;
+        return $this->get('age') >= 21;
     }
 }
 ```
