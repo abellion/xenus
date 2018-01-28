@@ -267,33 +267,10 @@ class User extends Document
 
 ### Embedded documents
 
-One super feature of MongoDB is the ability to nest data within documents. For example, you could have an array of addresses and another containing some contact informations.
-
-You'll find the `Embed` utility in the `Xenus\Support` namespace. This class holds a static method called `document`, returning an object with two methods :
-
-- `Embed::document(Contact::class)->on($contact)` : Return a `Contact` object containing the `$contact` values.
-- `Embed::document(Address::class)->in($addresses)` : Return an array of `Address` object containing the `$addresses` values.
-
-__First case, embeding a document :__
+One super feature of MongoDB is the ability to nest data within documents. For example, a user could have some contact informations (phone number, address, ...) stored as a document :
 
 ```php
 use Xenus\Document;
-use Xenus\Support\Embed;
-
-class User extends Document
-{
-    public function getContact()
-    {
-        return $this->get('contact');
-    }
-
-    public function setContact($contact)
-    {
-        //We tell Xenus to use the Contact class below to store the contact informations.
-        //It will create an instance of `Contact` for you.
-        return $this->set('contact', Embed::document(Contact::class)->on($contact));
-    }
-}
 
 class Contact extends Document
 {
@@ -311,7 +288,11 @@ class Contact extends Document
 }
 ```
 
-__Second case, embeding an array of documents :__
+You'll find the `Embed` utility in the `Xenus\Support` namespace to easily embed documents within models :
+
+- `Embed::document(Contact::class)->on($contact)` : It makes the `$contact` array be an instance of the `Contact` document.
+
+- `Embed::document(Contact::class)->in($contact)` : It makes every of the `$contact` values be an instance of the `Contact` document.
 
 ```php
 use Xenus\Document;
@@ -319,38 +300,32 @@ use Xenus\Support\Embed;
 
 class User extends Document
 {
-    public function getAddresses()
+    public function getContacts()
     {
-        return $this->get('addresses');
+        return $this->get('contacts');
     }
 
-    public function setAddresses(array $addresses)
+    public function setContacts(array $contacts)
     {
-        //Notice the difference : here we use the `in` method (instead of the `on`).
-
-        //It behaves exactly the same as above, except that it loops
-        //over the array to create the addresses.
-        return $this->set('addresses', Embed::document(Address::class)->in($addresses));
-    }
-}
-
-class Address extends Document
-{
-    public function getCity()
-    {
-        return $this->get('city');
+        return $this->set('contacts', Embed::document(Contact::class)->in($contacts));
     }
 
-    public function setCity(string $city)
+    public function getPrimaryContact()
     {
-        return $this->set('city', $city);
+        return $this->get('primary_contact');
     }
 
-    //...
+    public function setPrimaryContact($contact)
+    {
+        return $this->set('primary_contact', Embed::document(Contact::class)->on($contact));
+    }
 }
 ```
 
-> As you may notice in the examples above, the embedded documents are in the same file as the main one. This does not complain with PSR-4 but it's worth having it at the same level for clarity.
+- The user's `contacts` value will be an array of `Contact` documents.
+- The user's `primary_contact` value will be an instance of the `Contact` document.
+
+> You could have the embedded documents definitions in the same file as the main model document. It's not PSR-4 compliant but it's worth having it at the same level for clarity.
 
 
 
