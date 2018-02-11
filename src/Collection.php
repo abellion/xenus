@@ -55,6 +55,18 @@ abstract class Collection extends BaseCollection
     }
 
     /**
+     * Find documents matching some filters
+     *
+     * @param  array            $filter
+     * @param  array            $options
+     * @return Xenus\Cursor
+     */
+    public function find($filter = [], array $options = [])
+    {
+        return new Cursor(parent::find($filter, $options));
+    }
+
+    /**
      * Find one document matching an ID or some filters
      *
      * @param  array|ObjectID   $filter
