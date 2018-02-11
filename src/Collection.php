@@ -79,7 +79,10 @@ abstract class Collection extends BaseCollection
             $filter = ['_id' => $filter];
         }
 
-        return parent::findOne($filter, $options);
+        $cursor = $this->find($filter, array_merge($options, ['limit' => 1]));
+        $result = current($cursor->toArray());
+
+        return ($result === false) ? null : $result;
     }
 
     /**
