@@ -18,6 +18,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     use Document\Serializers\JsonSerializer;
 
     protected $withId = false;
+
     protected $document = [];
     protected $collection = null;
 
