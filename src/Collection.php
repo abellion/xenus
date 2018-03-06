@@ -6,16 +6,24 @@ use MongoDB\Database;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Collection as BaseCollection;
 
-abstract class Collection extends BaseCollection
+class Collection extends BaseCollection
 {
-    protected $name;
-    protected $document = Document::class;
+    const NAME = null;
+    const DOCUMENT = Document::class;
 
-    public function __construct(Database $database)
+    public function __construct(Database $database, array $options = [])
     {
-        parent::__construct($database->getManager(), $database->getDatabaseName(), $this->name, [
-            'typeMap' => ['root' => $this->document, 'array' => 'array', 'document' => 'array']
-        ]);
+        if (null === ($name = $options['name'] ?? static::NAME)) {
+            throw new Exceptions\InvalidArgumentException('The "name" argument is required.');
+        }
+
+        if (null === ($document = $options['document'] ?? static::DOCUMENT)) {
+            throw new Exceptions\InvalidArgumentException('The "document" argument is required.');
+        }
+
+        parent::__construct($database->getManager(), $database->getDatabaseName(), $name, array_merge($options, [
+            'typeMap' => ['root' => $document, 'array' => 'array', 'document' => 'array']
+        ]));
     }
 
     /**
