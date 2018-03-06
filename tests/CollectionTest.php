@@ -121,5 +121,4 @@ class CollectionTest extends TestCase
 class Cities extends XenusCollection
 {
     const NAME = 'cities';
-    // protected $name = 'cities';
 }
