@@ -19,6 +19,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
 
     protected $withId = false;
     protected $document = [];
+    protected $collection = null;
 
     /**
      * Return the document's values for debugging
@@ -123,6 +124,20 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     public function merge(array $document)
     {
         return self::fillFromSetter($document);
+    }
+
+    /**
+     * Set the collection this document is comming from
+     *
+     * @param  Collection $collection
+     *
+     * @return self
+     */
+    public function connect(Collection $collection)
+    {
+        $this->collection = $collection;
+
+        return $this;
     }
 
     /**

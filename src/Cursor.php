@@ -8,10 +8,12 @@ use IteratorIterator;
 class Cursor extends IteratorIterator
 {
     private $iterator;
+    private $collection;
 
-    public function __construct(Traversable $iterator)
+    public function __construct(Traversable $iterator, Collection $collection)
     {
         $this->iterator = $iterator;
+        $this->collection = $collection;
 
         parent::__construct($iterator);
     }
@@ -21,6 +23,7 @@ class Cursor extends IteratorIterator
         $document = parent::current();
 
         if ($document instanceof Document) {
+            $document->connect($this->collection);
         }
 
         return $document;
