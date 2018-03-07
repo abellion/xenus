@@ -14,12 +14,12 @@ class BindMany extends AbstractRelation
      */
     public function find($filter = [], array $options = [])
     {
-        $subject = $this->object->get($this->primaryKey);
+        $attribute = $this->object->get($this->primaryKey);
 
-        if (false === is_array($subject)) {
-            $query = $subject;
+        if (false === is_array($attribute)) {
+            $query = $attribute;
         } else {
-            $query = ['$in' => $subject];
+            $query = ['$in' => $attribute];
         }
 
         return $this->target->find(array_merge($filter, [
