@@ -11,11 +11,11 @@ trait HasRelationships
     public function buildCollection(string $target)
     {
         if (null === $this->collection) {
-            throw new Exceptions\LogicException(sprintf('Target collection `%s` is not buildable', $target));
+            throw new Exceptions\LogicException(sprintf('Target collection "%s" is not buildable', $target));
         }
 
         if (false === class_exists($target)) {
-            throw new Exceptions\InvalidArgumentException(sprintf('Target collection `%s` does not exist', $target));
+            throw new Exceptions\InvalidArgumentException(sprintf('Target collection "%s" does not exist', $target));
         }
 
         return new Collection(new Database($this->collection->getManager(), $this->collection->getDatabaseName()), [
