@@ -9,6 +9,13 @@ use MongoDB\Database;
 
 trait HasRelationships
 {
+    /**
+     * Instantiate a Xenus Collection
+     *
+     * @param  string $target
+     *
+     * @return Collection
+     */
     public function buildCollection(string $target)
     {
         if (null === $this->collection) {
@@ -25,6 +32,15 @@ trait HasRelationships
         ]);
     }
 
+    /**
+     * Define a "hasOne" relationship
+     *
+     * @param  string  $target
+     * @param  string  $targetKey
+     * @param  string  $localKey
+     *
+     * @return Relations\BindOne
+     */
     protected function hasOne(string $target, string $targetKey, string $localKey = '_id')
     {
         $object = $this;
@@ -33,6 +49,15 @@ trait HasRelationships
         return new Relations\BindOne($target, $object, $targetKey, $localKey);
     }
 
+    /**
+     * Define a "hasMany" relationship
+     *
+     * @param  string  $target
+     * @param  string  $targetKey
+     * @param  string  $localKey
+     *
+     * @return Relations\BindMany
+     */
     protected function hasMany(string $target, string $targetKey, string $localKey = '_id')
     {
         $object = $this;
@@ -41,6 +66,15 @@ trait HasRelationships
         return new Relations\BindMany($target, $object, $targetKey, $localKey);
     }
 
+    /**
+     * Define a "belongsTo" relationship
+     *
+     * @param  string $target
+     * @param  string $localKey
+     * @param  string $targetKey
+     *
+     * @return Relations\BindOne
+     */
     protected function belongsTo(string $target, string $localKey, string $targetKey = '_id')
     {
         $object = $this;
@@ -49,6 +83,15 @@ trait HasRelationships
         return new Relations\BindOne($target, $object, $targetKey, $localKey);
     }
 
+    /**
+     * Define a "belongsToMany" relationship
+     *
+     * @param  string $target
+     * @param  string $localKey
+     * @param  string $targetKey
+     *
+     * @return Relations\BindMany
+     */
     protected function belongsToMany(string $target, string $localKey, string $targetKey = '_id')
     {
         $object = $this;
