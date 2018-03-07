@@ -4,6 +4,7 @@ namespace Xenus\Tests;
 
 use Xenus\Document;
 use Xenus\Support\Transform;
+use Xenus\Tests\Stubs\CityTransformer;
 
 use MongoDB\BSON\ObjectID;
 use PHPUnit\Framework\TestCase;
@@ -32,18 +33,5 @@ class SupportTransformTest extends TestCase
         $this->assertEquals(2, count($cities));
         $this->assertInstanceOf(CityTransformer::class, $cities[0]);
         $this->assertInstanceOf(CityTransformer::class, $cities[1]);
-    }
-}
-
-class CityTransformer extends Document
-{
-    public function setId($id)
-    {
-        return $this->set('_id', (string) $id);
-    }
-
-    public function setZip($zip)
-    {
-        return $this->set('zip_code', $zip);
     }
 }

@@ -6,9 +6,8 @@ use MongoDB\Client;
 use MongoDB\BSON\ObjectID;
 use PHPUnit\Framework\TestCase;
 
+use Xenus\Tests\Stubs\Cities;
 use Xenus\Document as XenusDocument;
-use Xenus\Collection as XenusCollection;
-use MongoDB\Collection as MongoDBCollection;
 
 class XenusCollectionTest extends TestCase
 {
@@ -30,7 +29,7 @@ class XenusCollectionTest extends TestCase
     {
         $cities = new Cities($this->database);
 
-        $this->assertInstanceOf(MongoDBCollection::class, $cities);
+        $this->assertInstanceOf(\MongoDB\Collection::class, $cities);
     }
 
     public function testCollectionName()
@@ -117,9 +116,4 @@ class XenusCollectionTest extends TestCase
         $this->assertInstanceOf(\MongoDB\UpdateResult::class, $cities->replaceOne(new ObjectID(), []));
         $this->assertInstanceOf(\MongoDB\UpdateResult::class, $cities->replaceOne(['_id' => new ObjectID()], []));
     }
-}
-
-class Cities extends XenusCollection
-{
-    const NAME = 'cities';
 }
