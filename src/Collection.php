@@ -31,6 +31,7 @@ class Collection extends BaseCollection
      *
      * @param  array|object $document
      * @param  array        $options
+     *
      * @return MongoDB\InsertOneResult
      */
     public function insert($document, array $options = [])
@@ -43,6 +44,7 @@ class Collection extends BaseCollection
      *
      * @param  array|object $document
      * @param  array        $options
+     *
      * @return MongoDB\DeleteResult
      */
     public function delete($document, array $options = [])
@@ -55,6 +57,7 @@ class Collection extends BaseCollection
      *
      * @param  array|object $document
      * @param  array        $options
+     *
      * @return MongoDB\UpdateResult
      */
     public function update($document, array $options = [])
@@ -67,6 +70,7 @@ class Collection extends BaseCollection
      *
      * @param  array            $filter
      * @param  array            $options
+     *
      * @return Xenus\Cursor
      */
     public function find($filter = [], array $options = [])
@@ -79,6 +83,7 @@ class Collection extends BaseCollection
      *
      * @param  array|ObjectID   $filter
      * @param  array            $options
+     *
      * @return array|object|null
      */
     public function findOne($filter = [], array $options = [])
@@ -98,6 +103,7 @@ class Collection extends BaseCollection
      *
      * @param  array|ObjectID   $filter
      * @param  array            $options
+     *
      * @return MongoDB\DeleteResult
      */
     public function deleteOne($filter, array $options = [])
@@ -115,6 +121,7 @@ class Collection extends BaseCollection
      * @param  array|ObjectID   $filter
      * @param  array|object     $update
      * @param  array            $options
+     *
      * @return MongoDB\UpdateResult
      */
     public function updateOne($filter, $update, array $options = [])
@@ -132,6 +139,7 @@ class Collection extends BaseCollection
      * @param  array|ObjectID   $filter
      * @param  array|object     $replace
      * @param  array            $options
+     *
      * @return MongoDB\UpdateResult
      */
     public function replaceOne($filter, $replace, array $options = [])
