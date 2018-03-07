@@ -3,12 +3,12 @@
 namespace Xenus\Tests;
 
 use Xenus\Document;
-use Xenus\Tests\TestCase;
 use Xenus\Support\Transform;
 
 use MongoDB\BSON\ObjectID;
+use PHPUnit\Framework\TestCase;
 
-class TransformTest extends TestCase
+class SupportTransformTest extends TestCase
 {
     public function testTransformDocument()
     {

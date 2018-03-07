@@ -4,11 +4,11 @@ namespace Xenus\Tests;
 
 use Xenus\Document;
 use Xenus\Support\Embed;
-use Xenus\Tests\TestCase;
 
 use MongoDB\BSON\ObjectID;
+use PHPUnit\Framework\TestCase;
 
-class EmbedTest extends TestCase
+class SupportEmbedTest extends TestCase
 {
     public function testEmbedOnArray()
     {

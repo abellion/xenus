@@ -4,12 +4,13 @@ namespace Xenus\Tests;
 
 use MongoDB\Client;
 use MongoDB\BSON\ObjectID;
+use PHPUnit\Framework\TestCase;
 
 use Xenus\Document as XenusDocument;
 use Xenus\Collection as XenusCollection;
 use MongoDB\Collection as MongoDBCollection;
 
-class CollectionTest extends TestCase
+class XenusCollectionTest extends TestCase
 {
     private $client;
     private $database;

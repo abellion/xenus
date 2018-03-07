@@ -4,7 +4,9 @@ namespace Xenus\Tests;
 
 use Xenus\Document;
 
-class DocumentTest extends TestCase
+use PHPUnit\Framework\TestCase;
+
+class XenusDocumentTest extends TestCase
 {
     public function testHas()
     {
