@@ -41,7 +41,7 @@ abstract class AbstractRelation
         $this->primaryKey = $primaryKey;
 
         if (false === $this->object->has($this->primaryKey)) {
-            throw new Exceptions\LogicException(sprintf('The `%s` model does not have any `%s` attribute', get_class($object), $primaryKey));
+            throw new Exceptions\LogicException(sprintf('The "%s" document does not have any "%s" attribute', get_class($object), $primaryKey));
         }
     }
 }
