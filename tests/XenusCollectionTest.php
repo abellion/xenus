@@ -2,7 +2,6 @@
 
 namespace Xenus\Tests;
 
-use MongoDB\Client;
 use MongoDB\BSON\ObjectID;
 use PHPUnit\Framework\TestCase;
 
@@ -11,19 +10,7 @@ use Xenus\Document as XenusDocument;
 
 class XenusCollectionTest extends TestCase
 {
-    private $client;
-    private $database;
-
-    public function setUp()
-    {
-        $this->client = new Client(getenv('MONGODB_URI'));
-        $this->database = $this->client->{getenv('MONGODB_DATABASE')};
-    }
-
-    public function tearDown()
-    {
-        $this->database->drop();
-    }
+    use Cases\RefreshDatabase;
 
     public function testIsMongoCollection()
     {
