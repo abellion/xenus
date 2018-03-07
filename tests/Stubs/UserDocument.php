@@ -10,5 +10,10 @@ class UserDocument extends \Xenus\Document
     {
         return $this->hasOne(AddressesCollection::class, 'user_id');
     }
+
+    public function getAddresses()
+    {
+        return $this->hasMany(AddressesCollection::class, 'user_id');
+    }
 }
 
