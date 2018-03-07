@@ -16,7 +16,7 @@ trait HasRelationships
      *
      * @return Collection
      */
-    public function buildCollection(string $target)
+    private function buildCollection(string $target)
     {
         if (null === $this->collection) {
             throw new Exceptions\LogicException(sprintf('Target collection "%s" is not buildable', $target));
