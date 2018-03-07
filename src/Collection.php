@@ -14,11 +14,11 @@ class Collection extends BaseCollection
     public function __construct(Database $database, array $options = [])
     {
         if (null === ($name = $options['name'] ?? static::NAME)) {
-            throw new Exceptions\InvalidArgumentException('The "name" argument is required.');
+            throw new Exceptions\InvalidArgumentException('The "name" argument is required');
         }
 
         if (null === ($document = $options['document'] ?? static::DOCUMENT)) {
-            throw new Exceptions\InvalidArgumentException('The "document" argument is required.');
+            throw new Exceptions\InvalidArgumentException('The "document" argument is required');
         }
 
         parent::__construct($database->getManager(), $database->getDatabaseName(), $name, array_merge($options, [

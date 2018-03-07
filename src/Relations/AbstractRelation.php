@@ -4,6 +4,7 @@ namespace Xenus\Relations;
 
 use Xenus\Document;
 use Xenus\Collection;
+use Xenus\Exceptions;
 
 abstract class AbstractRelation
 {
@@ -20,5 +21,9 @@ abstract class AbstractRelation
 
         $this->foreignKey = $foreignKey;
         $this->primaryKey = $primaryKey;
+
+        if (false === $this->object->has($this->primaryKey)) {
+            throw new Exceptions\LogicException(sprintf('The `%s` model does not have any `%s` attribute', $this->object::class, $this->primaryKey));
+        }
     }
 }
