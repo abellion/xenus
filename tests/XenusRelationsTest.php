@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class XenusRelationsTest extends TestCase
 {
-    use Cases\RefreshDatabase;
+    use Concerns\RefreshDatabase;
 
     private $users;
     private $addresses;

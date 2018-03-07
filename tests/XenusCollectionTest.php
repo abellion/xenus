@@ -10,7 +10,7 @@ use Xenus\Tests\Stubs\CitiesCollection as Cities;
 
 class XenusCollectionTest extends TestCase
 {
-    use Cases\RefreshDatabase;
+    use Concerns\RefreshDatabase;
 
     public function testIsMongoCollection()
     {

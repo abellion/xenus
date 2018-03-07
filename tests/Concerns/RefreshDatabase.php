@@ -1,6 +1,6 @@
 <?php
 
-namespace Xenus\Tests\Cases;
+namespace Xenus\Tests\Concerns;
 
 use MongoDB\Client;
 
