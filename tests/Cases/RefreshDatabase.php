@@ -6,17 +6,25 @@ use MongoDB\Client;
 
 trait RefreshDatabase
 {
-    private $client;
     private $database;
 
-    public function setUp()
+    protected function setUp()
     {
-        $this->client = new Client(getenv('MONGODB_URI'));
-        $this->database = $this->client->{getenv('MONGODB_DATABASE')};
+        $this->createDatabase();
     }
 
-    public function tearDown()
+    protected function tearDown()
+    {
+        $this->deleteDatabase();
+    }
+
+    protected function deleteDatabase()
     {
         $this->database->drop();
+    }
+
+    protected function createDatabase()
+    {
+        $this->database = (new Client(getenv('MONGODB_URI')))->selectDatabase(getenv('MONGODB_DATABASE'));
     }
 }
