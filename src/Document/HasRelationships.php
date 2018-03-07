@@ -2,6 +2,7 @@
 
 namespace Xenus\Document;
 
+use Xenus\Relations;
 use Xenus\Exceptions;
 use Xenus\Collection;
 use MongoDB\Database;
@@ -29,7 +30,7 @@ trait HasRelationships
         $object = $this;
         $target = $this->buildCollection($target);
 
-        return new Xenus\Relations\BindOne($target, $object, $targetKey, $localKey);
+        return new Relations\BindOne($target, $object, $targetKey, $localKey);
     }
 
     protected function hasMany(string $target, string $targetKey, string $localKey = '_id')
@@ -37,7 +38,7 @@ trait HasRelationships
         $object = $this;
         $target = $this->buildCollection($target);
 
-        return new Xenus\Relations\BindMany($target, $object, $targetKey, $localKey);
+        return new Relations\BindMany($target, $object, $targetKey, $localKey);
     }
 
     protected function belongsTo(string $target, string $localKey, string $targetKey = '_id')
@@ -45,7 +46,7 @@ trait HasRelationships
         $object = $this;
         $target = $this->buildCollection($target);
 
-        return new Xenus\Relations\BindOne($target, $object, $targetKey, $localKey);
+        return new Relations\BindOne($target, $object, $targetKey, $localKey);
     }
 
     protected function belongsToMany(string $target, string $localKey, string $targetKey = '_id')
@@ -53,6 +54,6 @@ trait HasRelationships
         $object = $this;
         $target = $this->buildCollection($target);
 
-        return new Xenus\Relations\BindMany($target, $object, $targetKey, $localKey);
+        return new Relations\BindMany($target, $object, $targetKey, $localKey);
     }
 }
