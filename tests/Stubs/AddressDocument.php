@@ -4,5 +4,11 @@ namespace Xenus\Tests\Stubs;
 
 class AddressDocument extends \Xenus\Document
 {
+    protected $withId = true;
+
+    public function getUser()
+    {
+        return $this->belongsTo(UsersCollection::class, 'user_id');
+    }
 }
 
