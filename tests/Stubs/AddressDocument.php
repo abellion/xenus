@@ -10,5 +10,9 @@ class AddressDocument extends \Xenus\Document
     {
         return $this->belongsTo(UsersCollection::class, 'user_id');
     }
-}
 
+    public function getUsers()
+    {
+        return $this->belongsToMany(UsersCollection::class, 'users_id');
+    }
+}
