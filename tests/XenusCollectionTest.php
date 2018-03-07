@@ -5,8 +5,8 @@ namespace Xenus\Tests;
 use MongoDB\BSON\ObjectID;
 use PHPUnit\Framework\TestCase;
 
-use Xenus\Tests\Stubs\Cities;
 use Xenus\Document as XenusDocument;
+use Xenus\Tests\Stubs\CitiesCollection as Cities;
 
 class XenusCollectionTest extends TestCase
 {

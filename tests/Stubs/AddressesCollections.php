@@ -2,9 +2,9 @@
 
 namespace Xenus\Tests\Stubs;
 
-class CitiesCollection extends \Xenus\Collection
+class AddressesCollection extends \Xenus\Collection
 {
-    const NAME = 'cities';
+    const NAME = 'addresses';
     const DOCUMENT = \Xenus\Document::class;
 }
 
