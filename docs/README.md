@@ -275,7 +275,7 @@ class User extends Document
 }
 ```
 
-### Embeddeing documents
+### Embedding documents
 
 One super feature of MongoDB is the ability to nest data within documents. For example, a user could have some contact informations stored as the following document :
 
@@ -453,9 +453,9 @@ class Address extends Document
 
 In this example :
 
-- The user `belongsToMany` method will look for the addresses whose unique identifier are those stored in its `addresses_id` field.
+- The user's `belongsToMany` method will look for the addresses whose unique identifier are those stored in its `addresses_id` field.
 
-- The address `belongsToMany` method will look for the users whose unique identifier are those stored in its `users_id` field.
+- The address's `belongsToMany` method will look for the users whose unique identifier are those stored in its `users_id` field.
 
 ### Querying relations
 
