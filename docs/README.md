@@ -48,14 +48,14 @@ use Xenus\Collection;
 class Users extends Collection
 {
     //This is the name of your collection stored in the database
-    protected $name = 'users';
+    const NAME = 'users';
 }
 ```
 
 A Xenus `Collection` needs two properties to be constructed :
 
 - An instance of the `MongoDB\Database` class,
-- The name of the collection as a protected property.
+- The name of the collection as a constant property.
 
 ```php
 use MongoDB;
@@ -64,7 +64,6 @@ $client = new MongoDB\Client()
 $database = $client->myDatabase;
 
 $users = new Users($database);
-
 ```
 
 > If you use a framework with a dependency injection container, you can configure it to automatically inject an instance of the `MongoDB\Database` in every collections.
@@ -189,15 +188,15 @@ $john->name = 'John';
 $john = new User(['name' => 'John']);
 ```
 
-When retrieving models, you'll receive an instance of a `Xenus\Document` class by default. To tell Xenus to use a custom document, you need to set a protected property called `doument` in the `Collection` class :
+When retrieving models, you'll receive an instance of a `Xenus\Document` class by default. To tell Xenus to use a custom document, you need to set a property called `DOCUMENT` in the `Collection` class :
 
 ```php
 use Xenus\Collection;
 
 class Users extends Collection
 {
-    protected $name = 'users';
-    protected $document = User::class;
+    const NAME = 'users';
+    const DOCUMENT = User::class;
 }
 ```
 
@@ -442,7 +441,7 @@ In this example :
 
 - The address `belongsToMany` method will look for the users whose unique identifier are those stored in its `users_id` field.
 
-### Querying Relations
+### Querying relations
 
 Every of the relationship methods (`hasOne`, `belongsTo`, ...) return an object containing a `find()` method. Calling it will return a single document or a cursor depending on the relation type.
 
