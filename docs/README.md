@@ -275,7 +275,7 @@ class User extends Document
 }
 ```
 
-### Embedded documents
+### Embeddeing documents
 
 One super feature of MongoDB is the ability to nest data within documents. For example, a user could have some contact informations stored as the following document :
 
