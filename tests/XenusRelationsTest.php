@@ -2,6 +2,8 @@
 
 namespace Xenus\Tests;
 
+use Xenus\Cursor;
+
 use Xenus\Tests\Stubs\AddressDocument as Address;
 use Xenus\Tests\Stubs\AddressesCollection as Addresses;
 
@@ -21,6 +23,25 @@ class XenusRelationsTest extends \PHPUnit\Framework\TestCase
 
         $this->users = new Users($this->database);
         $this->addresses = new Addresses($this->database);
+    }
+
+    public function testCursorConnection()
+    {
+        $users = (new Cursor(new \ArrayIterator([
+            new User(),
+            new User()
+        ])))->toArray();
+
+        $this->assertNull($users[0]->collection());
+        $this->assertNull($users[1]->collection());
+
+        $users = (new Cursor(new \ArrayIterator([
+            new User(),
+            new User()
+        ])))->connect($this->users)->toArray();
+
+        $this->assertSame($users[0]->collection(), $this->users);
+        $this->assertSame($users[1]->collection(), $this->users);
     }
 
     public function testHasOneRelationship()
