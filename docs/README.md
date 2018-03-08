@@ -338,5 +338,106 @@ class User extends Document
 
 > You could have the embedded documents definitions in the same file as the main model document. It's not PSR-4 compliant but it's worth having it at the same level for clarity.
 
+## Relationships
+
+Embedding documents does not cover every use case. When you need to reference a document from another, you store its unique identifier - in either side of the relationship - and then retrieve the referenced document manually.
+
+Given the situation "A User has a Profile" :
+
+- The "User" is the `parent` of the relationship,
+- The "Profile" is the `child` of the relationship.
+
+- The "User" `has` a "Profile",
+- The "Profile" `belongs to` a "User".
+
+### One To One
+
+One To One relationships are very basic relations. For example, a user might have one address. To define a One To One relationship we use the `hasOne` method on the `parent` side and the `belongsTo` method on the `child` side :
+
+```php
+use Xenus\Document;
+
+class User extends Document
+{
+    public function getAddress()
+    {
+        return $this->hasOne(Addresses::class, 'user_id');
+    }
+}
+
+class Address extends Document
+{
+    public function getUser()
+    {
+        return $this->belongsTo(Users::class, 'user_id');
+    }
+}
+```
+
+In this example :
+
+- The `hasOne` method will look in the "Addresses" collection for an address with a `user_id` corresponding to the user unique identifier.
+
+- The `belongsTo` method will look in the "Users" collection for a user with a unique identifier corresponding to its `user_id` value.
+
+### One To Many
+
+One To Many relationships are used when something is linked to many other things. For exemple, a user might have many addresses. To define a One To Many relationship, we use the `hasMany` method on the `parent` side and the `belongsTo` method on the `child` side :
+
+```php
+use Xenus\Document;
+
+class User extends Document
+{
+    public function getAddresses()
+    {
+        return $this->hasMany(Addresses::class, 'user_id');
+    }
+}
+
+class Address extends Document
+{
+    public function getUser()
+    {
+        return $this->belongsTo(Users::class, 'user_id');
+    }
+}
+```
+
+In this example :
+
+- The `hasMany` method will look in the "Addresses" collection for all the addresses with a `user_id` corresponding to the user unique identifier.
+
+- The `belongsTo` method will look in the "Users" collection for a user with a unique identifier corresponding to its `user_id` value.
+
+### Many To Many
+
+Taking the previous example, what if some other users had the same address ? A user would have many addresses, and each address would have many users. To define a Many To Many relationship, we use on both sides the `belongsToMany` method :
+
+```php
+use Xenus\Document;
+
+class User extends Document
+{
+    public function getAddresses()
+    {
+        return $this->belongsToMany(Addresses::class, 'addresses_id');
+    }
+}
+
+class Address extends Document
+{
+    public function getUsers()
+    {
+        return $this->belongsToMany(Users::class, 'users_id');
+    }
+}
+```
+
+In this example :
+
+- The user `belongsToMany` method will look for the addresses whose unique identifier are those stored in its `addresses_id` field.
+
+- The address `belongsToMany` method will look for the users whose unique identifier are those stored in its `users_id` field.
 
 
