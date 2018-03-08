@@ -24,32 +24,32 @@ class XenusCollectionTest extends TestCase
 
     public function testNameConfiguration()
     {
-        $collection = new class($this->database) extends XenusCollection {
+        $collection = (new class($this->database) extends XenusCollection {
             const NAME = 'collection';
-        };
+        })->__debugInfo();
 
-        $this->assertEquals('collection', $collection->getCollectionName());
+        $this->assertEquals('collection', $collection['collectionName']);
 
-        $collection = new class($this->database, ['name' => 'collection']) extends XenusCollection {
-        };
+        $collection = (new class($this->database, ['name' => 'collection']) extends XenusCollection {
+        })->__debugInfo();
 
-        $this->assertEquals('collection', $collection->getCollectionName());
+        $this->assertEquals('collection', $collection['collectionName']);
     }
 
     public function testTypeMapConfiguration()
     {
-        $collection = new class($this->database) extends XenusCollection {
+        $collection = (new class($this->database) extends XenusCollection {
             const NAME = 'collection';
             const DOCUMENT = 'document';
-        };
+        })->__debugInfo();
 
-        $this->assertEquals('document', $collection->__debugInfo()['typeMap']['root']);
+        $this->assertEquals('document', $collection['typeMap']['root']);
 
-        $collection = new class($this->database, ['document' => 'document']) extends XenusCollection {
+        $collection = (new class($this->database, ['document' => 'document']) extends XenusCollection {
             const NAME = 'collection';
-        };
+        })->__debugInfo();
 
-        $this->assertEquals('document', $collection->__debugInfo()['typeMap']['root']);
+        $this->assertEquals('document', $collection['typeMap']['root']);
     }
 
     public function testInsert()
