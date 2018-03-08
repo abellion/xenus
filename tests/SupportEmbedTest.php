@@ -6,9 +6,8 @@ use Xenus\Document;
 use Xenus\Support\Embed;
 
 use MongoDB\BSON\ObjectID;
-use PHPUnit\Framework\TestCase;
 
-class SupportEmbedTest extends TestCase
+class SupportEmbedTest extends \PHPUnit\Framework\TestCase
 {
     public function testEmbedOnArray()
     {

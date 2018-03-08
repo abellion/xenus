@@ -3,13 +3,12 @@
 namespace Xenus\Tests;
 
 use MongoDB\BSON\ObjectID;
-use PHPUnit\Framework\TestCase;
 
 use Xenus\Document as XenusDocument;
 use Xenus\Collection as XenusCollection;
 use Xenus\Tests\Stubs\CitiesCollection as Cities;
 
-class XenusCollectionTest extends TestCase
+class XenusCollectionTest extends \PHPUnit\Framework\TestCase
 {
     use Concerns\RefreshDatabase;
 

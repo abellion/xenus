@@ -8,9 +8,7 @@ use Xenus\Tests\Stubs\AddressesCollection as Addresses;
 use Xenus\Tests\Stubs\UserDocument as User;
 use Xenus\Tests\Stubs\UsersCollection as Users;
 
-use PHPUnit\Framework\TestCase;
-
-class XenusRelationsTest extends TestCase
+class XenusRelationsTest extends \PHPUnit\Framework\TestCase
 {
     use Concerns\RefreshDatabase;
 

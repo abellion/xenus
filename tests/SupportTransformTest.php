@@ -7,9 +7,8 @@ use Xenus\Support\Transform;
 use Xenus\Tests\Stubs\CityTransformer;
 
 use MongoDB\BSON\ObjectID;
-use PHPUnit\Framework\TestCase;
 
-class SupportTransformTest extends TestCase
+class SupportTransformTest extends \PHPUnit\Framework\TestCase
 {
     public function testTransformDocument()
     {
