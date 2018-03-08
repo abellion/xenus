@@ -6,21 +6,7 @@ use IteratorIterator;
 
 class Cursor extends IteratorIterator
 {
-    protected $collection = null;
-
-    /**
-     * Set the collection this cursor is comming from
-     *
-     * @param  Collection $collection
-     *
-     * @return self
-     */
-    public function connect(Collection $collection)
-    {
-        $this->collection = $collection;
-
-        return $this;
-    }
+    use Concerns\HasCollection;
 
     /**
      * Return the current iterator element
