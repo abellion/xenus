@@ -342,6 +342,8 @@ class User extends Document
 
 Embedding documents does not cover every use case. When you need to reference a document from another, you store its unique identifier - in either side of the relationship - and then retrieve the referenced document manually.
 
+__Terminology :__
+
 Given the situation "A User has a Profile" :
 
 - The "User" is the `parent` of the relationship,
@@ -440,4 +442,28 @@ In this example :
 
 - The address `belongsToMany` method will look for the users whose unique identifier are those stored in its `users_id` field.
 
+### Querying Relations
 
+Every of the relationship methods (`hasOne`, `belongsTo`, ...) return an object containing a `find()` method. Calling it will return a single document or a cursor depending on the relation type.
+
+Given the previous examples, querying the user for its address can be done with the following :
+
+```php
+$address = $user->getAddress()->find();
+
+// Also by taking advantage of getters :
+
+$address = $user->address->find();
+```
+
+Additionally, you may give a filter, for example to retrieve the user's address only if it's located in Paris :
+
+```php
+$address = $user->address->find([
+    'city' => 'Paris'
+]);
+```
+
+This find method takes the same parameters as the one you know in the `Collection` class.
+
+!> A document's relations work only if the document comes from the `Collection` class (after a `find()` or `findOne()` call). Meaning that instantiating a document by hand will not allow to use relationships.
