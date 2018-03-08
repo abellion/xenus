@@ -1,6 +1,6 @@
 <?php
 
-namespace Xenus\Document;
+namespace Xenus\Concerns;
 
 use Xenus\Relations;
 use Xenus\Exceptions;

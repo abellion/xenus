@@ -11,10 +11,11 @@ use MongoDB\BSON\Unserializable;
 
 class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable, Unserializable
 {
+    use Concerns\HasRelationShips;
+
     use Document\MongoAccess;
     use Document\ArrayAccess;
     use Document\ArrayIterator;
-    use Document\HasRelationships;
     use Document\Accessors\CamelCaseAccessor;
     use Document\Serializers\JsonSerializer;
 
