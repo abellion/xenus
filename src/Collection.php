@@ -92,10 +92,84 @@ class Collection extends BaseCollection
             $filter = ['_id' => $filter];
         }
 
-        $cursor = $this->find($filter, array_merge($options, ['limit' => 1]));
-        $result = current($cursor->toArray());
+        $document = parent::findOne($filter, $options);
 
-        return ($result === false) ? null : $result;
+        if ($document instanceof Document) {
+            $document->connect($this);
+        }
+
+        return $document;
+    }
+
+    /**
+     * Find one document matching an ID or some filters and delete it
+     *
+     * @param  array|ObjectID   $filter
+     * @param  array            $options
+     *
+     * @return array|object|null
+     */
+    public function findOneAndDelete($filter = [], array $options = [])
+    {
+        if ($filter instanceof ObjectID) {
+            $filter = ['_id' => $filter];
+        }
+
+        $document = parent::findOneAndDelete($filter, $options);
+
+        if ($document instanceof Document) {
+            $document->connect($this);
+        }
+
+        return $document;
+    }
+
+    /**
+     * Find one document matching an ID or some filters and update it
+     *
+     * @param  array|ObjectID   $filter
+     * @param  array|object     $update
+     * @param  array            $options
+     *
+     * @return [type]          [description]
+     */
+    public function findOneAndUpdate($filter, $update, array $options = [])
+    {
+        if ($filter instanceof ObjectID) {
+            $filter = ['_id' => $filter];
+        }
+
+        $document = parent::findOneAndUpdate($filter, $update, $options);
+
+        if ($document instanceof Document) {
+            $document->connect($this);
+        }
+
+        return $document;
+    }
+
+    /**
+     * Find one document matching an ID or some filters and replace it
+     *
+     * @param  array|ObjectID   $filter
+     * @param  array|object     $replacement
+     * @param  array            $options
+     *
+     * @return array|object|null
+     */
+    public function findOneAndReplace($filter, $replacement, array $options = [])
+    {
+        if ($filter instanceof ObjectID) {
+            $filter = ['_id' => $filter];
+        }
+
+        $document = parent::findOneAndReplace($filter, $replacement, $options);
+
+        if ($document instanceof Document) {
+            $document->connect($this);
+        }
+
+        return $document;
     }
 
     /**
@@ -137,17 +211,17 @@ class Collection extends BaseCollection
      * Replace one document matching an ID or some filters
      *
      * @param  array|ObjectID   $filter
-     * @param  array|object     $replace
+     * @param  array|object     $replacement
      * @param  array            $options
      *
      * @return MongoDB\UpdateResult
      */
-    public function replaceOne($filter, $replace, array $options = [])
+    public function replaceOne($filter, $replacement, array $options = [])
     {
         if ($filter instanceof ObjectID) {
             $filter = ['_id' => $filter];
         }
 
-        return parent::replaceOne($filter, $replace, $options);
+        return parent::replaceOne($filter, $replacement, $options);
     }
 }
