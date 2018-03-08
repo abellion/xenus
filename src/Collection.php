@@ -4,9 +4,8 @@ namespace Xenus;
 
 use MongoDB\Database;
 use MongoDB\BSON\ObjectID;
-use MongoDB\Collection as BaseCollection;
 
-class Collection extends BaseCollection
+class Collection extends \MongoDB\Collection
 {
     const NAME = null;
     const DOCUMENT = Document::class;
