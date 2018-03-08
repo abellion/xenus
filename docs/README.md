@@ -277,7 +277,7 @@ class User extends Document
 
 ### Embedded documents
 
-One super feature of MongoDB is the ability to nest data within documents. For example, a user could have some contact informations (phone number, address, ...) stored as a document :
+One super feature of MongoDB is the ability to nest data within documents. For example, a user could have some contact informations stored as the following document :
 
 ```php
 use Xenus\Document;
@@ -293,16 +293,18 @@ class Contact extends Document
     {
         return $this->set('phone_number', $phoneNumber);
     }
-
-    //...
 }
 ```
 
-You'll find the `Embed` utility in the `Xenus\Support` namespace to easily embed documents within models :
+To easily embed this `Contact` document into your user model, you'll find the `Embed` utility in the `Xenus\Support` namespace. It contains a single `document()` method :
 
-- `Embed::document(Contact::class)->on($contact)` : It makes the `$contact` array be an instance of the `Contact` document.
+- `Embed::document(Contact::class)->on($contact)` : It makes the `$contact` be an instance of the `Contact` document.
 
 - `Embed::document(Contact::class)->in($contact)` : It makes every of the `$contact` values be an instance of the `Contact` document.
+
+In short : the `on()` method instantiate the given class with the given value, the `in()` method does the same but on every value of the given array.
+
+A user might have one primary contact, and many other as a backup :
 
 ```php
 use Xenus\Document;
@@ -332,14 +334,28 @@ class User extends Document
 }
 ```
 
-- The user's `contacts` value will be an array of `Contact` documents.
-- The user's `primary_contact` value will be an instance of the `Contact` document.
+- Its `contacts` value will be an array of `Contact` documents.
 
-> You could have the embedded documents definitions in the same file as the main model document. It's not PSR-4 compliant but it's worth having it at the same level for clarity.
+- Its `primary_contact` value will be an instance of the `Contact` document.
+
+Retrieving the contact informations is then as fluent as any other document's attribute :
+
+```php
+$phoneNumber = $user->primaryContact->phoneNumber;
+```
+
+Of course, you're not limited to embed documents. You could have an array of `ObjectID` and make the following to be sure it contains only `ObjectID` values :
+
+```php
+public function setFirendsId(array $friendsId)
+{
+    return $this->set('friends_id', Embed::document(ObjectID::class)->in($friendsId));
+}
+```
 
 ## Relationships
 
-Embedding documents does not cover every use case. When you need to reference a document from another, you store its unique identifier - in either side of the relationship - and then retrieve the referenced document manually.
+Embedding documents does not cover every use case. When you need to reference a document from another, you store its unique identifier - in either side of the relationship - and then retrieve the referenced document.
 
 __Terminology :__
 
