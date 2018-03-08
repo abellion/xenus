@@ -103,4 +103,29 @@ class XenusCollectionTest extends TestCase
         $this->assertInstanceOf(\MongoDB\UpdateResult::class, $cities->replaceOne(new ObjectID(), []));
         $this->assertInstanceOf(\MongoDB\UpdateResult::class, $cities->replaceOne(['_id' => new ObjectID()], []));
     }
+
+    public function testFindOneAndDelete()
+    {
+        $cities = new Cities($this->database);
+
+        $this->assertNull($cities->findOneAndDelete(new ObjectID()));
+        $this->assertNull($cities->findOneAndDelete(['_id' => new ObjectID()]));
+    }
+
+    public function testFindOneAndUpdate()
+    {
+        $cities = new Cities($this->database);
+        $update = ['$set' => ['field' => 'value']];
+
+        $this->assertNull($cities->findOneAndUpdate(new ObjectID(), $update));
+        $this->assertNull($cities->findOneAndUpdate(['_id' => new ObjectID()], $update));
+    }
+
+    public function testFindOneAndReplace()
+    {
+        $cities = new Cities($this->database);
+
+        $this->assertNull($cities->findOneAndReplace(new ObjectID(), []));
+        $this->assertNull($cities->findOneAndReplace(['_id' => new ObjectID()], []));
+    }
 }
