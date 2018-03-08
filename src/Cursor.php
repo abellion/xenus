@@ -6,7 +6,7 @@ use IteratorIterator;
 
 class Cursor extends IteratorIterator
 {
-    private $collection = null;
+    protected $collection = null;
 
     /**
      * Set the collection this cursor is comming from
