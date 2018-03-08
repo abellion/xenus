@@ -75,7 +75,7 @@ class Collection extends BaseCollection
      */
     public function find($filter = [], array $options = [])
     {
-        return new Cursor(parent::find($filter, $options), $this);
+        return (new Cursor(parent::find($filter, $options)))->connect($this);
     }
 
     /**

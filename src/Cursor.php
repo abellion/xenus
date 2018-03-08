@@ -2,20 +2,24 @@
 
 namespace Xenus;
 
-use Traversable;
 use IteratorIterator;
 
 class Cursor extends IteratorIterator
 {
-    private $iterator;
-    private $collection;
+    private $collection = null;
 
-    public function __construct(Traversable $iterator, Collection $collection)
+    /**
+     * Set the collection this cursor is comming from
+     *
+     * @param  Collection $collection
+     *
+     * @return self
+     */
+    public function connect(Collection $collection)
     {
-        $this->iterator = $iterator;
         $this->collection = $collection;
 
-        parent::__construct($iterator);
+        return $this;
     }
 
     /**
@@ -27,7 +31,7 @@ class Cursor extends IteratorIterator
     {
         $document = parent::current();
 
-        if ($document instanceof Document) {
+        if ($document instanceof Document && isset($this->collection)) {
             $document->connect($this->collection);
         }
 
@@ -60,6 +64,6 @@ class Cursor extends IteratorIterator
      */
     public function __call(string $name, array $arguments)
     {
-        return call_user_func_array([$this->iterator, $name], $arguments);
+        return call_user_func_array([$this->getInnerIterator(), $name], $arguments);
     }
 }
