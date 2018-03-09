@@ -35,7 +35,7 @@ class XenusCollectionTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('collection', $collection['collectionName']);
     }
 
-    public function testTypeMapConfiguration()
+    public function testDocumentConfiguration()
     {
         $collection = (new class($this->database) extends XenusCollection {
             const NAME = 'collection';
