@@ -12,23 +12,23 @@ trait HasRelationships
     /**
      * Instantiate a Xenus Collection
      *
-     * @param  string $target
+     * @param  string $collection
      *
      * @return Collection
      */
-    private function buildCollection(string $target)
+    private function build(string $collection)
     {
         if (null === $this->collection) {
-            throw new Exceptions\LogicException(sprintf('Target collection "%s" is not buildable', $target));
+            throw new Exceptions\LogicException(sprintf('Target collection "%s" is not buildable', $collection));
         }
 
-        if (false === class_exists($target)) {
-            throw new Exceptions\InvalidArgumentException(sprintf('Target collection "%s" does not exist', $target));
+        if (false === class_exists($collection)) {
+            throw new Exceptions\InvalidArgumentException(sprintf('Target collection "%s" does not exist', $collection));
         }
 
         return new Collection(new Database($this->collection->getManager(), $this->collection->getDatabaseName()), [
-            'name' => $target::NAME,
-            'document' => $target::DOCUMENT
+            'name' => $collection::NAME,
+            'document' => $collection::DOCUMENT
         ]);
     }
 
@@ -44,7 +44,7 @@ trait HasRelationships
     protected function hasOne(string $target, string $targetKey, string $localKey = '_id')
     {
         $object = $this;
-        $target = $this->buildCollection($target);
+        $target = $this->build($target);
 
         return new Relations\BindOne($target, $object, $targetKey, $localKey);
     }
@@ -61,7 +61,7 @@ trait HasRelationships
     protected function hasMany(string $target, string $targetKey, string $localKey = '_id')
     {
         $object = $this;
-        $target = $this->buildCollection($target);
+        $target = $this->build($target);
 
         return new Relations\BindMany($target, $object, $targetKey, $localKey);
     }
@@ -78,7 +78,7 @@ trait HasRelationships
     protected function belongsTo(string $target, string $localKey, string $targetKey = '_id')
     {
         $object = $this;
-        $target = $this->buildCollection($target);
+        $target = $this->build($target);
 
         return new Relations\BindOne($target, $object, $targetKey, $localKey);
     }
@@ -95,7 +95,7 @@ trait HasRelationships
     protected function belongsToMany(string $target, string $localKey, string $targetKey = '_id')
     {
         $object = $this;
-        $target = $this->buildCollection($target);
+        $target = $this->build($target);
 
         return new Relations\BindMany($target, $object, $targetKey, $localKey);
     }
