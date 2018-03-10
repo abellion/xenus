@@ -14,3 +14,32 @@
 # 0.8
 
 - The `Xenus\Document::get()` method can take as a second argument the default value to give in case the given key doesn't exist within the document.
+
+# 0.7.2
+
+- The `Xenus\Document::with()` no longer includes the `_id` field by default.
+- The `Xenus\Document::without()` no longer includes the `_id` field by default.
+
+# 0.7.1
+
+- The `Xenus\Document::with()` method now returns the higher document's instance.
+- The `Xenus\Document::without()` method now returns the higher document's instance.
+
+# 0.7
+
+- The `Xenus\Document` has two new methods : `with()` and `without()`.
+- The `Xenus\Collection::select()` method has been renamed to `find()`.
+
+# 0.6.1
+
+This release add documentation blocks on top of the library methods.
+
+# 0.6
+
+- The `Xenus\Document` has a new `merge()` method, used to fill the document's values.
+
+# 0.5
+
+- The `Xenus/Document/Serializers/HttpSerializer` methods have been removed.
+- The `Xenus/Document/Serializers/DefaultSerializer` methods have been removed.
+- The `Xenus\Document::toArray()` is the preferred way to serialize a document's properties.
