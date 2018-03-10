@@ -83,14 +83,14 @@ $adultUsers = $users->find([
 ]);
 ```
 
-Instead of making this query everywhere you need these users, you may better make a method inside the users collection :
+Instead of making this query everywhere you need these users, you may better make a `findAdults()` method inside the users collection :
 
 ```php
 use Xenus\Collection;
 
 class Users extends Collection
 {
-    protected $name = 'users';
+    const NAME = 'users';
 
     public function findAdults(array $options = [])
     {
@@ -105,7 +105,7 @@ class Users extends Collection
 $adultUsers = $users->findAdults();
 ```
 
-> When creating a method you may find usefull to give an array of options if you want to sort the results for example.
+Because we added the `$options` parameter, we can simply sort the results :
 
 ```php
 $adultUsers = $users->findAdults([
@@ -180,15 +180,15 @@ class User extends Document
 To create a new user, simply instantiate the `User` object, optionnaly with a set of properties :
 
 ```php
-//Create an empty user, and then gives him a name
+//It creates an empty user, and then gives him a name
 $john = new User();
 $john->name = 'John';
 
-//Create directly the user with a name
+//It creates directly the user with a name
 $john = new User(['name' => 'John']);
 ```
 
-When retrieving models, you'll receive an instance of a `Xenus\Document` class by default. To tell Xenus to use a custom document, you need to set a property called `DOCUMENT` in the `Collection` class :
+When retrieving models, you'll receive them as a `Xenus\Document` by default. To tell Xenus to use a custom document, you need to set a property called `DOCUMENT` in the `Collection` class :
 
 ```php
 use Xenus\Collection;
@@ -258,6 +258,8 @@ When mutating a document, Xenus will try to find the corresponding getter and se
 
 - A getter is a method whose name starts with `get` and its followed by the property name.
 - A setter is a method whose name starts with `set` and its followed by the property name.
+
+Now, when typing `$user->name` or `$user->name = 'Antoine'`, the `getName()` and `setName()` methods will be used.
 
 !> This "auto discovery" mechanism is not used if you use the array form (ie. `$model['property']`) to keep a way of muttating the documents without using the accessors.
 
@@ -355,7 +357,7 @@ public function setFirendsId(array $friendsId)
 
 ## Relationships
 
-Embedding documents does not cover every use case. When you need to reference a document from another, you store its unique identifier - in either side of the relationship - and then retrieve the referenced document.
+Embedding documents does not cover every use case. When you need to reference a document from another, you store its unique identifier - in one of the side of the relationship - and then retrieve the referenced document.
 
 __Terminology :__
 
