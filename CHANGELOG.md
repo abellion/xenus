@@ -1,3 +1,12 @@
+# 0.11
+
+Relationships have landed ! Check out the [documentation](https://abellion.github.io/xenus/) for more informations.
+
+- The `Xenus\Collection` protected properties `name` and `document` became constant properties.
+- The `Xenus\Collection` class is no longer `abstract`. You can instantiate it by giving an array of options as a second argument.
+- All of the `Xenus\Collection` methods returning a MongoDB Cursor now return a `Xenus\Cursor` having the same methods as the original cursor.
+- The `Xenus\Document` now provides accessors for an `_id` property.
+
 # 0.10
 
 - The `Xenus\Document::embed()` method has been removed. Use the `Xenus\Support\Embed` utility instead.
