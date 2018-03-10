@@ -4,7 +4,7 @@
 
 # Xenus
 
-Xenus is a simple yet powerful ODM for MongoDB implementing the Data mapper pattern.
+Xenus is a simple yet powerful ODM for MongoDB.
 
 Using a simple, elegant syntax it allows you to work seamlessly with your documents and collections.
 
