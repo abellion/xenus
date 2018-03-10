@@ -167,20 +167,23 @@ Instead of receiving your data in the form of an array or a pristine object, Xen
 ### Creating a document
 
 A document is no more than a class containing your document's properties stored in your MongoDB database.
-A user document may contains a `name`, an `email`, a `username` or whatever is fitting your business.
+A user document may contain a `name`, an `email`, a `username` or whatever is fitting your business.
 
 ```php
 use Xenus\Document;
 
 class User extends Document
 {
+    protected $withId = true;
 }
 ```
+
+> The `withId` property, when set to `true`, will create an `_id` field containing a fresh `MongoDB\BSON\ObjectID` instance.
 
 To create a new user, simply instantiate the `User` object, optionnaly with a set of properties :
 
 ```php
-//It creates an empty user, and then gives him a name
+//It creates an empty user, and then sets a name
 $john = new User();
 $john->name = 'John';
 
