@@ -108,4 +108,19 @@ class XenusDocumentTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals('Charles', $document->setFromSetter('name', 'Charles')->get('name'));
     }
+
+    public function testWithIdConfiguration()
+    {
+        $document = new class extends Document {
+            protected $withId = false;
+        };
+
+        $this->assertNull($document['_id']);
+
+        $document = new class extends Document {
+            protected $withId = true;
+        };
+
+        $this->assertInstanceOf(\MongoDB\BSON\ObjectID::class, $document['_id']);
+    }
 }

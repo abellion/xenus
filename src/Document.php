@@ -11,6 +11,7 @@ use MongoDB\BSON\Unserializable;
 
 class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable, Unserializable
 {
+    use Concerns\HasId;
     use Concerns\HasCollection;
     use Concerns\HasRelationShips;
 
