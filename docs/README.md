@@ -484,3 +484,123 @@ $address = $user->address->find([
 This find method takes the same parameters as the one you know in the `Collection` class.
 
 !> A document's relations work only if the document comes from the `Collection` class (after a `find()` or `findOne()` call). Meaning that instantiating a document by hand will not allow to use relationships.
+
+## Resources
+
+When making an API, you expose your database resources to the outside world (the users, the blog posts, etc...).
+
+Thus, you need to make sure none of the private attributes are going outside (a user password for example). You also may want to convert some attributes. For example, a `MongoDB\BSON\ObjectID` into a beautiful string called `id` instead of `_id`.
+
+Let's create a pristine resource representing a user :
+
+```php
+use Xenus\Document;
+
+class UserResource extends Document
+{
+
+}
+```
+
+### Selecting attributes
+
+Imagine you want to keep from your user only a certain set of attributes, for example its `name` and `city` - but none of its `password`, `email` or anything sensitive.
+
+Xenus documents have a `with()` method that selectivly keep the given attributes :
+
+```php
+$user = $user->with(['name', 'city']);
+```
+
+But instead of listing these attributes in every controllers you return a user, let's centralize into the `UserResource` :
+
+```php
+use Xenus\Document;
+
+class UserResource extends Document
+{
+    public function __construct(User $user)
+    {
+        parent::__construct(
+            $user->with(['name', 'city'])
+        );
+    }
+}
+```
+
+In your controllers, you can now return an instance of the `UserResource` that do the work behind the scene :
+
+```php
+return new UserResource(
+    $users->findOne([ ... ])
+);
+```
+
+### Transforming attributes
+
+Your models may contain a `createdAt` timestamp storing the model's creation date, in seconds. On the client, Javascript side, timestamps are treated in miliseconds. To make client side development easier, returning a milisecond timestamp would be great. By taking advantage of Xenus setters, making this tweak is very easy, you juste need to add a `setCreatedAt` setter inside the `UserResource` :
+
+```php
+use Xenus\Document;
+
+class UserResource extends Document
+{
+    public function setCreatedAt($createdAt)
+    {
+        return $this->set('created_at', $createdAt * 1000);
+    }
+}
+```
+
+Now, when returning this `userResource` from your controllers, the `created_at` attribute will always be a milisecond timestamp without any work !
+
+It's also common to tweak a model's ID, to rename the `_id` attribute into `id` and to make its `MongoDB\BSON\ObjectID` value a string :
+
+```php
+use Xenus\Document;
+
+class UserResource extends Document
+{
+    public function setId($id)
+    {
+        return $this->set('id', (string) $id);
+    }
+}
+```
+
+### Using a resource
+
+When returning a single resource, it's ok to make the following :
+
+```php
+return new CommentResource($comment);
+```
+
+On the opposite, it may become cumbersome when dealing with collections, a list of comments for example. You would need to loop over the comments to make every of them a `CommentResource`.
+
+Instead, you may better use the `Xenus\Support\Transform` utility :
+
+```php
+use Xenus\Support\Transform;
+
+return Transform::collection($comments)->to(CommentResource::class);
+```
+
+It accepts arrays as well as cursors, so you can transform directly the result of a `find()` query :
+
+```php
+use Xenus\Support\Transform;
+
+return Transform::collection(
+    $comments->find()
+)->to(CommentResource::class);
+```
+
+To be consistant, you can also transform single documents using the `document()` method :
+
+```php
+use Xenus\Support\Transform;
+
+return Transform::document($comment)->to(CommentResource::class);
+```
+
