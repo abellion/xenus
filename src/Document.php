@@ -13,7 +13,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
 {
     use Concerns\HasId;
     use Concerns\HasCollection;
-    use Concerns\HasRelationShips;
+    use Concerns\HasRelationships;
 
     use Document\MongoAccess;
     use Document\ArrayAccess;
