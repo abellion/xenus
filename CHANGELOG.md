@@ -1,3 +1,8 @@
+# 0.12
+
+- The `Xenus\Collection` constant properties `NAME` and `DOCUMENT` became protected properties.
+- The way relationships are loaded can be customized via the `resolve()` method of the `Xenus\Collection` class.
+
 # 0.11.1
 
 This release fixes a bug on case sensitive filesystems.
