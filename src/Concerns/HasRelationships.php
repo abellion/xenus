@@ -17,7 +17,7 @@ trait HasRelationships
     private function build(string $collection)
     {
         if (null === $this->collection) {
-            throw new Exceptions\LogicException(sprintf('Target collection "%s" is not buildable', $collection));
+            throw new Exceptions\LogicException(sprintf('Cannot build "%s" collection while document is not connected', $collection));
         }
 
         return $this->collection->resolve($collection);
