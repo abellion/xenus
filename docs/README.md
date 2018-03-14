@@ -48,14 +48,14 @@ use Xenus\Collection;
 class Users extends Collection
 {
     //This is the name of your collection stored in the database
-    const NAME = 'users';
+    protected $name = 'users';
 }
 ```
 
 A Xenus `Collection` needs two properties to be constructed :
 
 - An instance of the `MongoDB\Database` class,
-- The name of the collection as a constant property.
+- The name of the collection as a protected property.
 
 ```php
 use MongoDB;
@@ -90,7 +90,7 @@ use Xenus\Collection;
 
 class Users extends Collection
 {
-    const NAME = 'users';
+    protected $name = 'users';
 
     public function findAdults(array $options = [])
     {
@@ -191,15 +191,15 @@ $john->name = 'John';
 $john = new User(['name' => 'John']);
 ```
 
-When retrieving models, you'll receive them as a `Xenus\Document` by default. To tell Xenus to use a custom document, you need to set a property called `DOCUMENT` in the `Collection` class :
+When retrieving models, you'll receive them as a `Xenus\Document` by default. To tell Xenus to use a custom document, you need to set a property called `document` in the `Collection` class :
 
 ```php
 use Xenus\Collection;
 
 class Users extends Collection
 {
-    const NAME = 'users';
-    const DOCUMENT = User::class;
+    protected $name = 'users';
+    protected $document = User::class;
 }
 ```
 
