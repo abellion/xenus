@@ -4,8 +4,6 @@ namespace Xenus\Concerns;
 
 use Xenus\Relations;
 use Xenus\Exceptions;
-use Xenus\Collection;
-use MongoDB\Database;
 
 trait HasRelationships
 {
@@ -22,14 +20,7 @@ trait HasRelationships
             throw new Exceptions\LogicException(sprintf('Target collection "%s" is not buildable', $collection));
         }
 
-        if (false === class_exists($collection)) {
-            throw new Exceptions\InvalidArgumentException(sprintf('Target collection "%s" does not exist', $collection));
-        }
-
-        return new Collection(new Database($this->collection->getManager(), $this->collection->getDatabaseName()), [
-            'name' => $collection::NAME,
-            'document' => $collection::DOCUMENT
-        ]);
+        return $this->collection->resolve($collection);
     }
 
     /**

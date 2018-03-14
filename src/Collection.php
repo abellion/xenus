@@ -26,6 +26,22 @@ class Collection extends \MongoDB\Collection
     }
 
     /**
+     * Resolve the given collection
+     *
+     * @param  string $collection
+     *
+     * @return Collection
+     */
+    public function resolve(string $collection)
+    {
+        if (false === class_exists($collection)) {
+            throw new Exceptions\InvalidArgumentException(sprintf('Target collection "%s" does not exist', $collection));
+        }
+
+        return new $collection(new Database($this->getManager(), $this->getDatabaseName()));
+    }
+
+    /**
      * Insert the document
      *
      * @param  array|object $document
