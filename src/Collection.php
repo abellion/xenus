@@ -8,6 +8,7 @@ use MongoDB\BSON\ObjectID;
 class Collection extends \MongoDB\Collection
 {
     protected $name = null;
+    protected $database = null;
     protected $document = Document::class;
 
     public function __construct(Database $database, array $options = [])
@@ -19,6 +20,10 @@ class Collection extends \MongoDB\Collection
         if (null === ($document = $options['document'] ?? $this->document)) {
             throw new Exceptions\InvalidArgumentException('The "document" argument is required');
         }
+
+        $this->name = $name;
+        $this->database = $database;
+        $this->document = $document;
 
         parent::__construct($database->getManager(), $database->getDatabaseName(), $name, array_merge($options, [
             'typeMap' => ['root' => $document, 'array' => 'array', 'document' => 'array']
@@ -38,7 +43,7 @@ class Collection extends \MongoDB\Collection
             throw new Exceptions\InvalidArgumentException(sprintf('Target collection "%s" does not exist', $collection));
         }
 
-        return new $collection(new Database($this->getManager(), $this->getDatabaseName()));
+        return new $collection($this->database);
     }
 
     /**
