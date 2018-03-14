@@ -24,7 +24,7 @@ class XenusCollectionTest extends \PHPUnit\Framework\TestCase
     public function testNameConfiguration()
     {
         $collection = (new class($this->database) extends XenusCollection {
-            const NAME = 'collection';
+            protected $name = 'collection';
         })->__debugInfo();
 
         $this->assertEquals('collection', $collection['collectionName']);
@@ -38,14 +38,14 @@ class XenusCollectionTest extends \PHPUnit\Framework\TestCase
     public function testDocumentConfiguration()
     {
         $collection = (new class($this->database) extends XenusCollection {
-            const NAME = 'collection';
-            const DOCUMENT = 'document';
+            protected $name = 'collection';
+            protected $document = 'document';
         })->__debugInfo();
 
         $this->assertEquals('document', $collection['typeMap']['root']);
 
         $collection = (new class($this->database, ['document' => 'document']) extends XenusCollection {
-            const NAME = 'collection';
+            protected $name = 'collection';
         })->__debugInfo();
 
         $this->assertEquals('document', $collection['typeMap']['root']);

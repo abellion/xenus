@@ -4,7 +4,7 @@ namespace Xenus\Tests\Stubs;
 
 class UsersCollection extends \Xenus\Collection
 {
-    const NAME = 'users';
-    const DOCUMENT = UserDocument::class;
+    protected $name = 'users';
+    protected $document = UserDocument::class;
 }
 

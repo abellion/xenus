@@ -7,16 +7,16 @@ use MongoDB\BSON\ObjectID;
 
 class Collection extends \MongoDB\Collection
 {
-    const NAME = null;
-    const DOCUMENT = Document::class;
+    protected $name = null;
+    protected $document = Document::class;
 
     public function __construct(Database $database, array $options = [])
     {
-        if (null === ($name = $options['name'] ?? static::NAME)) {
+        if (null === ($name = $options['name'] ?? $this->name)) {
             throw new Exceptions\InvalidArgumentException('The "name" argument is required');
         }
 
-        if (null === ($document = $options['document'] ?? static::DOCUMENT)) {
+        if (null === ($document = $options['document'] ?? $this->document)) {
             throw new Exceptions\InvalidArgumentException('The "document" argument is required');
         }
 

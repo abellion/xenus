@@ -4,7 +4,7 @@ namespace Xenus\Tests\Stubs;
 
 class AddressesCollection extends \Xenus\Collection
 {
-    const NAME = 'addresses';
-    const DOCUMENT = AddressDocument::class;
+    protected $name = 'addresses';
+    protected $document = AddressDocument::class;
 }
 

@@ -4,7 +4,7 @@ namespace Xenus\Tests\Stubs;
 
 class CitiesCollection extends \Xenus\Collection
 {
-    const NAME = 'cities';
-    const DOCUMENT = \Xenus\Document::class;
+    protected $name = 'cities';
+    protected $document = \Xenus\Document::class;
 }
 
