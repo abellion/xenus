@@ -1,3 +1,7 @@
+# 0.11.1
+
+This release fixes a bug on case sensitive filesystems.
+
 # 0.11
 
 Relationships have landed ! Check out the [documentation](https://abellion.github.io/xenus/) for more informations.
