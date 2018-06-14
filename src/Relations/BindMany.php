@@ -49,4 +49,28 @@ class BindMany extends AbstractRelation
             $this->foreignKey => $query
         ], $filter), $options);
     }
+
+    /**
+     * Distinct the given field in the target collection
+     *
+     * @param  string $fieldName
+     * @param  array  $filter
+     * @param  array  $options
+     *
+     * @return array
+     */
+    public function distinct($fieldName, $filter = [], array $options = [])
+    {
+        $attribute = $this->object->get($this->primaryKey);
+
+        if (false === is_array($attribute)) {
+            $query = $attribute;
+        } else {
+            $query = ['$in' => $attribute];
+        }
+
+        return $this->target->distinct($fieldName, array_merge([
+            $this->foreignKey => $query
+        ], $filter), $options);
+    }
 }

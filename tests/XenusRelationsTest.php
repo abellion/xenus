@@ -99,11 +99,30 @@ class XenusRelationsTest extends \PHPUnit\Framework\TestCase
 
         $paris = $user->getAddresses()->findOne(['city' => 'Paris']);
 
-        $this->assertEquals($paris['city'], 'Paris');
+        $this->assertEquals('Paris', $paris['city']);
 
         $tours = $user->getAddresses()->findOne(['city' => 'Tours']);
 
-        $this->assertEquals($tours['city'], 'Tours');
+        $this->assertEquals('Tours', $tours['city']);
+    }
+
+    public function testDistinctInHasManyRelationship()
+    {
+        $this->users->insert(
+            $user = (new User())->connect($this->users)
+        );
+
+        $this->addresses->insert(
+            $addressA = (new Address(['user_id' => $user['_id'], 'city' => 'Paris']))->connect($this->addresses)
+        );
+
+        $this->addresses->insert(
+            $addressB = (new Address(['user_id' => $user['_id'], 'city' => 'Tours']))->connect($this->addresses)
+        );
+
+        $cities = $user->getAddresses()->distinct('city');
+
+        $this->assertEquals(['Paris', 'Tours'], $cities);
     }
 
     public function testBelongsToRelationship()
@@ -145,7 +164,7 @@ class XenusRelationsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals((string) $userB['_id'], (string) $users[1]['_id']);
     }
 
-    public function testFinOneInBelongsToManyRelationship()
+    public function testFindOneInBelongsToManyRelationship()
     {
         $this->users->insert(
             $userA = (new User(['name' => 'Antoine']))->connect($this->users)
@@ -161,10 +180,29 @@ class XenusRelationsTest extends \PHPUnit\Framework\TestCase
 
         $antoine = $address->getUsers()->findOne(['name' => 'Antoine']);
 
-        $this->assertEquals($antoine['name'], 'Antoine');
+        $this->assertEquals('Antoine', $antoine['name']);
 
         $nicolas = $address->getUsers()->findOne(['name' => 'Nicolas']);
 
-        $this->assertEquals($nicolas['name'], 'Nicolas');
+        $this->assertEquals('Nicolas', $nicolas['name']);
+    }
+
+    public function testDistinctInBelongsToManyRelationship()
+    {
+        $this->users->insert(
+            $userA = (new User(['name' => 'Antoine']))->connect($this->users)
+        );
+
+        $this->users->insert(
+            $userB = (new User(['name' => 'Nicolas']))->connect($this->users)
+        );
+
+        $this->addresses->insert(
+            $address = (new Address(['users_id' => [$userA['_id'], $userB['_id']]]))->connect($this->addresses)
+        );
+
+        $names = $address->getUsers()->distinct('name');
+
+        $this->assertEquals(['Antoine', 'Nicolas'], $names);
     }
 }
