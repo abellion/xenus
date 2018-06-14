@@ -1,3 +1,8 @@
+# 0.13
+
+- Added a `findOne()` method to `hasMany` and `belongsToMany` relationships.
+- Added a `distinct()` method to `hasMany` and `belongsToMany` relationships.
+
 # 0.12
 
 - The `Xenus\Collection` constant properties `NAME` and `DOCUMENT` became protected properties.
