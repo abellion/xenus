@@ -83,6 +83,29 @@ class XenusRelationsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals((string) $addressB['_id'], (string) $addresses[1]['_id']);
     }
 
+    public function testFindOneInHasManyRelationship()
+    {
+        $this->users->insert(
+            $user = (new User())->connect($this->users)
+        );
+
+        $this->addresses->insert(
+            $addressA = (new Address(['user_id' => $user['_id'], 'city' => 'Paris']))->connect($this->addresses)
+        );
+
+        $this->addresses->insert(
+            $addressB = (new Address(['user_id' => $user['_id'], 'city' => 'Tours']))->connect($this->addresses)
+        );
+
+        $paris = $user->getAddresses()->findOne(['city' => 'Paris']);
+
+        $this->assertEquals($paris['city'], 'Paris');
+
+        $tours = $user->getAddresses()->findOne(['city' => 'Tours']);
+
+        $this->assertEquals($tours['city'], 'Tours');
+    }
+
     public function testBelongsToRelationship()
     {
         $this->users->insert(
@@ -120,5 +143,28 @@ class XenusRelationsTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals((string) $userA['_id'], (string) $users[0]['_id']);
         $this->assertEquals((string) $userB['_id'], (string) $users[1]['_id']);
+    }
+
+    public function testFinOneInBelongsToManyRelationship()
+    {
+        $this->users->insert(
+            $userA = (new User(['name' => 'Antoine']))->connect($this->users)
+        );
+
+        $this->users->insert(
+            $userB = (new User(['name' => 'Nicolas']))->connect($this->users)
+        );
+
+        $this->addresses->insert(
+            $address = (new Address(['users_id' => [$userA['_id'], $userB['_id']]]))->connect($this->addresses)
+        );
+
+        $antoine = $address->getUsers()->findOne(['name' => 'Antoine']);
+
+        $this->assertEquals($antoine['name'], 'Antoine');
+
+        $nicolas = $address->getUsers()->findOne(['name' => 'Nicolas']);
+
+        $this->assertEquals($nicolas['name'], 'Nicolas');
     }
 }
