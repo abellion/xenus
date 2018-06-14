@@ -22,8 +22,8 @@ class BindMany extends AbstractRelation
             $query = ['$in' => $attribute];
         }
 
-        return $this->target->find(array_merge($filter, [
+        return $this->target->find(array_merge([
             $this->foreignKey => $query
-        ]), $options);
+        ], $filter), $options);
     }
 }
