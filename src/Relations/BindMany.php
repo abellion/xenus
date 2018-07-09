@@ -51,6 +51,29 @@ class BindMany extends AbstractRelation
     }
 
     /**
+     * Count the number of documents in the target collection
+     *
+     * @param  array  $filter
+     * @param  array  $options
+     *
+     * @return int
+     */
+    public function count($filter = [], array $options = [])
+    {
+        $attribute = $this->object->get($this->primaryKey);
+
+        if (false === is_array($attribute)) {
+            $query = $attribute;
+        } else {
+            $query = ['$in' => $attribute];
+        }
+
+        return $this->target->count(array_merge([
+            $this->foreignKey => $query
+        ], $filter), $options);
+    }
+
+    /**
      * Distinct the given field in the target collection
      *
      * @param  string $fieldName

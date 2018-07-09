@@ -164,6 +164,25 @@ class XenusRelationsTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals((string) $userB['_id'], (string) $users[1]['_id']);
     }
 
+    public function testCountInBelongsToManyRelationship()
+    {
+        $this->users->insert(
+            $userA = (new User(['name' => 'Antoine']))->connect($this->users)
+        );
+
+        $this->users->insert(
+            $userB = (new User(['name' => 'Nicolas']))->connect($this->users)
+        );
+
+        $this->addresses->insert(
+            $address = (new Address(['users_id' => [$userA['_id'], $userB['_id']]]))->connect($this->addresses)
+        );
+
+        $count = $address->getUsers()->count();
+
+        $this->assertEquals(2, $count);
+    }
+
     public function testFindOneInBelongsToManyRelationship()
     {
         $this->users->insert(
