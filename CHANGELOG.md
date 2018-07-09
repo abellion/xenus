@@ -1,3 +1,7 @@
+# 0.14
+
+- Added a `count()` method to `hasMany` and `belongsToMany` relationships.
+
 # 0.13
 
 - Added a `findOne()` method to `hasMany` and `belongsToMany` relationships.
