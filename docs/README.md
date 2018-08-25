@@ -484,9 +484,11 @@ $address = $user->address->find([
 ]);
 ```
 
-This find method takes the same parameters as the one you know in the `Collection` class.
-
 !> A document's relations work only if the document comes from the `Collection` class (after a `find()` or `findOne()` call). Meaning that instantiating a document by hand will not allow to use relationships.
+
+In the case of a `hasMany` and `belongsToMany` relationships, you also have access to the `findOne`, `count` and `distinct` methods.
+
+These methods take the same parameters as the ones you know in the `Collection` class.
 
 ## Resources
 
