@@ -14,7 +14,7 @@ trait HasRelationships
      *
      * @return Collection
      */
-    private function build(string $collection)
+    protected function build(string $collection)
     {
         if (null === $this->collection) {
             throw new Exceptions\LogicException(sprintf('Cannot build "%s" collection while document is not connected', $collection));

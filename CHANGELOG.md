@@ -1,3 +1,7 @@
+# 0.15 [UNRELEASED]
+
+- The `Xenus\Concerns\HasRelationships` `build` method is now protected.
+
 # 0.14
 
 - Added a `count()` method to `hasMany` and `belongsToMany` relationships.
