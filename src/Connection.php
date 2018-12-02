@@ -39,6 +39,16 @@ class Connection
     }
 
     /**
+     * Return the connection options
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        return $this->connection['options'];
+    }
+
+    /**
      * Return a manager instance
      *
      * @return Manager
@@ -76,5 +86,15 @@ class Connection
         }
 
         return $this->client = new Client($this->connection['host'], $this->connection['options']['server'], $this->connection['options']['driver']);
+    }
+
+    /**
+     * Return the database name
+     *
+     * @return string
+     */
+    public function getDatabaseName()
+    {
+        return $this->connection['database'];
     }
 }
