@@ -2,55 +2,56 @@
 
 namespace Xenus\Tests\Unit;
 
-use MongoDB\BSON\ObjectID;
-
 use Xenus\Document;
 use Xenus\Support\Embed;
 
 class SupportEmbedTest extends \PHPUnit\Framework\TestCase
 {
-    public function testEmbedOnArray()
-    {
-        $document = Embed::document(Document::class)->on($family = [
-            'mother' => 'Chris',
-            'father' => 'Dominique'
-        ]);
-
-        $this->assertInstanceOf(Document::class, $document);
-        $this->assertEquals($family, $document->toArray());
-    }
-
-    public function testEmbedOnDocument()
+    public function test_embeding_on_documents_works()
     {
         $document = Embed::document(Document::class)->on($family = new Document([
             'mother' => 'Chris',
             'father' => 'Dominique'
         ]));
 
-        $this->assertInstanceOf(Document::class, $document);
-        $this->assertEquals($family->toArray(), $document->toArray());
+        $this->assertInstanceOf(
+            Document::class, $document
+        );
+
+        $this->assertEquals(
+            $family->toArray(), $document->toArray()
+        );
     }
 
-    public function testEmbedObjectID()
+    public function test_embeding_on_arrays_works()
     {
-        $id = Embed::document(ObjectID::class)->on('5a6b0649d1e6a5001b739e62');
+        $document = Embed::document(Document::class)->on($family = [
+            'mother' => 'Chris',
+            'father' => 'Dominique'
+        ]);
 
-        $this->assertInstanceOf(ObjectID::class, $id);
-        $this->assertEquals((string) $id, '5a6b0649d1e6a5001b739e62');
+        $this->assertInstanceOf(
+            Document::class, $document
+        );
+
+        $this->assertEquals(
+            $family, $document->toArray()
+        );
     }
 
-    public function testEmbedInArray()
+    public function test_embeding_in_multiple_arrays_works()
     {
         $documents = Embed::document(Document::class)->in($browsers = [
             ['name' => 'Nicolas', 'age' => 25],
             ['name' => 'Obon', 'age' => 19]
         ]);
 
-        $this->assertTrue(is_array($documents));
-        $this->assertEquals(2, count($documents));
-        $this->assertInstanceOf(Document::class, $documents[0]);
-        $this->assertInstanceOf(Document::class, $documents[1]);
-        $this->assertEquals($browsers[0], $documents[0]->toArray());
-        $this->assertEquals($browsers[1], $documents[1]->toArray());
+        $this->assertTrue(
+            is_array($documents)
+        );
+
+        $this->assertCount(
+            2, $documents
+        );
     }
 }
