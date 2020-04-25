@@ -33,9 +33,13 @@ class Connection
      * @param string $database
      * @param array  $options
      */
-    public function __construct(string $host, string $database, array $options = ['server' => [], 'driver' => []])
+    public function __construct(string $host, string $database, array $options = null)
     {
-        $this->connection = ['host' => $host, 'database' => $database, 'options' => $options];
+        $this->connection = [
+            'options' => ['server' => $options['server'] ?? [], 'driver' => $options['driver'] ?? []],
+            'host' => $host,
+            'database' => $database
+        ];
     }
 
     /**
