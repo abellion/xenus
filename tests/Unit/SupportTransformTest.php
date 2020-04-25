@@ -11,27 +11,37 @@ use Xenus\Tests\Unit\Stubs\CityTransformer;
 
 class SupportTransformTest extends \PHPUnit\Framework\TestCase
 {
-    public function testTransformDocument()
+    public function test_transforming_a_document()
     {
-        $city = new Document(['_id' => new ObjectID(), 'name' => 'Paris', 'zip' => 75000]);
-        $city = Transform::document($city)->to(CityTransformer::class);
+        $document = new Document([
+            '_id' => new ObjectID(), 'name' => 'Paris', 'zip' => 75000
+        ]);
 
-        $this->assertInstanceOf(CityTransformer::class, $city);
-        $this->assertEquals(3, count($city->toArray()));
-        $this->assertTrue($city->has('zip_code'));
-        $this->assertTrue(is_string($city['_id']));
+        $document = Transform::document($document)->to(CityTransformer::class);
+
+        $this->assertInstanceOf(
+            CityTransformer::class, $document
+        );
+
+        $this->assertCount(
+            3, $document->toArray()
+        );
     }
 
-    public function testTransformCollection()
+    public function test_transforming_a_collection()
     {
-        $cities = Transform::collection([
-            new Document(['name' => 'Paris', 'zip' => 75000]),
-            new Document(['name' => 'Clermont', 'zip' => 63000])
-        ])->to(CityTransformer::class);
+        $collection = [
+            new Document(['name' => 'Paris', 'zip' => 75000]), new Document(['name' => 'Clermont', 'zip' => 63000])
+        ];
 
-        $this->assertTrue(is_array($cities));
-        $this->assertEquals(2, count($cities));
-        $this->assertInstanceOf(CityTransformer::class, $cities[0]);
-        $this->assertInstanceOf(CityTransformer::class, $cities[1]);
+        $collection = Transform::collection($collection)->to(CityTransformer::class);
+
+        $this->assertTrue(
+            is_array($collection)
+        );
+
+        $this->assertEquals(
+            2, count($collection)
+        );
     }
 }
