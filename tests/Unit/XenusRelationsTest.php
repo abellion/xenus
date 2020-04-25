@@ -1,18 +1,20 @@
 <?php
 
-namespace Xenus\Tests;
+namespace Xenus\Tests\Unit;
 
 use Xenus\Cursor;
 
-use Xenus\Tests\Stubs\AddressDocument as Address;
-use Xenus\Tests\Stubs\AddressesCollection as Addresses;
+use Xenus\Tests\Unit\Stubs\AddressDocument as Address;
+use Xenus\Tests\Unit\Stubs\AddressesCollection as Addresses;
 
-use Xenus\Tests\Stubs\UserDocument as User;
-use Xenus\Tests\Stubs\UsersCollection as Users;
+use Xenus\Tests\Unit\Stubs\UserDocument as User;
+use Xenus\Tests\Unit\Stubs\UsersCollection as Users;
+
+use Xenus\Tests\Support\RefreshDatabase;
 
 class XenusRelationsTest extends \PHPUnit\Framework\TestCase
 {
-    use Concerns\RefreshDatabase;
+    use RefreshDatabase;
 
     private $users;
     private $addresses;

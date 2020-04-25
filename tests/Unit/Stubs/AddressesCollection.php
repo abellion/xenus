@@ -1,6 +1,6 @@
 <?php
 
-namespace Xenus\Tests\Stubs;
+namespace Xenus\Tests\Unit\Stubs;
 
 class AddressesCollection extends \Xenus\Collection
 {

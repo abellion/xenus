@@ -1,6 +1,6 @@
 <?php
 
-namespace Xenus\Tests;
+namespace Xenus\Tests\Unit;
 
 use Xenus\Document;
 

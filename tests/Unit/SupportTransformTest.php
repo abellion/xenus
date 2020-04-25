@@ -1,12 +1,13 @@
 <?php
 
-namespace Xenus\Tests;
+namespace Xenus\Tests\Unit;
+
+use MongoDB\BSON\ObjectID;
 
 use Xenus\Document;
 use Xenus\Support\Transform;
-use Xenus\Tests\Stubs\CityTransformer;
 
-use MongoDB\BSON\ObjectID;
+use Xenus\Tests\Unit\Stubs\CityTransformer;
 
 class SupportTransformTest extends \PHPUnit\Framework\TestCase
 {
