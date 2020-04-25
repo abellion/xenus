@@ -1,11 +1,11 @@
 <?php
 
-namespace Xenus\Tests\Unit;
+namespace Xenus\Tests\Tests;
 
 use Xenus\Cursor;
 
-use Xenus\Tests\Unit\Stubs\UserDocument as User;
-use Xenus\Tests\Unit\Stubs\UsersCollection as Users;
+use Xenus\Tests\Tests\Stubs\UserDocument as User;
+use Xenus\Tests\Tests\Stubs\UsersCollection as Users;
 
 use Xenus\Tests\Support\RefreshDatabase;
 

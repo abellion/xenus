@@ -1,6 +1,6 @@
 <?php
 
-namespace Xenus\Tests\Unit\Stubs;
+namespace Xenus\Tests\Tests\Stubs;
 
 class CitiesCollection extends \Xenus\Collection
 {

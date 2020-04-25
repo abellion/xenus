@@ -1,6 +1,6 @@
 <?php
 
-namespace Xenus\Tests\Unit;
+namespace Xenus\Tests\Tests;
 
 use Xenus\Document;
 use Xenus\Support\Embed;

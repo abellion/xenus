@@ -1,12 +1,12 @@
 <?php
 
-namespace Xenus\Tests\Unit;
+namespace Xenus\Tests\Tests;
 
-use Xenus\Tests\Unit\Stubs\AddressDocument as Address;
-use Xenus\Tests\Unit\Stubs\AddressesCollection as Addresses;
+use Xenus\Tests\Tests\Stubs\AddressDocument as Address;
+use Xenus\Tests\Tests\Stubs\AddressesCollection as Addresses;
 
-use Xenus\Tests\Unit\Stubs\UserDocument as User;
-use Xenus\Tests\Unit\Stubs\UsersCollection as Users;
+use Xenus\Tests\Tests\Stubs\UserDocument as User;
+use Xenus\Tests\Tests\Stubs\UsersCollection as Users;
 
 use Xenus\Tests\Support\SetupRelationsTest;
 

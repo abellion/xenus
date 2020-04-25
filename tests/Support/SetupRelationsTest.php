@@ -2,8 +2,8 @@
 
 namespace Xenus\Tests\Support;
 
-use Xenus\Tests\Unit\Stubs\UsersCollection as Users;
-use Xenus\Tests\Unit\Stubs\AddressesCollection as Addresses;
+use Xenus\Tests\Tests\Stubs\UsersCollection as Users;
+use Xenus\Tests\Tests\Stubs\AddressesCollection as Addresses;
 
 trait SetupRelationsTest
 {
