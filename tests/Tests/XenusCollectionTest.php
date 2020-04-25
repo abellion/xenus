@@ -1,16 +1,18 @@
 <?php
 
-namespace Xenus\Tests;
+namespace Xenus\Tests\Tests;
 
 use MongoDB\BSON\ObjectID;
 
 use Xenus\Document as XenusDocument;
 use Xenus\Collection as XenusCollection;
-use Xenus\Tests\Stubs\CitiesCollection as Cities;
+
+use Xenus\Tests\Support\RefreshDatabase;
+use Xenus\Tests\Tests\Stubs\CitiesCollection as Cities;
 
 class XenusCollectionTest extends \PHPUnit\Framework\TestCase
 {
-    use Concerns\RefreshDatabase;
+    use RefreshDatabase;
 
     private $cities;
 

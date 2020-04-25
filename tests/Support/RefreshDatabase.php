@@ -1,17 +1,12 @@
 <?php
 
-namespace Xenus\Tests\Concerns;
+namespace Xenus\Tests\Support;
 
 use MongoDB\Client;
 
 trait RefreshDatabase
 {
     private $database;
-
-    protected function setUp()
-    {
-        $this->createDatabase();
-    }
 
     protected function tearDown()
     {
@@ -21,6 +16,11 @@ trait RefreshDatabase
     protected function deleteDatabase()
     {
         $this->database->drop();
+    }
+
+    protected function setUp()
+    {
+        $this->createDatabase();
     }
 
     protected function createDatabase()

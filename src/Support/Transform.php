@@ -73,8 +73,8 @@ class Transform
             {
                 $collection = [];
 
-                foreach ($this->collection as $document) {
-                    $collection[] = new $transformer($document);
+                foreach ($this->collection as $key => $document) {
+                    $collection[$key] = new $transformer($document);
                 }
 
                 return $collection;

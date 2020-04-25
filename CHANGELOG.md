@@ -1,6 +1,7 @@
-# 0.15 [UNRELEASED]
+# 0.15
 
 - The `Xenus\Concerns\HasRelationships` `build` method is now protected.
+- The `Xenus\Support\Transform::collection()` method now preserves the given collection's keys.
 
 # 0.14
 
