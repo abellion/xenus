@@ -54,9 +54,9 @@ class CollectionParameters
      */
     public function getCollectionOptions()
     {
-        return array_merge([
+        return ($this->properties['options'] ?? []) + [
             'typeMap' => ['root' => $this->properties['document'] ?? Document::class, 'array' => 'array', 'document' => 'array']
-        ], $this->properties['options'] ?? []);
+        ];
     }
 
     /**
