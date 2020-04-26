@@ -18,6 +18,21 @@ class Properties
     }
 
     /**
+     * Determine if the properties have the given proeprty
+     *
+     * @param  string $property
+     *
+     * @return bool
+     */
+    public function have(string $property) {
+        if (isset($this->properties[$property])) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Get the collection's options
      *
      * @return Array
@@ -45,38 +60,5 @@ class Properties
         }
 
         return null;
-    }
-
-    /**
-     * Determine if the properties have the given proeprty
-     *
-     * @param  string $property
-     *
-     * @return bool
-     */
-    public function have(string $property) {
-        if (isset($this->properties[$property])) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * Build the properties based on the given object
-     *
-     * @param  mixed $collection
-     *
-     * @return Options
-     */
-    public static function from($collection)
-    {
-        $properties = [];
-
-        foreach (['name', 'document'] as $property) {
-            $properties[$property] = $collection->{$property};
-        }
-
-        return new self(array_filter($properties));
     }
 }
