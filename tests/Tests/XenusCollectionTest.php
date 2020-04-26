@@ -5,53 +5,11 @@ namespace Xenus\Tests\Tests;
 use MongoDB\BSON\ObjectID;
 
 use Xenus\Document as XenusDocument;
-use Xenus\Collection as XenusCollection;
-
-use Xenus\Tests\Support\RefreshDatabase;
-use Xenus\Tests\Tests\Stubs\CitiesCollection as Cities;
+use Xenus\Tests\Support\SetupCollectionTest;
 
 class XenusCollectionTest extends \PHPUnit\Framework\TestCase
 {
-    use RefreshDatabase;
-
-    private $cities;
-
-    public function setUp()
-    {
-        $this->createDatabase();
-
-        $this->cities = new Cities($this->database);
-    }
-
-    public function testNameConfiguration()
-    {
-        $collection = (new class($this->database) extends XenusCollection {
-            protected $name = 'collection';
-        })->__debugInfo();
-
-        $this->assertEquals('collection', $collection['collectionName']);
-
-        $collection = (new class($this->database, ['name' => 'collection']) extends XenusCollection {
-        })->__debugInfo();
-
-        $this->assertEquals('collection', $collection['collectionName']);
-    }
-
-    public function testDocumentConfiguration()
-    {
-        $collection = (new class($this->database) extends XenusCollection {
-            protected $name = 'collection';
-            protected $document = 'document';
-        })->__debugInfo();
-
-        $this->assertEquals('document', $collection['typeMap']['root']);
-
-        $collection = (new class($this->database, ['document' => 'document']) extends XenusCollection {
-            protected $name = 'collection';
-        })->__debugInfo();
-
-        $this->assertEquals('document', $collection['typeMap']['root']);
-    }
+    use SetupCollectionTest;
 
     public function testInsert()
     {

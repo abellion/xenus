@@ -2,11 +2,11 @@
 
 namespace Xenus\Tests\Support;
 
-use MongoDB\Client;
+use Xenus\Connection;
 
 trait RefreshDatabase
 {
-    private $database;
+    private $connection;
 
     protected function tearDown()
     {
@@ -15,7 +15,7 @@ trait RefreshDatabase
 
     protected function deleteDatabase()
     {
-        $this->database->drop();
+        $this->connection->getDatabase()->drop();
     }
 
     protected function setUp()
@@ -25,6 +25,6 @@ trait RefreshDatabase
 
     protected function createDatabase()
     {
-        $this->database = (new Client(getenv('MONGODB_URI')))->selectDatabase(getenv('MONGODB_DATABASE'));
+        $this->connection = new Connection(getenv('MONGODB_URI'), getenv('MONGODB_DATABASE'));
     }
 }

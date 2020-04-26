@@ -2,32 +2,30 @@
 
 namespace Xenus;
 
-use MongoDB\Database;
 use MongoDB\BSON\ObjectID;
+use MongoDB\Collection as BaseCollection;
 
-class Collection extends \MongoDB\Collection
+use Xenus\CollectionParameters as Parameters;
+
+class Collection extends BaseCollection
 {
-    protected $name = null;
-    protected $database = null;
-    protected $document = Document::class;
+    /**
+     * Hold the collection's parameters
+     * @var Parameters
+     */
+    protected $parameters = null;
 
-    public function __construct(Database $database, array $options = [])
+    public function __construct(Connection $connection, array $properties = [])
     {
-        if (null === ($name = $options['name'] ?? $this->name)) {
-            throw new Exceptions\InvalidArgumentException('The "name" argument is required');
+        $this->parameters = new Parameters($connection, array_merge(['name' => $this->name, 'document' => $this->document], $properties));
+
+        if ($this->parameters->have('name') === false) {
+            throw new Exceptions\InvalidArgumentException('The collection\'s name must be defined');
         }
 
-        if (null === ($document = $options['document'] ?? $this->document)) {
-            throw new Exceptions\InvalidArgumentException('The "document" argument is required');
-        }
-
-        $this->name = $name;
-        $this->database = $database;
-        $this->document = $document;
-
-        parent::__construct($database->getManager(), $database->getDatabaseName(), $name, array_merge($options, [
-            'typeMap' => ['root' => $document, 'array' => 'array', 'document' => 'array']
-        ]));
+        parent::__construct(
+            $connection->getManager(), $connection->getDatabaseName(), $this->parameters->getCollectionName(), $this->parameters->getCollectionOptions()
+        );
     }
 
     /**
@@ -43,7 +41,7 @@ class Collection extends \MongoDB\Collection
             throw new Exceptions\InvalidArgumentException(sprintf('Target collection "%s" does not exist', $collection));
         }
 
-        return new $collection($this->database);
+        return new $collection($this->parameters->getCollectionConnection());
     }
 
     /**

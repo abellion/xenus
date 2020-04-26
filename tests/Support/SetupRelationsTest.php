@@ -17,8 +17,8 @@ trait SetupRelationsTest
     {
         $this->createDatabase();
 
-        $this->addresses = new Addresses($this->database);
+        $this->addresses = new Addresses($this->connection);
 
-        $this->users = new Users($this->database);
+        $this->users = new Users($this->connection);
     }
 }

@@ -23,7 +23,7 @@ class CollectionParameters
     }
 
     /**
-     * Get the connection
+     * Get the collection's connection
      *
      * @return Connection
      */

@@ -35,7 +35,7 @@ class XenusCursorTest extends \PHPUnit\Framework\TestCase
             new User()
         ]);
 
-        $users = (new Cursor($users))->connect(new Users($this->database))->toArray();
+        $users = (new Cursor($users))->connect(new Users($this->connection))->toArray();
 
         $this->assertNotNull(
             $users[0]->collection()
