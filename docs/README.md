@@ -145,23 +145,23 @@ On top of these methods, Xenus provides some more natural `update()`, `delete()`
 ```php
 $john = ['_id' => '...', 'name' => 'John'];
 
-//Create
+// Create
 $users->insert($john);
 
-//Update
+// Update
 $users->update($john);
 
-//Delete
+// Delete
 $users->delete($john);
 ```
 
 Sometimes you don't want or need to retrieve a document before updating or deleting it, so you will use one of the `updateOne()` and `deleteOne()` methods. Because it's so common to use them with a single `_id` filter, Xenus offers you the possibility to give directly a `MongoDB\BSON\ObjectID` :
 
 ```php
-//Update directly by ID
+// Update directly by ID
 $users->updateOne($userId, [...]);
 
-//Delete directly by ID
+// Delete directly by ID
 $users->deleteOne($userId)
 ```
 
@@ -188,11 +188,11 @@ class User extends Document
 To create a new user, simply instantiate the `User` object, optionnaly with a set of properties :
 
 ```php
-//It creates an empty user, and then sets a name
+// It creates an empty user, and then sets a name
 $john = new User();
 $john->name = 'John';
 
-//It creates directly the user with a name
+// It creates directly the user with a name
 $john = new User(['name' => 'John']);
 ```
 
@@ -264,8 +264,8 @@ class User extends Document
 
 When mutating a document, Xenus will try to find the corresponding getter and setter for you so you don't have to use the quite verbose `setXXX()` and `getXXX` methods.
 
-- A getter is a method whose name starts with `get` and its followed by the property name.
-- A setter is a method whose name starts with `set` and its followed by the property name.
+- A getter is a method whose name starts with `get` and is followed by the property name.
+- A setter is a method whose name starts with `set` and is followed by the property name.
 
 Now, when typing `$user->name` or `$user->name = 'Antoine'`, the `getName()` and `setName()` methods will be used.
 
@@ -499,7 +499,7 @@ These methods take the same parameters as the ones you know in the `Collection` 
 
 When making an API, you expose your database resources to the outside world (the users, the blog posts, etc...).
 
-Thus, you need to make sure none of the private attributes are going outside (a user password for example). You also may want to convert some attributes. For example, a `MongoDB\BSON\ObjectID` into a beautiful string called `id` instead of `_id`.
+Thus, you need to make sure none of the private attributes are going outside (a user password for example). You may also want to convert some attributes. For example, a `MongoDB\BSON\ObjectID` into a beautiful string called `id` instead of `_id`.
 
 Let's create a pristine resource representing a user :
 
@@ -538,7 +538,7 @@ class UserResource extends Document
 }
 ```
 
-In your controllers, you can now return an instance of the `UserResource` that do the work behind the scene :
+In your controllers, you can now return an instance of the `UserResource` that does the work behind the scene :
 
 ```php
 return new UserResource(
@@ -562,7 +562,7 @@ class UserResource extends Document
 }
 ```
 
-Now, when returning this `userResource` from your controllers, the `created_at` attribute will always be a milisecond timestamp without any work !
+Now, when returning this `UserResource` from your controllers, the `created_at` attribute will always be a milisecond timestamp without any work !
 
 It's also common to tweak a model's ID, to rename the `_id` attribute into `id` and to make its `MongoDB\BSON\ObjectID` value a string :
 
