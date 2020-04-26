@@ -54,10 +54,10 @@ class Parameters
      */
     public function getCollectionOptions()
     {
-        $options = ['typeMap' => ['root' => $this->properties->document ?? Document::class, 'array' => 'array', 'document' => 'array']];
+        $options = ['typeMap' => ['root' => $this->properties['document'] ?? Document::class, 'array' => 'array', 'document' => 'array']];
 
-        if (isset($this->properties->options)) {
-            return array_merge($this->properties->options, $options);
+        if (isset($this->properties['options'])) {
+            return array_merge($this->properties['options'], $options);
         }
 
         return $options;
