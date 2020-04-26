@@ -2,7 +2,7 @@
 
 namespace Xenus;
 
-class Parameters
+class CollectionParameters
 {
     /**
      * The collection's properties
