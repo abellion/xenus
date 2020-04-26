@@ -2,23 +2,38 @@
 
 namespace Xenus;
 
-class Properties
+class Parameters
 {
     /**
-     * The default collection's properties
+     * The collection's properties
      * @var array
      */
-    private $properties = [
-        'document' => Document::class
-    ];
+    private $properties = null;
 
-    public function __construct(array $properties)
+    /**
+     * The collection's connection
+     * @var Connection
+     */
+    private $connection = null;
+
+    public function __construct(Connection $connection, array $properties = [])
     {
-        $this->properties = array_merge($this->properties, $properties);
+        $this->connection = $connection;
+        $this->properties = $properties;
     }
 
     /**
-     * Determine if the properties have the given proeprty
+     * Get the connection
+     *
+     * @return Connection
+     */
+    public function getConnection()
+    {
+        return $this->connection;
+    }
+
+    /**
+     * Determine if the given proeprty exists
      *
      * @param  string $property
      *
@@ -39,7 +54,7 @@ class Properties
      */
     public function getCollectionOptions()
     {
-        $options = ['typeMap' => ['root' => $this->properties->document, 'array' => 'array', 'document' => 'array']];
+        $options = ['typeMap' => ['root' => $this->properties->document ?? Document::class, 'array' => 'array', 'document' => 'array']];
 
         if (isset($this->properties->options)) {
             return array_merge($this->properties->options, $options);
@@ -55,10 +70,6 @@ class Properties
      */
     public function getCollectionName()
     {
-        if (isset($this->properties['name'])) {
-            return $this->properties['name'];
-        }
-
-        return null;
+        return $this->properties['name'] ?? null;
     }
 }
