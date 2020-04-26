@@ -21,18 +21,27 @@ composer require abellion/xenus
 - Driver documentation : http://php.net/manual/en/set.mongodb.php
 - Library documentation : https://docs.mongodb.com/php-library/v1.2/
 
-Before going further, make sure you have a running MongoDB server and a established connection with it :
+Before going further, make sure you have a running MongoDB server. Then, create a connection to it :
 
 ```php
-use MongoDB;
+use Xenus\Connection;
 
-$client = new MongoDB\Client()
-
-$database = $client->myDatabase;
-
+$connection = new Connection('mongodb://127.0.0.1:27017', 'my_database', $config = []);
 ```
 
-> To know more about the `Client`, `Database` and `Collection` classes, please refer to the MongoDB library : https://docs.mongodb.com/php-library/v1.2/reference/class/MongoDBClient/
+This `Connection` class takes a MongoDB URI as its first argument and the database name you wish to connect to as the second argument. Additionally, an optional third argument lets you configure the server and the driver :
+
+```php
+$config = [
+    // Server options
+    'server' => [],
+    // Driver options
+    'driver' => []
+];
+```
+
+- The server options are listed here : https://www.php.net/mongodb-driver-manager.construct#mongodb-driver-manager.construct-urioptions
+- The driver options are listed here : https://www.php.net/mongodb-driver-manager.construct#mongodb-driver-manager.construct-driveroptions
 
 # Guide
 
@@ -47,26 +56,22 @@ use Xenus\Collection;
 
 class Users extends Collection
 {
-    //This is the name of your collection stored in the database
+    // This is the name of your collection stored in the database
     protected $name = 'users';
 }
 ```
 
-A Xenus `Collection` needs two properties to be constructed :
-
-- An instance of the `MongoDB\Database` class,
-- The name of the collection as a protected property.
+A Xenus `Collection` needs a `Xenus\Connection` to be constructed :
 
 ```php
-use MongoDB;
+use Xenus\Connection;
 
-$client = new MongoDB\Client()
-$database = $client->myDatabase;
-
-$users = new Users($database);
+$users = new Users(
+    new Connection('mongodb://127.0.0.1:27017', 'my_database')
+);
 ```
 
-> If you use a framework with a dependency injection container, you can configure it to automatically inject an instance of the `MongoDB\Database` in every collections.
+> If you use a framework with a dependency injection container, you can configure it to automatically inject an instance of your `Xenus\Connection` in every collections.
 
 ### Retrieving documents
 
