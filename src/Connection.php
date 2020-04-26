@@ -27,23 +27,27 @@ class Connection
     private $manager = null;
 
     /**
+     * The MongoDB database
+     * @var null|Database
+     */
+    private $database = null;
+
+    /**
      * Construct a new connection
      *
      * @param string $host
      * @param string $database
      * @param array  $options
      */
-    public function __construct(string $host, string $database, array $options = null)
+    public function __construct(string $host, string $database, array $options = [])
     {
-        $this->connection = [
-            'options' => ['server' => $options['server'] ?? [], 'driver' => $options['driver'] ?? []],
-            'host' => $host,
-            'database' => $database
-        ];
+        $this->connection['options'] = $options;
+        $this->connection['host'] = $host;
+        $this->connection['database'] = $database;
     }
 
     /**
-     * Return the connection options
+     * Return the connection's options
      *
      * @return array
      */
@@ -63,19 +67,21 @@ class Connection
             return $this->manager;
         }
 
-        return $this->manager = new Manager($this->connection['host'], $this->connection['options']['server'], $this->connection['options']['driver']);
+        return $this->manager = new Manager($this->connection['host'], $this->connection['options']['server'] ?? [], $this->connection['options']['driver'] ?? []);
     }
 
     /**
-     * Return a new database instance
-     *
-     * @param  array  $options
+     * Return a database instance
      *
      * @return Database
      */
-    public function getDatabase(array $options = [])
+    public function getDatabase()
     {
-        return new Database($this->getManager(), $this->connection['database'], $options);
+        if ($this->database) {
+            return $this->database;
+        }
+
+        return $this->database = new Database($this->getManager(), $this->getDatabaseName());
     }
 
     /**
@@ -89,7 +95,7 @@ class Connection
             return $this->client;
         }
 
-        return $this->client = new Client($this->connection['host'], $this->connection['options']['server'], $this->connection['options']['driver']);
+        return $this->client = new Client($this->connection['host'], $this->connection['options']['server'] ?? [], $this->connection['options']['driver'] ?? []);
     }
 
     /**
