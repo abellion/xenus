@@ -1,6 +1,6 @@
 <?php
 
-namespace Xenus\Document\Accessors;
+namespace Xenus\Document;
 
 trait CamelCaseAccessor
 {

@@ -1,6 +1,7 @@
 # 0.16 [UNRELEASED]
 
 - The `Xenus\Collection` class now takes a `Xenus\Connection` as its first argument. Read https://abellion.github.io/xenus/#/?id=first-steps to know more.
+- The `Xenus\Document` class now contains a `__sleep()` method.
 
 # 0.15
 
