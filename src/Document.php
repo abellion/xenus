@@ -27,7 +27,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     /**
      * Return the document's values for debugging
      *
-     * @return array The document's values
+     * @return array
      */
     public function __debugInfo()
     {
@@ -49,10 +49,10 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     /**
      * Get the value of the given key
      *
-     * @param  string $offset The key
-     * @param mixed $default The default value to return
+     * @param  string $offset  The key
+     * @param  mixed  $default The default value to return
      *
-     * @return mixed The value
+     * @return mixed
      */
     public function get(string $offset, $default = null)
     {
@@ -68,7 +68,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
      *
      * @param  string  $offset The key
      *
-     * @return boolean Whether the given key exists or not
+     * @return boolean
      */
     public function has(string $offset)
     {
@@ -76,11 +76,11 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     }
 
     /**
-     * Returnsa new document only with the specified fields
+     * Return a new document only with the specified fields
      *
      * @param  array  $fields The keys to keep
      *
-     * @return Xenus\Document A new document conatining only the specified fields
+     * @return Xenus\Document
      */
     public function with(array $fields)
     {
@@ -101,7 +101,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
      *
      * @param  array  $fields The keys to drop
      *
-     * @return Xenus\Document A new document without the specified fields
+     * @return Xenus\Document
      */
     public function without(array $fields)
     {
@@ -132,7 +132,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     /**
      * Return the document as an array
      *
-     * @return array The document as an array
+     * @return array
      */
     public function toArray()
     {
@@ -144,7 +144,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
      *
      * @param  string $offset The key
      *
-     * @return mixed The value
+     * @return mixed
      */
     public function getFromGetter(string $offset)
     {
@@ -161,7 +161,9 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
      * Set the given value on the offset
      *
      * @param string $offset The key to retrieve the value
-     * @param mixed $value  The value
+     * @param mixed  $value  The value
+     *
+     * @return self
      */
     public function set(string $offset, $value)
     {
@@ -174,7 +176,9 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
      * Set the given value through a setter
      *
      * @param string $offset The key to retrieve the value
-     * @param mixed $value  The value
+     * @param mixed  $value  The value
+     *
+     * @return self
      */
     public function setFromSetter(string $offset, $value)
     {
