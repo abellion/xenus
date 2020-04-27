@@ -98,6 +98,14 @@ class Transform
         };
     }
 
+    /**
+     * Pipe the given documents onto the transformers
+     *
+     * @param  object $document
+     * @param  array  $transformers
+     *
+     * @return object
+     */
     protected static function pipe($document, array $transformers)
     {
         foreach ($transformers as $transformer) {
