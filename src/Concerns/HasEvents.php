@@ -33,7 +33,7 @@ trait HasEvents
         }
 
         $this->dispatcher->dispatch(
-            new $this->events[$event]($document);
+            new $this->events[$event]($document)
         );
     }
 
