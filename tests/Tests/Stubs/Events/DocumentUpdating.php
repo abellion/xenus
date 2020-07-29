@@ -2,6 +2,6 @@
 
 namespace Xenus\Tests\Tests\Stubs\Events;
 
-class DocumentCreating
+class DocumentUpdating
 {
 }
