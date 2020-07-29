@@ -14,7 +14,17 @@ trait HasConvenientWrites
      */
     public function insert($document, array $options = [])
     {
-        return parent::insertOne($document, $options);
+        $this->dispatchMany(
+            ['creating', 'saving'], $document
+        );
+
+        $wr = parent::insertOne($document, $options);
+
+        $this->dispatchMany(
+            ['created', 'saved'], $document
+        );
+
+        return $wr;
     }
 
     /**
@@ -27,7 +37,17 @@ trait HasConvenientWrites
      */
     public function delete($document, array $options = [])
     {
-        return parent::deleteOne(['_id' => $document['_id']], $options);
+        $this->dispatch(
+            'deleting', $document
+        );
+
+        $wr = parent::deleteOne(['_id' => $document['_id']], $options);
+
+        $this->dispatch(
+            'deleted', $document
+        );
+
+        return $wr;
     }
 
     /**
@@ -40,6 +60,16 @@ trait HasConvenientWrites
      */
     public function update($document, array $options = [])
     {
-        return parent::updateOne(['_id' => $document['_id']], ['$set' => $document], $options);
+        $this->dispatchMany(
+            ['updating', 'saving'], $document
+        );
+
+        $wr = parent::updateOne(['_id' => $document['_id']], ['$set' => $document], $options);
+
+        $this->dispatchMany(
+            ['updated', 'saved'], $document
+        );
+
+        return $wr;
     }
 }
