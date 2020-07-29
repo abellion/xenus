@@ -2,6 +2,8 @@
 
 namespace Xenus\Concerns;
 
+use Xenus\EventDispatcher as Dispatcher;
+
 trait HasEvents
 {
     /**
@@ -32,5 +34,18 @@ trait HasEvents
         $this->dispatcher->dispatch(
             new $this->events[$event]($document);
         );
+    }
+
+    /**
+     * Set the event dispatcher
+     *
+     * @param  Dispatcher $dispatcher
+     * @return self
+     */
+    public function setEventDispatcher(Dispatcher $dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
+
+        return $this;
     }
 }
