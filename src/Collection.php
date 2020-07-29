@@ -149,7 +149,7 @@ class Collection extends BaseCollection
      * @param  array|object     $update
      * @param  array            $options
      *
-     * @return [type]          [description]
+     * @return array|object|null
      */
     public function findOneAndUpdate($filter, $update, array $options = [])
     {
