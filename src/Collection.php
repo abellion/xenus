@@ -5,26 +5,26 @@ namespace Xenus;
 use MongoDB\BSON\ObjectID;
 use MongoDB\Collection as BaseCollection;
 
-use Xenus\CollectionParameters as Parameters;
+use Xenus\CollectionConfiguration as Configuration;
 
 class Collection extends BaseCollection
 {
     /**
-     * Hold the collection's parameters
-     * @var Parameters
+     * Hold the collection's configuration
+     * @var Configuration
      */
-    protected $parameters = null;
+    protected $configuration = null;
 
     public function __construct(Connection $connection, array $properties = [])
     {
-        $this->parameters = new Parameters($connection, array_merge(['name' => $this->name, 'document' => $this->document], $properties));
+        $this->configuration = new Configuration($connection, array_merge(['name' => $this->name, 'document' => $this->document], $properties));
 
-        if ($this->parameters->have('name') === false) {
+        if ($this->configuration->has('name') === false) {
             throw new Exceptions\InvalidArgumentException('The collection\'s name must be defined');
         }
 
         parent::__construct(
-            $connection->getManager(), $connection->getDatabaseName(), $this->parameters->getCollectionName(), $this->parameters->getCollectionOptions()
+            $connection->getManager(), $connection->getDatabaseName(), $this->configuration->getCollectionName(), $this->configuration->getCollectionOptions()
         );
     }
 
@@ -41,7 +41,7 @@ class Collection extends BaseCollection
             throw new Exceptions\InvalidArgumentException(sprintf('Target collection "%s" does not exist', $collection));
         }
 
-        return new $collection($this->parameters->getCollectionConnection());
+        return new $collection($this->configuration->getCollectionConnection());
     }
 
     /**

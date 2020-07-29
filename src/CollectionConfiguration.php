@@ -2,7 +2,7 @@
 
 namespace Xenus;
 
-class CollectionParameters
+class CollectionConfiguration
 {
     /**
      * The collection's properties
@@ -39,7 +39,7 @@ class CollectionParameters
      *
      * @return bool
      */
-    public function have(string $property) {
+    public function has(string $property) {
         if (isset($this->properties[$property])) {
             return true;
         }

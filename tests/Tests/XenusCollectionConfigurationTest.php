@@ -3,17 +3,17 @@
 namespace Xenus\Tests\Tests;
 
 use Xenus\Document;
-use Xenus\CollectionParameters;
+use Xenus\CollectionConfiguration;
 
 use Xenus\Tests\Support\RefreshDatabase;
 
-class XenusCollectionParametersTest extends \PHPUnit\Framework\TestCase
+class XenusCollectionConfigurationTest extends \PHPUnit\Framework\TestCase
 {
     use RefreshDatabase;
 
     public function test_the_collection_has_a_default_type_map()
     {
-        $options = (new CollectionParameters($this->connection))->getCollectionOptions();
+        $options = (new CollectionConfiguration($this->connection))->getCollectionOptions();
 
         $this->assertArrayHasKey(
             'typeMap', $options
@@ -28,7 +28,7 @@ class XenusCollectionParametersTest extends \PHPUnit\Framework\TestCase
     {
         $options = ['typeMap' => []];
 
-        $options = (new CollectionParameters($this->connection, ['options' => $options]))->getCollectionOptions();
+        $options = (new CollectionConfiguration($this->connection, ['options' => $options]))->getCollectionOptions();
 
         $this->assertEmpty(
             $options['typeMap']
@@ -37,7 +37,7 @@ class XenusCollectionParametersTest extends \PHPUnit\Framework\TestCase
 
     public function test_the_given_document_is_taken_in_the_type_map()
     {
-        $options = (new CollectionParameters($this->connection, ['document' => MyDocument::class]))->getCollectionOptions();
+        $options = (new CollectionConfiguration($this->connection, ['document' => MyDocument::class]))->getCollectionOptions();
 
         $this->assertEquals(
             MyDocument::class, $options['typeMap']['root']
@@ -48,7 +48,7 @@ class XenusCollectionParametersTest extends \PHPUnit\Framework\TestCase
     {
         $options = ['readPreference' => null];
 
-        $options = (new CollectionParameters($this->connection, ['options' => $options]))->getCollectionOptions();
+        $options = (new CollectionConfiguration($this->connection, ['options' => $options]))->getCollectionOptions();
 
         $this->assertArrayHasKey(
             'readPreference', $options
