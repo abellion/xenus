@@ -17,6 +17,12 @@ class Collection extends BaseCollection
      */
     protected $configuration = null;
 
+    /**
+     * Construct a new collection
+     *
+     * @param Connection $connection
+     * @param array      $properties
+     */
     public function __construct(Connection $connection, array $properties = [])
     {
         $this->configuration = new Configuration($connection, $properties + ['name' => $this->name, 'document' => $this->document]);
