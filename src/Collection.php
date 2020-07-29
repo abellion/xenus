@@ -10,6 +10,7 @@ use Xenus\CollectionConfiguration as Configuration;
 class Collection extends BaseCollection
 {
     use Concerns\HasConvenientWrites;
+    use Concerns\HasEvents;
 
     /**
      * Hold the collection's configuration
