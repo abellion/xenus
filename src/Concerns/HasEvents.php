@@ -23,6 +23,7 @@ trait HasEvents
      *
      * @param  string       $event
      * @param  array|object $document
+     *
      * @return void
      */
     protected function dispatch(string $event, $document)
@@ -40,6 +41,7 @@ trait HasEvents
      * Set the event dispatcher
      *
      * @param  Dispatcher $dispatcher
+     *
      * @return self
      */
     public function setEventDispatcher(Dispatcher $dispatcher)
