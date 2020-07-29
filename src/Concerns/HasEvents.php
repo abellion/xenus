@@ -38,6 +38,25 @@ trait HasEvents
     }
 
     /**
+     * Dispatch many events
+     *
+     * @param  array        $events
+     * @param  array|object $document
+     *
+     * @return void
+     */
+    protected function dispatchMany(array $events, $document)
+    {
+        if (isset($this->dispatcher) === false) {
+            return ;
+        }
+
+        foreach ($events as $event) {
+            $this->dispatch($event, $document);
+        }
+    }
+
+    /**
      * Set the event dispatcher
      *
      * @param  Dispatcher $dispatcher
