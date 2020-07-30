@@ -2,6 +2,10 @@
 
 Events have landed ! Check out the [documentation](https://abellion.github.io/xenus/) for more informations.
 
+- The protected property `parameters` of the `Xenus\Collection` class has been renamed to `configuration`.
+- The `Xenus\CollectionParameters` class has been renamed to `Xenus\CollectionConfiguration`.
+- A collection can now be resolved by relationships using an implementation of the `Xenus\CollectionResolver` interface.
+
 # 0.16
 
 - The `Xenus\Collection` class now takes a `Xenus\Connection` as its first argument. Read https://abellion.github.io/xenus/#/?id=first-steps to know more.
