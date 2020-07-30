@@ -2,6 +2,7 @@
 
 namespace Xenus\Concerns;
 
+use Xenus\Exceptions;
 use Xenus\CollectionResolver as Resolver;
 
 trait HasCollectionResolver
