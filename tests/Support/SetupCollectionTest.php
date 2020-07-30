@@ -6,14 +6,25 @@ use Xenus\Tests\Tests\Stubs\CitiesCollection as Cities;
 
 trait SetupCollectionTest
 {
-    use RefreshDatabase;
+    use SetupDatabase, SetupTestsHooks;
+
+    private $setup = [
+        'createDatabase', 'createCitiesCollection'
+    ];
+
+    private $tearDown = [
+        'deleteDatabase'
+    ];
 
     private $cities;
 
-    public function setUp()
+    /**
+     * Create the cities collection
+     *
+     * @return void
+     */
+    private function createCitiesCollection()
     {
-        $this->createDatabase();
-
         $this->cities = new Cities($this->connection);
     }
 }

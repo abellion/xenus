@@ -5,11 +5,11 @@ namespace Xenus\Tests\Tests;
 use Xenus\Document;
 use Xenus\CollectionConfiguration;
 
-use Xenus\Tests\Support\RefreshDatabase;
+use Xenus\Tests\Support\SetupCollectionConfigurationTest;
 
 class XenusCollectionConfigurationTest extends \PHPUnit\Framework\TestCase
 {
-    use RefreshDatabase;
+    use SetupCollectionConfigurationTest;
 
     public function test_the_collection_has_a_default_type_map()
     {
