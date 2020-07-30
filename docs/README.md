@@ -61,7 +61,7 @@ class Users extends Collection
 }
 ```
 
-A Xenus `Collection` needs a `Xenus\Connection` to be constructed :
+A collection needs a `Xenus\Connection` to be constructed :
 
 ```php
 use Xenus\Connection;
@@ -82,13 +82,15 @@ Collections inherit from the `MongoDB\Collection` class so you can use any of th
 | `find()` | https://docs.mongodb.com/php-library/v1.2/reference/method/MongoDBCollection-find/ |
 | `findOne()` | https://docs.mongodb.com/php-library/v1.2/reference/method/MongoDBCollection-findOne/ |
 
+For example, you could retrieve all the users whose age is greater than 21 with this query :
+
 ```php
 $adultUsers = $users->find([
     'age' => ['$gte' => 21]
 ]);
 ```
 
-Instead of making this query everywhere you need these users, you may better make a `findAdults()` method inside the users collection :
+Instead of making this query everywhere you need these users, you may better create a dedicated `findAdults()` method inside the users collection :
 
 ```php
 use Xenus\Collection;
@@ -97,11 +99,11 @@ class Users extends Collection
 {
     protected $name = 'users';
 
-    public function findAdults(array $options = [])
+    public function findAdults()
     {
         return $this->find([
             'age' => ['$gte' => 21]
-        ], $options);
+        ]);
     }
 }
 ```
@@ -110,15 +112,7 @@ class Users extends Collection
 $adultUsers = $users->findAdults();
 ```
 
-Because we added the `$options` parameter, we can simply sort the results :
-
-```php
-$adultUsers = $users->findAdults([
-    'sort' => ['age' => 1]
-]);
-```
-
-You'll see you very often retrieving models by ID typing `['_id' => $id]`. To avoid that, Xenus allows you to give directly a `MongoDB\BSON\ObjectID` instance that's automatically translated to the array form :
+You'll see you very often retrieving models by ID typing `['_id' => $id]`. To make it smoother, Xenus allows you to give directly a `MongoDB\BSON\ObjectID` instance that's automatically translated to the array form :
 
 ```php
 // Typing
@@ -167,12 +161,12 @@ $users->deleteOne($userId)
 
 ## Documents
 
-Instead of receiving your data in the form of an array or a pristine object, Xenus allows you to treat your documents as pre-defined objects, containing a lot of helpful methods.
+Instead of receiving your data in the form of an array or an ordinary object, Xenus allows you to treat your documents as pre-defined objects, containing a lot of helpful methods.
 
 ### Creating a document
 
 A document is no more than a class containing your document's properties stored in your MongoDB database.
-A user document may contain a `name`, an `email`, a `username` or whatever is fitting your business.
+A user document may contain a `name`, an `email`, an `username` or whatever is matching your needs.
 
 ```php
 use Xenus\Document;
@@ -183,7 +177,7 @@ class User extends Document
 }
 ```
 
-> The `withId` property, when set to `true`, will create an `_id` field containing a fresh `MongoDB\BSON\ObjectID` instance.
+> The `withId` property, when set to `true`, will create an `_id` field containing a fresh `MongoDB\BSON\ObjectID` instance when instantiating the document.
 
 To create a new user, simply instantiate the `User` object, optionnaly with a set of properties :
 
@@ -212,7 +206,7 @@ From now, whenever you'll fetch some users, they will come in the form of the `U
 
 ### Accessing properties
 
-The `Xenus\Document` class implements the `ArrayAccess` interface and uses the magic methods `__get` and `__set`. You can access your document's properties using these ways :
+The `Xenus\Document` class implements the `ArrayAccess` interface and leverages the magic methods `__get` and `__set`. You can access your document's properties using these ways :
 
 ```php
 //Get the user name
@@ -354,7 +348,7 @@ Retrieving the contact informations is then as fluent as any other document's at
 $phoneNumber = $user->primaryContact->phoneNumber;
 ```
 
-Of course, you're not limited to embed documents. You could have an array of `ObjectID` and make the following to be sure it contains only `ObjectID` values :
+Of course, you're not limited to embeding documents. You could have an array of `ObjectID` and make the following to be sure it contains only `ObjectID` values :
 
 ```php
 public function setFirendsId(array $friendsId)
