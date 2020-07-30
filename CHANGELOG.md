@@ -1,3 +1,7 @@
+# 0.17
+
+Events have landed ! Check out the [documentation](https://abellion.github.io/xenus/) for more informations.
+
 # 0.16
 
 - The `Xenus\Collection` class now takes a `Xenus\Connection` as its first argument. Read https://abellion.github.io/xenus/#/?id=first-steps to know more.
