@@ -7,18 +7,37 @@ use Xenus\Tests\Mocks\EventDispatcherMock as EventDispatcher;
 
 trait SetupEventsTest
 {
-    use RefreshDatabase;
+    use SetupDatabase, SetupTestsHooks;
 
-    private $tokens;
+    private $setup = [
+        'createDatabase', 'createDispatcher', 'createTokensCollection'
+    ];
+
+    private $tearDown = [
+        'deleteDatabase'
+    ];
 
     private $dispatcher;
 
-    public function setUp()
-    {
-        $this->createDatabase();
+    private $tokens;
 
-        $this->tokens = (new Tokens($this->connection))->setEventDispatcher(
-            $this->dispatcher = new EventDispatcher()
-        );
+    /**
+     * Create the event dispatcher
+     *
+     * @return void
+     */
+    private function createDispatcher()
+    {
+        $this->dispatcher = new EventDispatcher();
+    }
+
+    /**
+     * Create the tokens collection
+     *
+     * @return void
+     */
+    private function createTokensCollection()
+    {
+        $this->tokens = (new Tokens($this->connection))->setEventDispatcher($this->dispatcher);
     }
 }
