@@ -3,16 +3,13 @@
 namespace Xenus\Tests\Tests;
 
 use Xenus\Cursor;
+use Xenus\Connection;
 
 use Xenus\Tests\Tests\Stubs\UserDocument as User;
 use Xenus\Tests\Tests\Stubs\UsersCollection as Users;
 
-use Xenus\Tests\Support\RefreshDatabase;
-
 class XenusCursorTest extends \PHPUnit\Framework\TestCase
 {
-    use RefreshDatabase;
-
     public function test_cursor_connection()
     {
         $users = new \ArrayIterator([
@@ -35,7 +32,7 @@ class XenusCursorTest extends \PHPUnit\Framework\TestCase
             new User()
         ]);
 
-        $users = (new Cursor($users))->connect(new Users($this->connection))->toArray();
+        $users = (new Cursor($users))->connect(new Users(new Connection('mongodb://xxx', 'xxx')))->toArray();
 
         $this->assertNotNull(
             $users[0]->collection()

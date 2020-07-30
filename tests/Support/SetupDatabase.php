@@ -4,26 +4,26 @@ namespace Xenus\Tests\Support;
 
 use Xenus\Connection;
 
-trait RefreshDatabase
+trait SetupDatabase
 {
     private $connection;
 
-    protected function tearDown()
-    {
-        $this->deleteDatabase();
-    }
-
-    protected function deleteDatabase()
+    /**
+     * Delete the database
+     *
+     * @return void
+     */
+    private function deleteDatabase()
     {
         $this->connection->getDatabase()->drop();
     }
 
-    protected function setUp()
-    {
-        $this->createDatabase();
-    }
-
-    protected function createDatabase()
+    /**
+     * Create the database
+     *
+     * @return void
+     */
+    private function createDatabase()
     {
         $this->connection = new Connection(getenv('MONGODB_URI'), getenv('MONGODB_DATABASE'));
     }
