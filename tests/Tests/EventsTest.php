@@ -8,7 +8,7 @@ use Xenus\Tests\Stubs;
 use Xenus\Document as XenusDocument;
 use Xenus\Tests\Support\SetupEventsTest;
 
-class XenusEventsTest extends \PHPUnit\Framework\TestCase
+class EventsTest extends \PHPUnit\Framework\TestCase
 {
     use SetupEventsTest;
 

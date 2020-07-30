@@ -9,7 +9,7 @@ use Xenus\Support\Transform;
 
 use Xenus\Tests\Stubs\CityTransformer;
 
-class SupportTransformTest extends \PHPUnit\Framework\TestCase
+class TransformTest extends \PHPUnit\Framework\TestCase
 {
     public function test_transforming_a_document()
     {

@@ -10,7 +10,7 @@ use Xenus\Tests\Stubs\UsersCollection as Users;
 
 use Xenus\Tests\Support\SetupRelationsTest;
 
-class XenusRelationsTest extends \PHPUnit\Framework\TestCase
+class RelationsTest extends \PHPUnit\Framework\TestCase
 {
     use SetupRelationsTest;
 

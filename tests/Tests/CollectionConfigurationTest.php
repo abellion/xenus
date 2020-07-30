@@ -7,7 +7,7 @@ use Xenus\CollectionConfiguration;
 
 use Xenus\Tests\Support\SetupCollectionConfigurationTest;
 
-class XenusCollectionConfigurationTest extends \PHPUnit\Framework\TestCase
+class CollectionConfigurationTest extends \PHPUnit\Framework\TestCase
 {
     use SetupCollectionConfigurationTest;
 

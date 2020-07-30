@@ -5,7 +5,7 @@ namespace Xenus\Tests\Tests;
 use Xenus\Document;
 use Xenus\Support\Embed;
 
-class SupportEmbedTest extends \PHPUnit\Framework\TestCase
+class EmbedTest extends \PHPUnit\Framework\TestCase
 {
     public function test_embeding_on_documents_works()
     {

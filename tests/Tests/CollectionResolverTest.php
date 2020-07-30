@@ -8,7 +8,7 @@ use Xenus\Tests\Mocks\CollectionResolverMock;
 
 use Xenus\Connection;
 
-class XenusCollectionResolverTest extends \PHPUnit\Framework\TestCase
+class CollectionResolverTest extends \PHPUnit\Framework\TestCase
 {
     public function test_custom_resolver_is_used()
     {

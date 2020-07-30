@@ -8,7 +8,7 @@ use Xenus\Connection;
 use Xenus\Tests\Stubs\UserDocument as User;
 use Xenus\Tests\Stubs\UsersCollection as Users;
 
-class XenusCursorTest extends \PHPUnit\Framework\TestCase
+class CursorTest extends \PHPUnit\Framework\TestCase
 {
     public function test_cursor_connection()
     {

@@ -4,7 +4,7 @@ namespace Xenus\Tests\Tests;
 
 use Xenus\Document;
 
-class XenusDocumentTest extends \PHPUnit\Framework\TestCase
+class DocumentTest extends \PHPUnit\Framework\TestCase
 {
     public function test_has_method()
     {

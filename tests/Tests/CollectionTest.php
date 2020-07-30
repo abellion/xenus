@@ -7,7 +7,7 @@ use MongoDB\BSON\ObjectID;
 use Xenus\Document as XenusDocument;
 use Xenus\Tests\Support\SetupCollectionTest;
 
-class XenusCollectionTest extends \PHPUnit\Framework\TestCase
+class CollectionTest extends \PHPUnit\Framework\TestCase
 {
     use SetupCollectionTest;
 
