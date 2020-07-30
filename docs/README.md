@@ -489,6 +489,83 @@ In the case of a `hasMany` and `belongsToMany` relationships, you also have acce
 
 These methods take the same parameters as the ones you know in the `Collection` class.
 
+## Events
+
+Xenus fires several events when working with the `insert()`, `update()` and `delete()` methods of a collection. This allows you to hook into a document's lifecycle when working on it.
+For exemple, you may want to receive a notification whenever a document is deleted ; that would be done using the `deleted` event a collection fires when a document is deleted.
+
+### Setting up the dispatcher
+
+Before using events, you must provide an event dispatcher to your collections. The event dispatcher is defined as follow (https://github.com/abellion/xenus/blob/master/src/EventDispatcher.php) :
+
+```php
+namespace Xenus;
+
+interface EventDispatcher
+{
+    /**
+     * Dispatch the given event
+     *
+     * @param  object $event
+     *
+     * @return void
+     */
+    public function dispatch($event);
+}
+```
+
+Several implementations of events dispatchers exist, and most of the time one is shipped with popular frameworks like Laravel or Symfony. You can implement this interface using one of them very quickly.
+To connect your implementation of the `EventDispatcher` interface to a collection, you simply need to use the `setEventDispatcher` method on the collection :
+
+```php
+$collection->setEventDispatcher($eventDispatcher);
+```
+
+> You can configure your dependency injection container to call this method every time a collection is resolved.
+
+### Using events
+
+To get started, define an `$events` property on your collection :
+
+```php
+use Xenus\Collection;
+
+class Users extends Collection
+{
+    protected $events = [
+        'deleted' => Events\UserDeleted::class
+    ];
+}
+```
+
+Now, when deleting a user, an instance of the `Events\UserDeleted` class will be constructed with the document being deleted and sent to the `dispatch` method of your event dispatcher.
+An event class looks like this :
+
+```php
+class MyEvent
+{
+    public $document;
+
+    public function __construct(Document $document)
+    {
+        $this->document = $document;
+    }
+}
+```
+
+It's basically a data container holding the information related to the event. The events being fired by a collection are listed bellow :
+
+| Event | Description |
+|-------|-------------|
+| `creating` | Fired by the `insert()` method before the document is actually inserted |
+| `created` | Fired by the `insert()` method after the document has been inserted |
+| `updating` | Fired by the `update()` method before the document is actually updated |
+| `updated` | Fired by the `update()` method after the document has been updated |
+| `deleting` | Fired by the `delete()` method before the document is actually deleted |
+| `deleted` | Fired by the `delete()` method after the document has been deleted |
+| `saving` | Fired at the same time as the `creating` and `updating` events |
+| `saved` | Fired at the same time as the `created` and `updated` events |
+
 ## Resources
 
 When making an API, you expose your database resources to the outside world (the users, the blog posts, etc...).
