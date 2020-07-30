@@ -9,8 +9,9 @@ use Xenus\CollectionConfiguration as Configuration;
 
 class Collection extends BaseCollection
 {
-    use Concerns\HasConvenientWrites;
     use Concerns\HasEvents;
+    use Concerns\HasConvenientWrites;
+    use Concerns\HasCollectionResolver;
 
     /**
      * Hold the collection's configuration
@@ -35,22 +36,6 @@ class Collection extends BaseCollection
         parent::__construct(
             $connection->getManager(), $connection->getDatabaseName(), $this->configuration->getCollectionName(), $this->configuration->getCollectionOptions()
         );
-    }
-
-    /**
-     * Resolve the given collection
-     *
-     * @param  string $collection
-     *
-     * @return Collection
-     */
-    public function resolve(string $collection)
-    {
-        if (false === class_exists($collection)) {
-            throw new Exceptions\InvalidArgumentException(sprintf('Target collection "%s" does not exist', $collection));
-        }
-
-        return new $collection($this->configuration->getCollectionConnection());
     }
 
     /**
