@@ -2,11 +2,11 @@
 
 namespace Xenus\Tests\Tests;
 
-use Xenus\Tests\Tests\Stubs\AddressDocument as Address;
-use Xenus\Tests\Tests\Stubs\AddressesCollection as Addresses;
+use Xenus\Tests\Stubs\AddressDocument as Address;
+use Xenus\Tests\Stubs\AddressesCollection as Addresses;
 
-use Xenus\Tests\Tests\Stubs\UserDocument as User;
-use Xenus\Tests\Tests\Stubs\UsersCollection as Users;
+use Xenus\Tests\Stubs\UserDocument as User;
+use Xenus\Tests\Stubs\UsersCollection as Users;
 
 use Xenus\Tests\Support\SetupRelationsTest;
 

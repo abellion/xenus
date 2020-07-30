@@ -2,8 +2,8 @@
 
 namespace Xenus\Tests\Tests;
 
-use Xenus\Tests\Tests\Stubs\UsersCollection;
-use Xenus\Tests\Tests\Stubs\CitiesCollection;
+use Xenus\Tests\Stubs\UsersCollection;
+use Xenus\Tests\Stubs\CitiesCollection;
 use Xenus\Tests\Mocks\CollectionResolverMock;
 
 use Xenus\Connection;

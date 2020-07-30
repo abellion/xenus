@@ -1,6 +1,6 @@
 <?php
 
-namespace Xenus\Tests\Tests\Stubs;
+namespace Xenus\Tests\Stubs;
 
 class TokensCollection extends \Xenus\Collection
 {

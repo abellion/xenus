@@ -4,6 +4,7 @@ namespace Xenus\Tests\Tests;
 
 use MongoDB\BSON\ObjectID;
 
+use Xenus\Tests\Stubs;
 use Xenus\Document as XenusDocument;
 use Xenus\Tests\Support\SetupEventsTest;
 

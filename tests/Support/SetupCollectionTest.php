@@ -2,7 +2,7 @@
 
 namespace Xenus\Tests\Support;
 
-use Xenus\Tests\Tests\Stubs\CitiesCollection as Cities;
+use Xenus\Tests\Stubs\CitiesCollection as Cities;
 
 trait SetupCollectionTest
 {

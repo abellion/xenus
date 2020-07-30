@@ -7,7 +7,7 @@ use MongoDB\BSON\ObjectID;
 use Xenus\Document;
 use Xenus\Support\Transform;
 
-use Xenus\Tests\Tests\Stubs\CityTransformer;
+use Xenus\Tests\Stubs\CityTransformer;
 
 class SupportTransformTest extends \PHPUnit\Framework\TestCase
 {

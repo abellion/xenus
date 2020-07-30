@@ -5,8 +5,8 @@ namespace Xenus\Tests\Tests;
 use Xenus\Cursor;
 use Xenus\Connection;
 
-use Xenus\Tests\Tests\Stubs\UserDocument as User;
-use Xenus\Tests\Tests\Stubs\UsersCollection as Users;
+use Xenus\Tests\Stubs\UserDocument as User;
+use Xenus\Tests\Stubs\UsersCollection as Users;
 
 class XenusCursorTest extends \PHPUnit\Framework\TestCase
 {

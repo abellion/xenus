@@ -2,7 +2,7 @@
 
 namespace Xenus\Tests\Support;
 
-use Xenus\Tests\Tests\Stubs\TokensCollection as Tokens;
+use Xenus\Tests\Stubs\TokensCollection as Tokens;
 use Xenus\Tests\Mocks\EventDispatcherMock as EventDispatcher;
 
 trait SetupEventsTest
