@@ -156,7 +156,7 @@ class DocumentTest extends \PHPUnit\Framework\TestCase
         };
 
         $this->assertNull(
-            $document['_id']
+            $document->get('_id')
         );
 
         $document = new class extends Document {
@@ -164,7 +164,7 @@ class DocumentTest extends \PHPUnit\Framework\TestCase
         };
 
         $this->assertInstanceOf(
-            \MongoDB\BSON\ObjectID::class, $document['_id']
+            \MongoDB\BSON\ObjectID::class, $document->get('_id')
         );
     }
 }

@@ -26,7 +26,7 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
 
     public function test_update_method()
     {
-        $city = ['name' => 'Paris'];
+        $city = ['_id' => new ObjectID(),'name' => 'Paris'];
 
         $this->assertInstanceOf(
             \MongoDB\UpdateResult::class, $this->cities->update($city)
@@ -39,7 +39,7 @@ class CollectionTest extends \PHPUnit\Framework\TestCase
 
     public function test_delete_method()
     {
-        $city = ['name' => 'Paris'];
+        $city = ['_id' => new ObjectID(), 'name' => 'Paris'];
 
         $this->assertInstanceOf(
             \MongoDB\DeleteResult::class, $this->cities->delete($city)

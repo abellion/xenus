@@ -27,7 +27,7 @@ class Collection extends BaseCollection
      */
     public function __construct(Connection $connection, array $properties = [])
     {
-        $this->configuration = new Configuration($connection, $properties + ['name' => $this->name, 'document' => $this->document]);
+        $this->configuration = new Configuration($connection, $properties + ['name' => $this->name ?? null, 'document' => $this->document ?? null]);
 
         if ($this->configuration->has('name') === false) {
             throw new Exceptions\InvalidArgumentException('The collection\'s name must be defined');
