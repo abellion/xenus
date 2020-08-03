@@ -1,3 +1,7 @@
+# 0.17.1
+
+This release fixes an issue when the `display_errors` configuration of PHP is turned on.
+
 # 0.17
 
 Events have landed ! Check out the [documentation](https://abellion.github.io/xenus/) for more informations.
