@@ -4,29 +4,20 @@
     </a>
 </p>
 
-[![Latest Stable Version](https://poser.pugx.org/abellion/xenus/v/stable)](https://packagist.org/packages/abellion/xenus)
-[![Total Downloads](https://poser.pugx.org/abellion/xenus/downloads)](https://packagist.org/packages/abellion/xenus)
-[![License](https://poser.pugx.org/abellion/xenus/license)](https://packagist.org/packages/abellion/xenus)
+Xenus is a simple and elegent ODM for MongoDB.
 
-# Xenus
+- It has built-in and cross framework support for **events** ([Doc](https://abellion.github.io/xenus/#/?id=events))
+- It makes your schema self documented via **document's mutators** ([Doc](https://abellion.github.io/xenus/#/?id=accessing-properties))
+- It includes **fluent methods** to update, delete and insert documents ([Doc](https://abellion.github.io/xenus/#/?id=inserting-amp-updating-documents))
+- It supports **documents' embeding** via an elegent syntax ([Doc](https://abellion.github.io/xenus/#/?id=embedding-documents))
+- It handles **relationships** out of the box ([Doc](https://abellion.github.io/xenus/#/?id=relationships))
+- It provides an elegent **transformation layer** mechanism for your API resources ([Doc](https://abellion.github.io/xenus/#/?id=resources))
 
-Xenus is a simple yet powerful ODM for MongoDB.
-
-Using a simple, elegant syntax it allows you to work seamlessly with your documents and collections.
+If you're working with the Laravel or Lumen framework, take a look at the [Xenus Laravel](https://github.com/abellion/xenus-laravel) integration.
 
 ## Learning Xenus
 
-Xenus is based on the awesome, official MongoDB library for PHP 7 : https://docs.mongodb.com/php-library/current/
-
-While taking advantage of the power this library gives, you'll find tons of usefull and shortcut methods to work on a daily basis with MongoDB.
-
-Documentation is available at https://abellion.github.io/xenus
-
-## Contributing
-
-Fell free to open PRs and issues to make this library better !
-
-When making a PR, make sure all tests passes. If you add a new feature, please consider updating the documentation. Thank you !
+The documentation is available at https://abellion.github.io/xenus
 
 ## License
 
