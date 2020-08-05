@@ -4,7 +4,7 @@
     </a>
 </p>
 
-Xenus is a simple and elegent ODM for MongoDB.
+Xenus is a simple and elegent MongoDB ODM.
 
 - It has built-in and cross framework support for **events** ([Doc](https://abellion.github.io/xenus/#/?id=events))
 - It makes your schema self documented via **document's mutators** ([Doc](https://abellion.github.io/xenus/#/?id=accessing-properties))
