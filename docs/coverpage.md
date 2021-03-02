@@ -2,7 +2,7 @@
 
 # Xenus
 
-> An elegant MongoDB ODM for PHP 7
+> An elegant MongoDB ODM for PHP
 
 [GitHub](https://github.com/abellion/xenus/)
 [Getting Started](#getting-started)
