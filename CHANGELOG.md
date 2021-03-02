@@ -1,3 +1,8 @@
+# 0.18
+
+- Bump minimum PHP version to `^7.1`.
+- Support PHP 8.
+
 # 0.17.1
 
 This release fixes an issue when the `display_errors` configuration of PHP is turned on.
