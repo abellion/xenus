@@ -9,7 +9,7 @@ trait SetupTestsHooks
      *
      * @return void
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         foreach ($this->setup ?? [] as $setup) {
             call_user_func([$this, $setup]);
@@ -21,7 +21,7 @@ trait SetupTestsHooks
      *
      * @return void
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         foreach ($this->tearDown ?? [] as $tearDown) {
             call_user_func([$this, $tearDown]);
