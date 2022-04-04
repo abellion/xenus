@@ -13,6 +13,7 @@
     "require": {
         "php": "^7.1|^8.0",
         "ext-mongodb": "^1.2.0",
+        "ext-json": "*",
         "mongodb/mongodb": "^1.1.0"
     },
     "require-dev": {

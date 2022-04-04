@@ -19,7 +19,7 @@ trait JsonSerializer
      *
      * @return array The JSON serializable format
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->document;
     }

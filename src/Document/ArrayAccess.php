@@ -23,7 +23,7 @@ trait ArrayAccess
 
      * @return mixed The value
      */
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         return $this->document[$offset];
     }
@@ -34,7 +34,7 @@ trait ArrayAccess
      * @param string $offset The key
      * @param mixed $value  The value
      */
-    public function __set(string $offset, $value)
+    public function __set(string $offset, mixed $value)
     {
         self::setFromSetter($offset, $value);
     }
@@ -45,7 +45,7 @@ trait ArrayAccess
      * @param  string $offset The key
      * @param  mixed $value  The value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, mixed $value): void
     {
         $this->document[$offset] = $value;
     }
@@ -53,9 +53,9 @@ trait ArrayAccess
     /**
      * Unset the document's value at the given offset
      *
-     * @param  stirng $offset The key
+     * @param  string $offset The key
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->document[$offset]);
     }
@@ -67,7 +67,7 @@ trait ArrayAccess
      *
      * @return bool Whether the given key exists or not in the document
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return isset($this->document[$offset]);
     }
