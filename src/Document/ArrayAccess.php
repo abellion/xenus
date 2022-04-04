@@ -23,7 +23,8 @@ trait ArrayAccess
 
      * @return mixed The value
      */
-    public function offsetGet($offset): mixed
+    #[\ReturnTypeWillChange]
+    public function offsetGet($offset)
     {
         return $this->document[$offset];
     }
@@ -34,7 +35,7 @@ trait ArrayAccess
      * @param string $offset The key
      * @param mixed $value  The value
      */
-    public function __set(string $offset, mixed $value)
+    public function __set(string $offset, $value)
     {
         self::setFromSetter($offset, $value);
     }
@@ -45,7 +46,8 @@ trait ArrayAccess
      * @param  string $offset The key
      * @param  mixed $value  The value
      */
-    public function offsetSet($offset, mixed $value): void
+    #[\ReturnTypeWillChange]
+    public function offsetSet($offset, $value)
     {
         $this->document[$offset] = $value;
     }
@@ -55,7 +57,8 @@ trait ArrayAccess
      *
      * @param  string $offset The key
      */
-    public function offsetUnset($offset): void
+    #[\ReturnTypeWillChange]
+    public function offsetUnset($offset)
     {
         unset($this->document[$offset]);
     }

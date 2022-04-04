@@ -13,7 +13,8 @@ class Cursor extends IteratorIterator
      *
      * @return mixed
      */
-    public function current(): mixed
+    #[\ReturnTypeWillChange]
+    public function current()
     {
         $document = parent::current();
 
@@ -29,7 +30,7 @@ class Cursor extends IteratorIterator
      *
      * @return array
      */
-    public function toArray(): array
+    public function toArray()
     {
         $documents = [];
 

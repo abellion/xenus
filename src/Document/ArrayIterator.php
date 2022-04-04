@@ -17,7 +17,8 @@ trait ArrayIterator
      *
      * @return mixed The current element
      */
-    public function current(): mixed
+    #[\ReturnTypeWillChange]
+    public function current()
     {
         return current($this->document);
     }
@@ -27,7 +28,8 @@ trait ArrayIterator
      *
      * @return string The current key
      */
-    public function key(): string
+    #[\ReturnTypeWillChange]
+    public function key()
     {
         return key($this->document);
     }
@@ -38,7 +40,7 @@ trait ArrayIterator
      * @return mixed The next element
      */
     #[\ReturnTypeWillChange]
-    public function next(): mixed
+    public function next()
     {
         return next($this->document);
     }
