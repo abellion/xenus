@@ -19,6 +19,7 @@ trait JsonSerializer
      *
      * @return array The JSON serializable format
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->document;

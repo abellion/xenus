@@ -13,6 +13,7 @@ class Cursor extends IteratorIterator
      *
      * @return mixed
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         $document = parent::current();

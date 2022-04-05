@@ -7,7 +7,7 @@ trait ArrayIterator
     /**
      * Rewind the document
      */
-    public function rewind()
+    public function rewind(): void
     {
         reset($this->document);
     }
@@ -17,6 +17,7 @@ trait ArrayIterator
      *
      * @return mixed The current element
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return current($this->document);
@@ -27,6 +28,7 @@ trait ArrayIterator
      *
      * @return string The current key
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return key($this->document);
@@ -37,6 +39,7 @@ trait ArrayIterator
      *
      * @return mixed The next element
      */
+    #[\ReturnTypeWillChange]
     public function next()
     {
         return next($this->document);
@@ -47,7 +50,7 @@ trait ArrayIterator
      *
      * @return bool Whether or not the array is ready for an iteration
      */
-    public function valid()
+    public function valid(): bool
     {
         $key = key($this->document);
 
