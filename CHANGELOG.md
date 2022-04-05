@@ -1,3 +1,7 @@
+# 0.19
+
+- Support PHP 8.1
+
 # 0.18
 
 - Bump minimum PHP version to `^7.1`.

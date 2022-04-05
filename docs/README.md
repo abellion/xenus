@@ -4,7 +4,7 @@ __Xenus__ is a simple yet powerfull ODM for MongoDB.
 
 ## Installation
 
-Xenus requires PHP version >= 7.1 and the MongoDB driver version 1.2 or higher.
+Xenus requires PHP version >= 7.1, or version >= 8.0, and the MongoDB driver version 1.2 or higher.
 
 Make sure to install first the MongoDB driver : http://php.net/manual/en/mongodb.installation.php
 
