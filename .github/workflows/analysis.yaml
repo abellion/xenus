@@ -11,9 +11,8 @@ jobs:
       - uses: php-actions/composer@v6
         with:
           php_extensions: mongodb
-      - uses: php-actions/phpstan@v3
-        with:
-          configuration: phpstan.neon
+      - name: PHPStan
+        run: vendor/bin/phpstan analyze -l 5 -c phpstan.neon
       - name: PHPUnit tests
         uses: php-actions/phpunit@v3
         with:
