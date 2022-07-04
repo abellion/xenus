@@ -26,7 +26,7 @@ trait ArrayIterator
     /**
      * Return the current key
      *
-     * @return string The current key
+     * @return int|string|null The current key
      */
     #[\ReturnTypeWillChange]
     public function key()

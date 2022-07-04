@@ -14,7 +14,7 @@ trait HasEvents
 
     /**
      * The dispatcher instance
-     * @var EventDispatcher
+     * @var Dispatcher
      */
     protected $dispatcher;
 

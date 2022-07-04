@@ -1,0 +1,16 @@
+includes:
+  - phpstan-baseline.neon
+
+parameters:
+  level: 8
+  checkMissingIterableValueType: false
+  checkAlwaysTrueCheckTypeFunctionCall: true
+  checkTooWideReturnTypesInProtectedAndPublicMethods: true
+  treatPhpDocTypesAsCertain: false
+  reportUnmatchedIgnoredErrors: false
+  checkGenericClassInNonGenericObjectType: false
+  scanDirectories:
+    - src
+  paths:
+    - src
+    # - tests

@@ -1,0 +1,16 @@
+name: Analysis
+
+on: [push]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: php-actions/composer@v6
+        with:
+          php_version: "7.4"
+          php_extensions: mongodb
+      - name: PHPStan
+        run: vendor/bin/phpstan analyze -c phpstan.neon

@@ -34,6 +34,7 @@ trait ArrayAccess
      *
      * @param string $offset The key
      * @param mixed $value  The value
+     * @return void
      */
     public function __set(string $offset, $value)
     {

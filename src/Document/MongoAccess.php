@@ -18,6 +18,7 @@ trait MongoAccess
      * Unserialize a document comming from MongoDB
      *
      * @param  array  $document The document as array
+     * @return void
      */
     public function bsonUnserialize(array $document)
     {

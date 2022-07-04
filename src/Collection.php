@@ -14,6 +14,18 @@ class Collection extends BaseCollection
     use Concerns\HasCollectionResolver;
 
     /**
+     * name of the collection
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * class-name of the document class
+     * @var class-string
+     */
+    protected $document;
+
+    /**
      * Hold the collection's configuration
      * @var Configuration
      */
@@ -29,12 +41,13 @@ class Collection extends BaseCollection
     {
         $this->configuration = new Configuration($connection, $properties + ['name' => $this->name ?? null, 'document' => $this->document ?? null]);
 
-        if ($this->configuration->has('name') === false) {
+        $collection_name = ($this->configuration->has('name')) ? $this->configuration->getCollectionName() : null;
+        if ($collection_name === null) {
             throw new Exceptions\InvalidArgumentException('The collection\'s name must be defined');
         }
 
         parent::__construct(
-            $connection->getManager(), $connection->getDatabaseName(), $this->configuration->getCollectionName(), $this->configuration->getCollectionOptions()
+            $connection->getManager(), $connection->getDatabaseName(), $collection_name, $this->configuration->getCollectionOptions()
         );
     }
 
@@ -44,7 +57,7 @@ class Collection extends BaseCollection
      * @param  array            $filter
      * @param  array            $options
      *
-     * @return Xenus\Cursor
+     * @return \Xenus\Cursor
      */
     public function find($filter = [], array $options = [])
     {
@@ -151,7 +164,7 @@ class Collection extends BaseCollection
      * @param  array|ObjectID   $filter
      * @param  array            $options
      *
-     * @return MongoDB\DeleteResult
+     * @return \MongoDB\DeleteResult
      */
     public function deleteOne($filter, array $options = [])
     {
@@ -169,7 +182,7 @@ class Collection extends BaseCollection
      * @param  array|object     $update
      * @param  array            $options
      *
-     * @return MongoDB\UpdateResult
+     * @return \MongoDB\UpdateResult
      */
     public function updateOne($filter, $update, array $options = [])
     {
@@ -187,7 +200,7 @@ class Collection extends BaseCollection
      * @param  array|object     $replacement
      * @param  array            $options
      *
-     * @return MongoDB\UpdateResult
+     * @return \MongoDB\UpdateResult
      */
     public function replaceOne($filter, $replacement, array $options = [])
     {

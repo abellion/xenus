@@ -2,8 +2,8 @@
 
 namespace Xenus;
 
-use Iterator;
 use ArrayAccess;
+use Iterator;
 use JsonSerializable;
 use MongoDB\BSON\ObjectID;
 use MongoDB\BSON\Serializable;
@@ -23,7 +23,10 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     use Document\Serializers\JsonSerializer;
     use Document\Serializers\NativeSerializer;
 
+    /** @var bool */
     protected $withId = false;
+
+    /** @var array */
     protected $document = [];
 
     /**
@@ -82,11 +85,11 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
      *
      * @param  array  $fields The keys to keep
      *
-     * @return Xenus\Document
+     * @return \Xenus\Document
      */
     public function with(array $fields)
     {
-        $document = new static();
+        $document = clone $this;
         $document->document = [];
 
         foreach ($fields as $field) {
@@ -103,11 +106,11 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
      *
      * @param  array  $fields The keys to drop
      *
-     * @return Xenus\Document
+     * @return \Xenus\Document
      */
     public function without(array $fields)
     {
-        $document = new static();
+        $document = clone $this;
         $document->document = [];
 
         foreach ($this->document as $key => $value) {
@@ -120,7 +123,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     }
 
     /**
-     * Fill the document whith the given values
+     * Fill the document with the given values
      *
      * @param  array  $document The values
      *
@@ -153,7 +156,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
         $getter = $this->getterIze($offset);
 
         if (method_exists($this, $getter)) {
-            return call_user_func([$this, $getter]);
+            return $this->$getter();
         }
 
         return self::get($offset);
@@ -187,7 +190,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
         $setter = $this->setterIze($offset);
 
         if (method_exists($this, $setter)) {
-            return call_user_func([$this, $setter], $value);
+            return $this->$setter($value);
         }
 
         return self::set($offset, $value);

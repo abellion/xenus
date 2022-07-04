@@ -14,8 +14,13 @@ class Embed
     public static function document(string $document)
     {
         return new class ($document) {
+            /** @var string */
             private $document;
 
+            /**
+             * __costruct
+             * @param string $document
+             */
             public function __construct(string $document)
             {
                 $this->document = $document;

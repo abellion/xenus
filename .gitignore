@@ -6,6 +6,7 @@ vendor/
 # Docker
 Dockerfile
 docker-compose.yml
+.docker
 
 # Misc
 .DS_Store

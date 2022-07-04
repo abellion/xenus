@@ -1,0 +1,5 @@
+parameters:
+  ignoreErrors:
+    - message: "#^Return type \\(Xenus\\\\Cursor\\) of method Xenus\\\\Collection\\:\\:find\\(\\) should be compatible with return type \\(MongoDB\\\\Driver\\\\Cursor\\) of method MongoDB\\\\Collection\\:\\:find\\(\\)$#"
+      count: 1
+      path: src/Collection.php

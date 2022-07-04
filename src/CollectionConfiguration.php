@@ -50,7 +50,7 @@ class CollectionConfiguration
     /**
      * Get the collection's options
      *
-     * @return Array
+     * @return array
      */
     public function getCollectionOptions()
     {
@@ -62,7 +62,7 @@ class CollectionConfiguration
     /**
      * Get the collection's name
      *
-     * @return String|null
+     * @return string|null
      */
     public function getCollectionName()
     {
