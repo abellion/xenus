@@ -6,10 +6,13 @@ use Xenus\Collection;
 
 trait HasCollection
 {
-    protected $collection = null;
+    /**
+     * @var Collection|null
+     */
+    protected ?Collection $collection = null;
 
     /**
-     * Set the collection this object is comming from
+     * Set the collection this object is coming from
      *
      * @param  Collection $collection
      *
@@ -27,7 +30,7 @@ trait HasCollection
      *
      * @return null|Collection
      */
-    public function collection()
+    public function collection() : ?Collection
     {
         return $this->collection;
     }

@@ -9,13 +9,18 @@ class Transform
      *
      * @param  mixed $document
      *
-     * @return mixed
+     * @return object
      */
     public static function document($document)
     {
         return new class($document) extends Transform {
+            /** @var mixed */
             private $document;
 
+            /**
+             * __construct
+             * @param mixed $document
+             */
             public function __construct($document)
             {
                 $this->document = $document;
@@ -52,13 +57,18 @@ class Transform
      *
      * @param  iterable $collection
      *
-     * @return array
+     * @return object
      */
     public static function collection($collection)
     {
         return new class($collection) extends Transform {
+            /** @var mixed */
             private $collection;
 
+            /**
+             * __construct
+             * @param mixed $collection
+             */
             public function __construct($collection)
             {
                 $this->collection = $collection;

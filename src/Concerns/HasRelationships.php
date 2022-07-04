@@ -2,8 +2,9 @@
 
 namespace Xenus\Concerns;
 
-use Xenus\Relations;
+use Xenus\Collection;
 use Xenus\Exceptions;
+use Xenus\Relations;
 
 trait HasRelationships
 {

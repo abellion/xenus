@@ -2,12 +2,16 @@
 
 namespace Xenus\Concerns;
 
-use Xenus\Exceptions;
+use Xenus\Collection as Collection;
 use Xenus\CollectionResolver as Resolver;
+use Xenus\Exceptions;
 
 trait HasCollectionResolver
 {
-    protected $resolver;
+    /**
+     * @var Resolver
+     */
+    protected Resolver $resolver;
 
     /**
      * Resolve the given collection

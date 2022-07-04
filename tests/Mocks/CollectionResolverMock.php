@@ -2,8 +2,8 @@
 
 namespace Xenus\Tests\Mocks;
 
-use Xenus\Connection;
 use Xenus\CollectionResolver;
+use Xenus\Connection;
 
 class CollectionResolverMock implements CollectionResolver
 {
@@ -14,7 +14,7 @@ class CollectionResolverMock implements CollectionResolver
      *
      * @param  string $collection
      *
-     * @return Collection
+     * @return \Xenus\Collection
      */
     public function resolve(string $collection)
     {

@@ -4,6 +4,17 @@ namespace Xenus;
 
 use IteratorIterator;
 
+/**
+ * @method \MongoDB\Driver\CursorId getId()
+ * @method \MongoDB\Driver\Server getServer()
+ * @method bool isDead()
+ * @method int key()
+ * @method void next()
+ * @method void rewind()
+ * @method void setTypeMap(array $typemap)
+ * @method bool valid()
+ * @compatible \MongoDB\Driver\Cursor
+ */
 class Cursor extends IteratorIterator
 {
     use Concerns\HasCollection;
@@ -51,6 +62,11 @@ class Cursor extends IteratorIterator
      */
     public function __call(string $name, array $arguments)
     {
-        return call_user_func_array([$this->getInnerIterator(), $name], $arguments);
+        $method = [$this->getInnerIterator(), $name];
+        if (!is_callable($method)) {
+            throw new \InvalidArgumentException($name.' is not callable');
+        }
+
+        return call_user_func_array($method, $arguments);
     }
 }

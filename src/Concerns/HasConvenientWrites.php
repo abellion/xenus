@@ -2,15 +2,17 @@
 
 namespace Xenus\Concerns;
 
+use ArrayObject;
+
 trait HasConvenientWrites
 {
     /**
      * Insert the document
      *
-     * @param  array|object $document
+     * @param  array|\ArrayAccess $document
      * @param  array        $options
      *
-     * @return MongoDB\InsertOneResult
+     * @return \MongoDB\InsertOneResult
      */
     public function insert($document, array $options = [])
     {
@@ -30,10 +32,10 @@ trait HasConvenientWrites
     /**
      * Delete the document
      *
-     * @param  array|object $document
+     * @param  array|\ArrayAccess $document
      * @param  array        $options
      *
-     * @return MongoDB\DeleteResult
+     * @return \MongoDB\DeleteResult
      */
     public function delete($document, array $options = [])
     {
@@ -53,10 +55,10 @@ trait HasConvenientWrites
     /**
      * Update the document
      *
-     * @param  array|object $document
+     * @param  array|\ArrayAccess $document
      * @param  array        $options
      *
-     * @return MongoDB\UpdateResult
+     * @return \MongoDB\UpdateResult
      */
     public function update($document, array $options = [])
     {
