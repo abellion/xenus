@@ -14,5 +14,3 @@ jobs:
           php_extensions: mongodb
       - name: PHPStan
         run: vendor/bin/phpstan analyze -c phpstan.neon
-      - name: PHPUnit tests
-        run: vendor/bin/phpunit
