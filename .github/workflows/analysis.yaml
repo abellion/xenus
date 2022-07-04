@@ -13,8 +13,6 @@ jobs:
           php_version: "7.4"
           php_extensions: mongodb
       - name: PHPStan
-        run: vendor/bin/phpstan analyze -l 5 -c phpstan.neon
+        run: vendor/bin/phpstan analyze -c phpstan.neon
       - name: PHPUnit tests
-        uses: php-actions/phpunit@v3
-        with:
-          configuration: phpunit.xml.dist
+        run: vendor/bin/phpunit
