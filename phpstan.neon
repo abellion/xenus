@@ -13,4 +13,4 @@ parameters:
     - src
   paths:
     - src
-    - tests
+    # - tests
