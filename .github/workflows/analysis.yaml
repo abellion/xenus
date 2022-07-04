@@ -9,6 +9,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: php-actions/composer@v6
+        with:
+          php_extensions: mongodb
       - uses: php-actions/phpstan@v3
         with:
           configuration: phpstan.neon
+      - name: PHPUnit tests
+        uses: php-actions/phpunit@v3
+        with:
+          configuration: phpunit.xml
