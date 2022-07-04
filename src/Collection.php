@@ -41,12 +41,13 @@ class Collection extends BaseCollection
     {
         $this->configuration = new Configuration($connection, $properties + ['name' => $this->name ?? null, 'document' => $this->document ?? null]);
 
-        if ($this->configuration->has('name') === false) {
+        $collection_name = ($this->configuration->has('name')) ? $this->configuration->getCollectionName() : null;
+        if ($collection_name === null) {
             throw new Exceptions\InvalidArgumentException('The collection\'s name must be defined');
         }
 
         parent::__construct(
-            $connection->getManager(), $connection->getDatabaseName(), $this->configuration->getCollectionName(), $this->configuration->getCollectionOptions()
+            $connection->getManager(), $connection->getDatabaseName(), $collection_name, $this->configuration->getCollectionOptions()
         );
     }
 
