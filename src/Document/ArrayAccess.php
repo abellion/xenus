@@ -72,6 +72,6 @@ trait ArrayAccess
      */
     public function offsetExists($offset): bool
     {
-        return isset($this->document[$offset]);
+        return array_key_exists($offset, $this->document);
     }
 }
