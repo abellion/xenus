@@ -74,7 +74,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
      */
     public function has(string $offset)
     {
-        return isset($this->document[$offset]);
+        return array_key_exists($offset, $this->document);
     }
 
     /**
