@@ -1,3 +1,7 @@
+# 0.19.1
+
+This release prevents `null` values from being considered as undefined in a `Xenus\Document`.
+
 # 0.19
 
 - Support PHP 8.1
