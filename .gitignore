@@ -3,10 +3,6 @@ composer.phar
 composer.lock
 vendor/
 
-# Docker
-Dockerfile
-docker-compose.yml
-
 # Misc
 .DS_Store
 .php_cs.cache
