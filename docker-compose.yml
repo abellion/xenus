@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  xenus-lib:
+    image: abellion/xenus
+    volumes:
+      - .:/usr/src/xenus
+
+  xenus-db:
+    image: mongo:4.0
