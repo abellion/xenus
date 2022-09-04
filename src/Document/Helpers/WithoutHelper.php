@@ -7,7 +7,7 @@ use Xenus\Document;
 class WithoutHelper
 {
     /**
-     * The set of fields that must be taken out of the document
+     * The fields that must be taken out of the document
      * @var array
      */
     private $fields;

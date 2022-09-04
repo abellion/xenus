@@ -7,7 +7,7 @@ use Xenus\Document;
 class MergeHelper
 {
     /**
-     * The set of values that must be merged
+     * The values that must be merged
      * @var array
      */
     private $values;

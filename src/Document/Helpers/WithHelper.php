@@ -7,7 +7,7 @@ use Xenus\Document;
 class WithHelper
 {
     /**
-     * The set of fields that must be kept within the document
+     * The fields that must be kept within the document
      * @var array
      */
     private $fields;
