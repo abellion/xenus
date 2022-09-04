@@ -2,29 +2,22 @@
 
 namespace Xenus;
 
-use Iterator;
-use ArrayAccess;
-use JsonSerializable;
 use MongoDB\BSON\ObjectID;
 use MongoDB\BSON\Serializable;
 use MongoDB\BSON\Unserializable;
 
-class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable, Unserializable
+use Xenus\Document\Record\Record;
+
+class Document extends Record implements Serializable, Unserializable
 {
     use Concerns\HasCollection;
     use Concerns\HasId;
     use Concerns\HasRelationships;
 
     use Document\ArrayAccess;
-    use Document\ArrayIterator;
     use Document\CamelCaseAccessor;
-    use Document\MongoAccess;
-
-    use Document\Serializers\JsonSerializer;
-    use Document\Serializers\NativeSerializer;
 
     protected $withId = false;
-    protected $document = [];
 
     /**
      * Return the document's values for debugging
@@ -33,7 +26,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
      */
     public function __debugInfo()
     {
-        return $this->document;
+        return $this->fields;
     }
 
     /**
@@ -45,36 +38,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
             self::setFromSetter('_id', new ObjectID());
         }
 
-        self::fillFromSetter(($document instanceof self) ? $document->document : $document);
-    }
-
-    /**
-     * Get the value of the given key
-     *
-     * @param  string $offset  The key
-     * @param  mixed  $default The default value to return
-     *
-     * @return mixed
-     */
-    public function get(string $offset, $default = null)
-    {
-        if (isset($this->document[$offset])) {
-            return $this->document[$offset];
-        }
-
-        return $default;
-    }
-
-    /**
-     * Get whether the given key exists or not
-     *
-     * @param  string  $offset The key
-     *
-     * @return boolean
-     */
-    public function has(string $offset)
-    {
-        return array_key_exists($offset, $this->document);
+        self::fillFromSetter(($document instanceof self) ? $document->fields : $document);
     }
 
     /**
@@ -87,11 +51,11 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     public function with(array $fields)
     {
         $document = new static();
-        $document->document = [];
+        $document->fields = [];
 
         foreach ($fields as $field) {
-            if (array_key_exists($field, $this->document)) {
-                $document->document[$field] = $this->document[$field];
+            if (array_key_exists($field, $this->fields)) {
+                $document->fields[$field] = $this->fields[$field];
             }
         }
 
@@ -108,11 +72,11 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     public function without(array $fields)
     {
         $document = new static();
-        $document->document = [];
+        $document->fields = [];
 
-        foreach ($this->document as $key => $value) {
+        foreach ($this->fields as $key => $value) {
             if (!in_array($key, $fields)) {
-                $document->document[$key] = $this->document[$key];
+                $document->fields[$key] = $this->fields[$key];
             }
         }
 
@@ -132,16 +96,6 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     }
 
     /**
-     * Return the document as an array
-     *
-     * @return array
-     */
-    public function toArray()
-    {
-        return $this->document;
-    }
-
-    /**
      * Get a value from a getter if it exists, or fallback on the internal array
      *
      * @param  string $offset The key
@@ -157,21 +111,6 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
         }
 
         return self::get($offset);
-    }
-
-    /**
-     * Set the given value on the offset
-     *
-     * @param string $offset The key to retrieve the value
-     * @param mixed  $value  The value
-     *
-     * @return self
-     */
-    public function set(string $offset, $value)
-    {
-        $this->document[$offset] = $value;
-
-        return $this;
     }
 
     /**
@@ -223,5 +162,25 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
         }
 
         return $this;
+    }
+
+    /**
+     * Serialize the document to a MongoDB readable value
+     *
+     * @return array The document as array
+     */
+    public function bsonSerialize()
+    {
+        return $this->fields;
+    }
+
+    /**
+     * Unserialize a document comming from MongoDB
+     *
+     * @param  array  $document The document as array
+     */
+    public function bsonUnserialize(array $document)
+    {
+        self::fillFromSetter($document);
     }
 }
