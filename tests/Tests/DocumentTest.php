@@ -66,48 +66,6 @@ class DocumentTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function test_with_method()
-    {
-        $document = new class extends Document {
-            protected $withId = true;
-        };
-
-        $document = $document->merge([
-            'name' => 'Antoine', 'city' => 'Paris'
-        ]);
-
-        $this->assertEquals(
-            [], $document->with([])->toArray()
-        );
-
-        $this->assertEquals(
-            ['name' => 'Antoine'], $document->with(['name'])->toArray()
-        );
-
-        $this->assertEquals(
-            ['name' => 'Antoine'], $document->with(['name', 'unknown'])->toArray()
-        );
-    }
-
-    public function test_without_method()
-    {
-        $document = new class extends Document {
-            protected $withId = true;
-        };
-
-        $document = $document->merge([
-            'name' => 'Antoine', 'city' => 'Paris'
-        ]);
-
-        $this->assertEquals(
-            ['name' => 'Antoine', '_id' => $document['_id']], $document->without(['city'])->toArray()
-        );
-
-        $this->assertEquals(
-            ['name' => 'Antoine', 'city' => 'Paris'], $document->without(['_id'])->toArray()
-        );
-    }
-
     public function test_with_id_configuration()
     {
         $document = new class extends Document {
