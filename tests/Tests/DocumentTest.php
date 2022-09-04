@@ -66,26 +66,13 @@ class DocumentTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function test_fill_method()
-    {
-        $document = new Document();
-
-        $document->fill([
-            'name' => 'Antoine'
-        ]);
-
-        $this->assertEquals(
-            ['name' => 'Antoine'], $document->toArray()
-        );
-    }
-
     public function test_with_method()
     {
         $document = new class extends Document {
             protected $withId = true;
         };
 
-        $document = $document->fill([
+        $document = $document->merge([
             'name' => 'Antoine', 'city' => 'Paris'
         ]);
 
@@ -108,7 +95,7 @@ class DocumentTest extends \PHPUnit\Framework\TestCase
             protected $withId = true;
         };
 
-        $document = $document->fill([
+        $document = $document->merge([
             'name' => 'Antoine', 'city' => 'Paris'
         ]);
 
@@ -118,34 +105,6 @@ class DocumentTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             ['name' => 'Antoine', 'city' => 'Paris'], $document->without(['_id'])->toArray()
-        );
-    }
-
-    public function test_get_from_getter_method()
-    {
-        $document = new class extends Document {
-            public function getName()
-            {
-                return 'Antoine';
-            }
-        };
-
-        $this->assertEquals(
-            'Antoine', $document->getFromGetter('name')
-        );
-    }
-
-    public function test_set_from_setter_method()
-    {
-        $document = new class extends Document {
-            public function setName($name)
-            {
-                return $this->set('name', $name);
-            }
-        };
-
-        $this->assertEquals(
-            'Charles', $document->setFromSetter('name', 'Charles')->get('name')
         );
     }
 

@@ -7,15 +7,13 @@ use MongoDB\BSON\Serializable;
 use MongoDB\BSON\Unserializable;
 
 use Xenus\Document\Record\Record;
+use Xenus\Document\Support\DynamicProperties;
 
 class Document extends Record implements Serializable, Unserializable
 {
     use Concerns\HasCollection;
     use Concerns\HasId;
     use Concerns\HasRelationships;
-
-    use Document\ArrayAccess;
-    use Document\CamelCaseAccessor;
 
     protected $withId = false;
 
@@ -34,11 +32,13 @@ class Document extends Record implements Serializable, Unserializable
      */
     public function __construct($document = [])
     {
-        if ($this->withId && !isset($document['_id'])) {
-            self::setFromSetter('_id', new ObjectID());
+        if ($this->withId && isset($this['_id']) !== true) {
+            $this->setId(new ObjectID());
         }
 
-        self::fillFromSetter(($document instanceof self) ? $document->fields : $document);
+        foreach ($document as $key => $value) {
+            $this->{$key} = $value;
+        }
     }
 
     /**
@@ -92,76 +92,12 @@ class Document extends Record implements Serializable, Unserializable
      */
     public function merge(array $document)
     {
-        return self::fillFromSetter($document);
-    }
-
-    /**
-     * Get a value from a getter if it exists, or fallback on the internal array
-     *
-     * @param  string $offset The key
-     *
-     * @return mixed
-     */
-    public function getFromGetter(string $offset)
-    {
-        $getter = $this->getterIze($offset);
-
-        if (method_exists($this, $getter)) {
-            return call_user_func([$this, $getter]);
-        }
-
-        return self::get($offset);
-    }
-
-    /**
-     * Set the given value through a setter
-     *
-     * @param string $offset The key to retrieve the value
-     * @param mixed  $value  The value
-     *
-     * @return self
-     */
-    public function setFromSetter(string $offset, $value)
-    {
-        $setter = $this->setterIze($offset);
-
-        if (method_exists($this, $setter)) {
-            return call_user_func([$this, $setter], $value);
-        }
-
-        return self::set($offset, $value);
-    }
-
-    /**
-     * Fill the document with the given array
-     *
-     * @param  array  $document The array
-     *
-     * @return self
-     */
-    public function fill(array $document)
-    {
-        foreach ($document as $offset => $value) {
-            self::set($offset, $value);
+        foreach ($document as $key => $value) {
+            $this->{$key} = $value;
         }
 
         return $this;
-    }
 
-    /**
-     * Fill the document, though the setters, with the given array
-     *
-     * @param  array  $document The array
-     *
-     * @return self
-     */
-    public function fillFromSetter(array $document)
-    {
-        foreach ($document as $offset => $value) {
-            self::setFromSetter($offset, $value);
-        }
-
-        return $this;
     }
 
     /**
@@ -171,7 +107,7 @@ class Document extends Record implements Serializable, Unserializable
      */
     public function bsonSerialize()
     {
-        return $this->fields;
+        return $this->toArray();
     }
 
     /**
@@ -181,6 +117,30 @@ class Document extends Record implements Serializable, Unserializable
      */
     public function bsonUnserialize(array $document)
     {
-        self::fillFromSetter($document);
+        call_user_func([$this, '__construct'], $document);
+    }
+
+    /**
+     * Fluently retrieve a property from the document
+     *
+     * @param  string $property
+     *
+     * @return mixed
+     */
+    public function __get(string $property)
+    {
+        return call_user_func(DynamicProperties::findGetter($this, $property));
+    }
+
+    /**
+     * Fluently set a property to the document
+     *
+     * @param string $property
+     *
+     * @param mixed
+     */
+    public function __set(string $property, $value)
+    {
+        return call_user_func(DynamicProperties::findSetter($this, $property), $value);
     }
 }
