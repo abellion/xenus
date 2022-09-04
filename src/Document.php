@@ -15,6 +15,8 @@ class Document extends Record implements Serializable, Unserializable
     use Concerns\HasId;
     use Concerns\HasRelationships;
 
+    use Document\HasHelpers;
+
     protected $withId = false;
 
     /**
@@ -39,65 +41,6 @@ class Document extends Record implements Serializable, Unserializable
         foreach ($document as $key => $value) {
             $this->{$key} = $value;
         }
-    }
-
-    /**
-     * Return a new document only with the specified fields
-     *
-     * @param  array  $fields The keys to keep
-     *
-     * @return Xenus\Document
-     */
-    public function with(array $fields)
-    {
-        $document = new static();
-        $document->fields = [];
-
-        foreach ($fields as $field) {
-            if (array_key_exists($field, $this->fields)) {
-                $document->fields[$field] = $this->fields[$field];
-            }
-        }
-
-        return $document;
-    }
-
-    /**
-     * Return a new document without the specified fields
-     *
-     * @param  array  $fields The keys to drop
-     *
-     * @return Xenus\Document
-     */
-    public function without(array $fields)
-    {
-        $document = new static();
-        $document->fields = [];
-
-        foreach ($this->fields as $key => $value) {
-            if (!in_array($key, $fields)) {
-                $document->fields[$key] = $this->fields[$key];
-            }
-        }
-
-        return $document;
-    }
-
-    /**
-     * Fill the document whith the given values
-     *
-     * @param  array  $document The values
-     *
-     * @return self
-     */
-    public function merge(array $document)
-    {
-        foreach ($document as $key => $value) {
-            $this->{$key} = $value;
-        }
-
-        return $this;
-
     }
 
     /**
