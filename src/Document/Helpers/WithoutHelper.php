@@ -8,12 +8,14 @@ class WithoutHelper
 {
     /**
      * The fields that must be taken out of the document
+     *
      * @var array
      */
     private $fields;
 
     /**
      * Create the helper
+     *
      * @param array $fields
      */
     public function __construct(array $fields)
@@ -23,7 +25,9 @@ class WithoutHelper
 
     /**
      * Create a new document without the given fields
+     *
      * @param  Document $document
+     *
      * @return Document
      */
     public function apply(Document $document): Document

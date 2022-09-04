@@ -6,7 +6,9 @@ trait HasHelpers
 {
     /**
      * Merge the given values within the document
+     *
      * @param  array  $values
+     *
      * @return self
      */
     public function merge(array $values): self
@@ -18,7 +20,9 @@ trait HasHelpers
 
     /**
      * Return a new document containing only the specified values
+     *
      * @param  array  $fields
+     *
      * @return self
      */
     public function with(array $fields): self
@@ -30,7 +34,9 @@ trait HasHelpers
 
     /**
      * Return a new document without the specified values
+     *
      * @param  array  $fields
+     *
      * @return self
      */
     public function without(array $fields): self

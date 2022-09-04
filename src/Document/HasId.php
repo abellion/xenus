@@ -8,6 +8,7 @@ trait HasId
 {
     /**
      * Get the document's ID
+     *
      * @return mixed
      */
     public function getId()
@@ -17,7 +18,9 @@ trait HasId
 
     /**
      * Set the document's ID
+     *
      * @param mixed $id
+     *
      * @return self
      */
     public function setId($id)

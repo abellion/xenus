@@ -8,12 +8,14 @@ class WithHelper
 {
     /**
      * The fields that must be kept within the document
+     *
      * @var array
      */
     private $fields;
 
     /**
      * Create the helper
+     *
      * @param array $fields
      */
     public function __construct(array $fields)
@@ -23,7 +25,9 @@ class WithHelper
 
     /**
      * Create a new document containing only the given fields
+     *
      * @param  Document $document
+     *
      * @return Document
      */
     public function apply(Document $document): Document

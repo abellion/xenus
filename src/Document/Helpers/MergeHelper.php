@@ -8,12 +8,14 @@ class MergeHelper
 {
     /**
      * The values that must be merged
+     *
      * @var array
      */
     private $values;
 
     /**
      * Create the helper
+     *
      * @param array $values
      */
     public function __construct(array $values)
@@ -23,7 +25,9 @@ class MergeHelper
 
     /**
      * Merge the values into the given document
+     *
      * @param  Document $document
+     *
      * @return Document
      */
     public function apply(Document $document): Document

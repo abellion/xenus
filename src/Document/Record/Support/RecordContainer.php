@@ -6,12 +6,14 @@ trait RecordContainer
 {
     /**
      * Hold the record's fields
+     *
      * @var array
      */
     protected $fields = [];
 
     /**
      * Construct a new record
+     *
      * @param array $fields
      */
     public function __construct(array $fields = [])
@@ -21,6 +23,7 @@ trait RecordContainer
 
     /**
      * Return the record's fields for debugging purposes
+     *
      * @return array
      */
     public function __debugInfo()
@@ -30,6 +33,7 @@ trait RecordContainer
 
     /**
      * Return the list of properties that should be kept when calling "serialize" on the object
+     *
      * @return array
      */
     public function __sleep(): array
@@ -39,6 +43,7 @@ trait RecordContainer
 
     /**
      * Return the fields
+     *
      * @return array
      */
     public function toArray(): array
@@ -48,6 +53,7 @@ trait RecordContainer
 
     /**
      * Return the fiels in a JSON serializable format
+     *
      * @return mixed
      */
     public function jsonSerialize()
@@ -57,6 +63,7 @@ trait RecordContainer
 
     /**
      * Return the value of the current field
+     *
      * @return mixed
      */
     public function current()
@@ -66,6 +73,7 @@ trait RecordContainer
 
     /**
      * Return the key of the current field
+     *
      * @return mixed
      */
     public function key()
@@ -75,6 +83,7 @@ trait RecordContainer
 
     /**
      * Advance the internal pointer of the fields
+     *
      * @return void
      */
     public function next(): void
@@ -84,6 +93,7 @@ trait RecordContainer
 
     /**
      * Reset the internal pointer of the fields
+     *
      * @return void
      */
     public function rewind(): void
@@ -93,6 +103,7 @@ trait RecordContainer
 
     /**
      * Check if the current fields position is valid
+     *
      * @return boolean
      */
     public function valid(): bool
@@ -102,7 +113,9 @@ trait RecordContainer
 
     /**
      * Determine if the given offset exists
+     *
      * @param  mixed $offset
+     *
      * @return boolean
      */
     public function offsetExists($offset): bool
@@ -112,7 +125,9 @@ trait RecordContainer
 
     /**
      * Get the value for a given offset
+     *
      * @param  mixed $offset
+     *
      * @return mixed
      */
     public function offsetGet($offset)
@@ -122,8 +137,10 @@ trait RecordContainer
 
     /**
      * Set the value at the given offset
+     *
      * @param  mixed $offset
      * @param  mixed $value
+     *
      * @return void
      */
     public function offsetSet($offset, $value): void
@@ -133,7 +150,9 @@ trait RecordContainer
 
     /**
      * Unset the value at the given offset
+     *
      * @param  mixed $offset
+     *
      * @return void
      */
     public function offsetUnset($offset): void

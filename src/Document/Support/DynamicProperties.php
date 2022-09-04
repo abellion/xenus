@@ -8,8 +8,10 @@ class DynamicProperties
 {
     /**
      * Find a getter corresponding to the given property
+     *
      * @param  Document $document
      * @param  string   $property
+     *
      * @return callable
      */
     public static function findGetter(Document $document, string $property): callable
@@ -27,7 +29,9 @@ class DynamicProperties
 
     /**
      * Create a getter name out of a property
+     *
      * @param  string $property
+     *
      * @return string
      */
     protected static function getterIze(string $property): string
@@ -37,8 +41,10 @@ class DynamicProperties
 
     /**
      * Find a setter corresponding to the given property
+     *
      * @param  Document $document
      * @param  string   $property
+     *
      * @return callable
      */
     public static function findSetter(Document $document, string $property): callable
@@ -56,7 +62,9 @@ class DynamicProperties
 
     /**
      * Create a setter name out of a property
+     *
      * @param  string $property
+     *
      * @return string
      */
     protected static function setterIze(string $property): string

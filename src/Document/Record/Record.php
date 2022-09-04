@@ -12,7 +12,9 @@ class Record implements Iterator, ArrayAccess, JsonSerializable
 
     /**
      * Determine if the given field is part of the record
+     *
      * @param  string  $field
+     *
      * @return boolean
      */
     public function has(string $field): bool
@@ -22,8 +24,10 @@ class Record implements Iterator, ArrayAccess, JsonSerializable
 
     /**
      * Get a field from the record
+     *
      * @param  string $field
      * @param  mixed $default
+     *
      * @return mixed
      */
     public function get(string $field, $default = null)
@@ -37,8 +41,10 @@ class Record implements Iterator, ArrayAccess, JsonSerializable
 
     /**
      * Set a field to the record
+     *
      * @param  string $field
      * @param  mixed $value
+     *
      * @return self
      */
     public function set(string $field, $value): self

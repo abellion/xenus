@@ -19,12 +19,14 @@ class Document extends Record implements Serializable, Unserializable
 
     /**
      * Indicate if the document should receive an ID upon instantiation
+     *
      * @var boolean
      */
     protected $withId = false;
 
     /**
      * Construct a new document
+     *
      * @param iterable $document
      */
     public function __construct(iterable $document = [])
