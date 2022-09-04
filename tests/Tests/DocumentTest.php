@@ -6,7 +6,7 @@ use Xenus\Document;
 
 class DocumentTest extends \PHPUnit\Framework\TestCase
 {
-    public function test_with_id_configuration()
+    public function test_a_document_receives_an_id_if_it_is_configured_as_such()
     {
         $document = new class extends Document {
             protected $withId = false;
@@ -25,7 +25,7 @@ class DocumentTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    public function test_a_document_can_be_constructed_with_with_another_document()
+    public function test_a_document_can_be_constructed_with_another_document()
     {
         $document = new Document(
             new Document([
