@@ -17,12 +17,17 @@ class Document extends Record implements Serializable, Unserializable
     use Document\HasHelpers;
     use Document\HasId;
 
+    /**
+     * Indicate if the document should receive an ID upon instantiation
+     * @var boolean
+     */
     protected $withId = false;
 
     /**
-     * @param array $document The values to put in the document
+     * Construct a new document
+     * @param iterable $document
      */
-    public function __construct($document = [])
+    public function __construct(iterable $document = [])
     {
         if ($this->withId && isset($this['_id']) !== true) {
             $this->setId(new ObjectID());

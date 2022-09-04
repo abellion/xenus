@@ -126,4 +126,17 @@ class DocumentTest extends \PHPUnit\Framework\TestCase
             \MongoDB\BSON\ObjectID::class, $document->get('_id')
         );
     }
+
+    public function test_a_document_can_be_constructed_with_with_another_document()
+    {
+        $document = new Document(
+            new Document([
+                'name' => 'Antoine'
+            ])
+        );
+
+        $this->assertEquals(
+            ['name' => 'Antoine'], $document->toArray()
+        );
+    }
 }
