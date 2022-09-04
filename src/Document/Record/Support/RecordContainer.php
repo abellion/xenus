@@ -20,6 +20,15 @@ trait RecordContainer
     }
 
     /**
+     * Return the record's fields for debugging purposes
+     * @return array
+     */
+    public function __debugInfo()
+    {
+        return $this->fields;
+    }
+
+    /**
      * Return the list of properties that should be kept when calling "serialize" on the object
      * @return array
      */

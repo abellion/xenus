@@ -20,16 +20,6 @@ class Document extends Record implements Serializable, Unserializable
     protected $withId = false;
 
     /**
-     * Return the document's values for debugging
-     *
-     * @return array
-     */
-    public function __debugInfo()
-    {
-        return $this->fields;
-    }
-
-    /**
      * @param array $document The values to put in the document
      */
     public function __construct($document = [])
