@@ -43,9 +43,9 @@ class Document extends Record implements Serializable, Unserializable
     /**
      * Serialize the document to a MongoDB readable value
      *
-     * @return array The document as array
+     * @return array
      */
-    public function bsonSerialize()
+    public function bsonSerialize(): array
     {
         return $this->toArray();
     }
@@ -53,9 +53,11 @@ class Document extends Record implements Serializable, Unserializable
     /**
      * Unserialize a document comming from MongoDB
      *
-     * @param  array  $document The document as array
+     * @param  array  $document
+     *
+     * @return void
      */
-    public function bsonUnserialize(array $document)
+    public function bsonUnserialize(array $document): void
     {
         call_user_func([$this, '__construct'], $document);
     }
