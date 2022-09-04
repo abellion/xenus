@@ -12,10 +12,10 @@ use Xenus\Document\Support\DynamicProperties;
 class Document extends Record implements Serializable, Unserializable
 {
     use Concerns\HasCollection;
-    use Concerns\HasId;
     use Concerns\HasRelationships;
 
     use Document\HasHelpers;
+    use Document\HasId;
 
     protected $withId = false;
 
