@@ -44,7 +44,7 @@ class Collection extends BaseCollection
      * @param  array            $filter
      * @param  array            $options
      *
-     * @return Xenus\Cursor
+     * @return \Xenus\Cursor
      */
     public function find($filter = [], array $options = [])
     {
@@ -151,7 +151,7 @@ class Collection extends BaseCollection
      * @param  array|ObjectID   $filter
      * @param  array            $options
      *
-     * @return MongoDB\DeleteResult
+     * @return \MongoDB\DeleteResult
      */
     public function deleteOne($filter, array $options = [])
     {
@@ -169,7 +169,7 @@ class Collection extends BaseCollection
      * @param  array|object     $update
      * @param  array            $options
      *
-     * @return MongoDB\UpdateResult
+     * @return \MongoDB\UpdateResult
      */
     public function updateOne($filter, $update, array $options = [])
     {
@@ -187,7 +187,7 @@ class Collection extends BaseCollection
      * @param  array|object     $replacement
      * @param  array            $options
      *
-     * @return MongoDB\UpdateResult
+     * @return \MongoDB\UpdateResult
      */
     public function replaceOne($filter, $replacement, array $options = [])
     {

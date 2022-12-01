@@ -12,7 +12,7 @@ trait HasRelationships
      *
      * @param  string $collection
      *
-     * @return Collection
+     * @return \Xenus\Collection
      */
     protected function build(string $collection)
     {
