@@ -82,7 +82,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
      *
      * @param  array  $fields The keys to keep
      *
-     * @return Xenus\Document
+     * @return \Xenus\Document
      */
     public function with(array $fields)
     {
@@ -103,7 +103,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
      *
      * @param  array  $fields The keys to drop
      *
-     * @return Xenus\Document
+     * @return \Xenus\Document
      */
     public function without(array $fields)
     {

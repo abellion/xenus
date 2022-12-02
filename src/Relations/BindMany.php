@@ -10,7 +10,7 @@ class BindMany extends AbstractRelation
      * @param  array  $filter
      * @param  array  $options
      *
-     * @return Cursor
+     * @return \Xenus\Cursor
      */
     public function find($filter = [], array $options = [])
     {

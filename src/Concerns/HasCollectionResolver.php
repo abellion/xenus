@@ -14,7 +14,7 @@ trait HasCollectionResolver
      *
      * @param  string $collection
      *
-     * @return Collection
+     * @return \Xenus\Collection
      */
     public function resolve(string $collection)
     {
