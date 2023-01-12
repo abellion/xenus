@@ -1,3 +1,8 @@
+# 0.19.2
+
+- Updated doc-block comments (https://github.com/abellion/xenus/pull/9)
+- Connect document copies with their original collection (https://github.com/abellion/xenus/pull/10)
+
 # 0.19.1
 
 This release prevents `null` values from being considered as undefined in a `Xenus\Document`.
