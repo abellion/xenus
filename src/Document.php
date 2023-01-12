@@ -87,6 +87,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     public function with(array $fields)
     {
         $document = new static();
+        $document->collection = $this->collection;
         $document->document = [];
 
         foreach ($fields as $field) {
@@ -108,6 +109,7 @@ class Document implements Iterator, ArrayAccess, JsonSerializable, Serializable,
     public function without(array $fields)
     {
         $document = new static();
+        $document->collection = $this->collection;
         $document->document = [];
 
         foreach ($this->document as $key => $value) {

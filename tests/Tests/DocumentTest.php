@@ -3,9 +3,12 @@
 namespace Xenus\Tests\Tests;
 
 use Xenus\Document;
+use Xenus\Tests\Support\SetupCollectionTest;
 
 class DocumentTest extends \PHPUnit\Framework\TestCase
 {
+    use SetupCollectionTest;
+
     public function test_has_method()
     {
         $document = new Document([
@@ -85,6 +88,8 @@ class DocumentTest extends \PHPUnit\Framework\TestCase
             protected $withId = true;
         };
 
+        $document->connect($this->cities);
+
         $document = $document->fill([
             'name' => 'Antoine', 'city' => 'Paris'
         ]);
@@ -100,6 +105,10 @@ class DocumentTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(
             ['name' => 'Antoine'], $document->with(['name', 'unknown'])->toArray()
         );
+
+        $this->assertEquals(
+            $document->collection(), $document->with([])->collection()
+        );
     }
 
     public function test_without_method()
@@ -107,6 +116,8 @@ class DocumentTest extends \PHPUnit\Framework\TestCase
         $document = new class extends Document {
             protected $withId = true;
         };
+
+        $document->connect($this->cities);
 
         $document = $document->fill([
             'name' => 'Antoine', 'city' => 'Paris'
@@ -118,6 +129,10 @@ class DocumentTest extends \PHPUnit\Framework\TestCase
 
         $this->assertEquals(
             ['name' => 'Antoine', 'city' => 'Paris'], $document->without(['_id'])->toArray()
+        );
+
+        $this->assertEquals(
+            $document->collection(), $document->without([])->collection()
         );
     }
 
