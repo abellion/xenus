@@ -7,8 +7,9 @@ trait MongoAccess
     /**
      * Serialize the document to a MongoDB readable value
      *
-     * @return array The document as array
+     * @return array|object The document as array
      */
+    #[\ReturnTypeWillChange]
     public function bsonSerialize()
     {
         return $this->document;
@@ -19,7 +20,7 @@ trait MongoAccess
      *
      * @param  array  $document The document as array
      */
-    public function bsonUnserialize(array $document)
+    public function bsonUnserialize(array $document): void
     {
         self::fillFromSetter($document);
     }
